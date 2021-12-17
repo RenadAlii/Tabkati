@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "185765143475",
+    "project_id": "tabkati-da5ac",
+    "storage_bucket": "tabkati-da5ac.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:185765143475:android:f44c1181d96f5eb9d1e1c6",
+        "android_client_info": {
+          "package_name": "com.example.tabkati"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "185765143475-6bniaqlrg8ejrvf0vqgi6tu4huqpnmoi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB0UhIjy2wjy-pcZVyhCDKkrC2z7dMbEAA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "185765143475-6bniaqlrg8ejrvf0vqgi6tu4huqpnmoi.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
