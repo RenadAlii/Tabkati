@@ -1,9 +1,146 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.login.WelcomeActivity">
+    xmlns:tools="http://schemas.android.com/tools">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.tabkati.ui.login.LoginViewModel" />
+        <variable
+            name="welcomeActivity"
+            type="com.example.tabkati.ui.login.WelcomeActivity" />
+    </data>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/egg"
+            tools:context=".ui.login.WelcomeActivity">
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card"
+                android:layout_width="match_parent"
+                android:layout_height="230dp"
+                android:layout_marginTop="360dp"
+                app:cardBackgroundColor="@color/blackTransparent40"
+                app:cardCornerRadius="0dp"
+                app:cardElevation="1dp"
+                app:cardPreventCornerOverlap="true"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintVertical_bias="1.0">
+
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardparent"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:cardBackgroundColor="@color/blackTransparent60"
+                app:cardCornerRadius="0dp"
+                app:cardElevation="1dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0">
+
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/welcomeMsgTextView3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="28dp"
+                        android:layout_marginEnd="15dp"
+                        android:text="@string/cooking_a_delicious_food_easily"
+                        android:textColor="@color/white"
+                        android:textSize="50sp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:ignore="MissingConstraints" />
+
+                    <Button
+                        android:id="@+id/signupButton"
+                        android:layout_width="350dp"
+                        android:layout_height="70dp"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="100dp"
+                        android:layout_marginEnd="20dp"
+                        android:onClick="@{() -> welcomeActivity.goToSignUpActivity()}"
+                        android:text="@string/sign_up"
+                        android:textSize="15sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/welcomeMsgTextView3" />
+
+                    <Button
+                        android:id="@+id/loginButton"
+                        android:layout_width="350dp"
+                        android:layout_height="70dp"
+                        android:layout_marginTop="8dp"
+                        android:onClick="@{()-> welcomeActivity.goToLoginActivity()}"
+                        android:text="@string/loginText"
+                        android:textSize="15sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/signupButton" />
+
+                    <ImageView
+                        android:id="@+id/facebookIcon"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="123dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginBottom="30dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/googlePlusIcon"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/loginButton"
+                        app:srcCompat="@drawable/facebook" />
+
+                    <ImageView
+                        android:id="@+id/googlePlusIcon"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginBottom="30dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/twitterIcon"
+                        app:layout_constraintStart_toEndOf="@+id/facebookIcon"
+                        app:layout_constraintTop_toBottomOf="@+id/loginButton"
+                        app:srcCompat="@drawable/google_plus" />
+
+                    <ImageView
+                        android:id="@+id/twitterIcon"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="123dp"
+                        android:layout_marginBottom="30dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/googlePlusIcon"
+                        app:layout_constraintTop_toBottomOf="@+id/loginButton"
+                        app:srcCompat="@drawable/twitter" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</layout>

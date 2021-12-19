@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.tabkati.ui.login.LoginViewModel" />
+        <variable
+            name="loginActivity"
+            type="com.example.tabkati.ui.login.LoginActivity" />
+    </data>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/wafel"
+            tools:context=".ui.login.LoginActivity">
+
+
+
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:cardBackgroundColor="@color/blackTransparent60"
+                app:cardCornerRadius="0dp"
+                app:cardElevation="1dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/loginTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="148dp"
+                        android:layout_marginTop="100dp"
+                        android:layout_marginEnd="148dp"
+                        android:text="@string/loginText"
+                        android:textAlignment="center"
+                        android:textColor="@color/white"
+                        android:textSize="50sp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/editTextTextEmailAddressLogin"
+                        android:layout_width="350dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="30dp"
+                        android:layout_marginTop="28dp"
+                        android:layout_marginEnd="30dp"
+                        android:ems="10"
+                        android:inputType="textEmailAddress"
+                        android:minHeight="48dp"
+                        android:text="@string/email_address"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/loginTextView">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="380dp"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/email_address"
+
+                            />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/editTextTextPasswordLogin"
+                        android:layout_width="350dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="30dp"
+                        android:layout_marginTop="28dp"
+                        android:layout_marginEnd="31dp"
+                        android:ems="10"
+                        android:inputType="numberPassword"
+                        android:minHeight="48dp"
+                        app:endIconMode="password_toggle"
+                        app:helperTextEnabled="true"
+                        app:helperText="@string/PasswordHelperText"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/editTextTextEmailAddressLogin">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/password"
+                            android:inputType="numberPassword"
+
+                            />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <Button
+                        android:id="@+id/loginButton"
+                        android:layout_width="350dp"
+                        android:layout_height="70dp"
+                        android:layout_marginStart="30dp"
+                        android:layout_marginTop="100dp"
+                        android:layout_marginEnd="30dp"
+                        android:layout_marginBottom="30dp"
+                        android:text="@string/loginText"
+                        android:textSize="15sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/editTextTextPasswordLogin" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</layout>
