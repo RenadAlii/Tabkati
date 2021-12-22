@@ -8,17 +8,17 @@
             name="viewModel"
             type="com.example.tabkati.ui.login.LoginViewModel" />
         <variable
-            name="registerActivity"
-            type="com.example.tabkati.ui.login.RegisterActivity" />
+            name="signUpFragment"
+            type="com.example.tabkati.ui.login.SignUpFragment" />
     </data>
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:background="@drawable/wafel"
-            tools:context=".ui.login.RegisterActivity">
+            tools:context=".ui.login.SignUpFragment">
 
 
             <com.google.android.material.card.MaterialCardView
@@ -116,6 +116,7 @@
                         app:endIconMode="password_toggle"
                         app:helperTextEnabled="true"
                         app:helperText="@string/PasswordHelperText"
+                        app:helperTextTextColor="@color/white"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/editTextTextEmailAddressSignup">
@@ -134,7 +135,7 @@
                         android:layout_width="350dp"
                         android:layout_height="70dp"
                         android:layout_marginStart="30dp"
-                        android:layout_marginTop="48dp"
+                        android:layout_marginTop="55dp"
                         android:layout_marginEnd="30dp"
                         android:text="@string/sign_up"
                         android:textSize="15dp"
@@ -149,7 +150,8 @@
                         android:layout_marginStart="30dp"
                         android:layout_marginTop="8dp"
                         android:layout_marginEnd="30dp"
-                        android:layout_marginBottom="16dp"
+                        android:layout_marginBottom="140dp"
+                        android:onClick="@{()-> signUpFragment.goToLoginFragment()}"
                         android:text="@string/already_signup_login"
                         android:textColor="@color/white"
                         android:textSize="15sp"

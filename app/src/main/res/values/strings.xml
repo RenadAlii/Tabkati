@@ -9,4 +9,7 @@
     <string name="already_signup_login">Already SignUp? LogIn.</string>
     <string name="register">Register</string>
     <string name="PasswordHelperText">Your password must be at least  6 characters long.</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="don_t_have_an_account_sign_up">Don\'t have an account? Sign up</string>
 </resources>

@@ -3,12 +3,14 @@
     package="com.example.tabkati">
 
     <application
+        android:name=".TabkatiAplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Tabkati">
+
         <activity
             android:name=".ui.login.LoginActivity"
             android:exported="false" />
@@ -19,11 +21,11 @@
             android:name=".MainActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.login.WelcomeActivity"
-            android:exported="true">
+            android:name=".ui.login.AuthMainActivity"
+            android:exported="true"
+            android:theme="@style/Theme.Tabkati.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

@@ -8,17 +8,17 @@
             name="viewModel"
             type="com.example.tabkati.ui.login.LoginViewModel" />
         <variable
-            name="loginActivity"
-            type="com.example.tabkati.ui.login.LoginActivity" />
+            name="loginFragment"
+            type="com.example.tabkati.ui.login.LoginFragment" />
     </data>
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@drawable/wafel">
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/wafel"
-            tools:context=".ui.login.LoginActivity">
+            tools:context=".ui.login.LoginFragment">
 
 
 
@@ -36,7 +36,7 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="727dp">
 
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/loginTextView"
@@ -60,7 +60,7 @@
                         android:layout_width="350dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="30dp"
-                        android:layout_marginTop="28dp"
+                        android:layout_marginTop="90dp"
                         android:layout_marginEnd="30dp"
                         android:ems="10"
                         android:inputType="textEmailAddress"
@@ -85,14 +85,15 @@
                         android:layout_width="350dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="30dp"
-                        android:layout_marginTop="28dp"
+                        android:layout_marginTop="30dp"
                         android:layout_marginEnd="31dp"
                         android:ems="10"
                         android:inputType="numberPassword"
                         android:minHeight="48dp"
                         app:endIconMode="password_toggle"
-                        app:helperTextEnabled="true"
                         app:helperText="@string/PasswordHelperText"
+                        app:helperTextEnabled="true"
+                        app:helperTextTextColor="@color/white"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/editTextTextEmailAddressLogin">
@@ -111,7 +112,7 @@
                         android:layout_width="350dp"
                         android:layout_height="70dp"
                         android:layout_marginStart="30dp"
-                        android:layout_marginTop="100dp"
+                        android:layout_marginTop="200dp"
                         android:layout_marginEnd="30dp"
                         android:layout_marginBottom="30dp"
                         android:text="@string/loginText"
@@ -120,6 +121,25 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/editTextTextPasswordLogin" />
+
+                    <TextView
+                        android:id="@+id/signup_link"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="30dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="30dp"
+                        android:layout_marginBottom="25dp"
+                        android:onClick="@{()-> loginFragment.goToSignUpFragment()}"
+                        android:text="@string/don_t_have_an_account_sign_up"
+                        android:textColor="@color/white"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/loginButton"
+                        app:layout_constraintVertical_bias="0.0" />
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>

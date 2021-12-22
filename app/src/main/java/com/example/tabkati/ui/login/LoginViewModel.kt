@@ -1,5 +1,6 @@
 package com.example.tabkati.ui.login
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -16,7 +17,8 @@ class LoginViewModel : ViewModel() {
 
     private var _userName = MutableLiveData<String?>()
     val userName: LiveData<String?> = _userName
-
+    private var _isSuccess = MutableLiveData<String>()
+    val isSuccess: LiveData<String> = _isSuccess
 
     fun setEmail(email: String) {
         _userEmail.value = email
@@ -28,8 +30,8 @@ class LoginViewModel : ViewModel() {
 
 
     // fun to check if the user Info is empty or Not for sign Up.
-    private fun isUserInfoForSignUpNotEmpty(userPassword: String): Boolean {
-        return _userEmail.value!!.isNotEmpty() && userPassword.isNotEmpty() && _userName.value!!.isNotEmpty()
+    private fun isUserInfoForSignUpNotEmpty(userPassword: String,username:String,email: String): Boolean {
+        return email.isNotEmpty() && userPassword.isNotEmpty() && username.isNotEmpty()
     }
 
     // fun to check if the user Info is empty or Not for Login.
@@ -48,32 +50,23 @@ class LoginViewModel : ViewModel() {
 
 
     // fun to sign up using firebase by user name, password and email.
-    fun signUpUser(userPassword: String): Boolean {
-        var successful = false
-        if (isUserInfoForSignUpNotEmpty(userPassword.trim())) {
+    fun signUpUser(userPassword: String,email: String,name: String) {
+
+        if (isUserInfoForSignUpNotEmpty(userPassword.trim(),name,email)) {
             FirebaseAuth
                 .getInstance()
-                .createUserWithEmailAndPassword(_userEmail.value!!.trim(), (userPassword.trim()))
+                .createUserWithEmailAndPassword(email.trim(), userPassword.trim())
                 .addOnCanceledListener {
-
+                    _isSuccess.value ="canceled"
                 }
                 .addOnFailureListener {
-                    println("signUpUser:${it} ")
+                   _isSuccess.value =it.message.toString()
                 }
-                .addOnCompleteListener {
-                    println("signUpUser:${it.exception.toString()} ")
-                    if(it.isSuccessful){
-                        println("signUpUser:${it.exception.toString()} ")
-
-                    }else{
-                      println("signUpUser:${it.exception.toString()} ")
-
-                    }
-
-                    successful = it.isSuccessful
-        }
+                .addOnSuccessListener {
+                    _isSuccess.value="success ${it.user?.email}"
+                }
          }
-        return successful
+
     }
 
     // fun to Login using firebase by user email & password.
@@ -92,4 +85,8 @@ class LoginViewModel : ViewModel() {
          }
         return successful
     }
+
+
+
+
 }

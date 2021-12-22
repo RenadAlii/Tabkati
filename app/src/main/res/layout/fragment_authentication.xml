@@ -4,27 +4,32 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="viewModel"
             type="com.example.tabkati.ui.login.LoginViewModel" />
+
         <variable
-            name="welcomeActivity"
-            type="com.example.tabkati.ui.login.WelcomeActivity" />
+            name="authenticationFragment"
+            type="com.example.tabkati.ui.login.AuthenticationFragment" />
     </data>
+
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@drawable/pasta"
+        >
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/egg"
-            tools:context=".ui.login.WelcomeActivity">
+            android:layout_height="wrap_content"
+            tools:context=".ui.login.AuthenticationFragment">
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/card"
                 android:layout_width="match_parent"
-                android:layout_height="230dp"
-                android:layout_marginTop="360dp"
+                android:layout_height="255dp"
+                android:layout_marginTop="390dp"
                 app:cardBackgroundColor="@color/blackTransparent40"
                 app:cardCornerRadius="0dp"
                 app:cardElevation="1dp"
@@ -51,7 +56,7 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="wrap_content">
 
 
                     <com.google.android.material.textview.MaterialTextView
@@ -59,7 +64,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="15dp"
-                        android:layout_marginTop="28dp"
+                        android:layout_marginTop="35dp"
                         android:layout_marginEnd="15dp"
                         android:text="@string/cooking_a_delicious_food_easily"
                         android:textColor="@color/white"
@@ -75,9 +80,9 @@
                         android:layout_width="350dp"
                         android:layout_height="70dp"
                         android:layout_marginStart="20dp"
-                        android:layout_marginTop="100dp"
+                        android:layout_marginTop="240dp"
                         android:layout_marginEnd="20dp"
-                        android:onClick="@{() -> welcomeActivity.goToSignUpActivity()}"
+                        android:onClick="@{()-> authenticationFragment.goToSignUpFragment()}"
                         android:text="@string/sign_up"
                         android:textSize="15sp"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -89,52 +94,106 @@
                         android:layout_width="350dp"
                         android:layout_height="70dp"
                         android:layout_marginTop="8dp"
-                        android:onClick="@{()-> welcomeActivity.goToLoginActivity()}"
+                        android:onClick="@{()-> authenticationFragment.goToLoginFragment()}"
                         android:text="@string/loginText"
                         android:textSize="15sp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/signupButton" />
 
+                    <View
+                        android:id="@+id/dividerOnStart"
+                        android:layout_width="150dp"
+                        android:layout_height="2dp"
+                        android:layout_marginStart="3dp"
+                        android:layout_marginTop="16dp"
+                        android:background="@color/white"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.883"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/loginButton" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="200dp"
+                        android:text="Or"
+                        android:textColor="@color/white"
+                        android:textSize="20sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="1.0"
+                        app:layout_constraintStart_toStartOf="@+id/dividerOnStart"
+                        app:layout_constraintTop_toBottomOf="@+id/loginButton" />
+
+                    <View
+                        android:id="@+id/dividerOnLeft"
+                        android:layout_width="150dp"
+                        android:layout_height="2dp"
+                        android:layout_marginStart="3dp"
+                        android:layout_marginTop="16dp"
+                        android:background="@color/white"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.147"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/loginButton" />
+
                     <ImageView
                         android:id="@+id/facebookIcon"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
                         android:layout_marginStart="123dp"
                         android:layout_marginTop="8dp"
                         android:layout_marginEnd="16dp"
                         android:layout_marginBottom="30dp"
+                        android:visibility="invisible"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@+id/googlePlusIcon"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/loginButton"
+                        app:layout_constraintTop_toBottomOf="@+id/dividerOnStart"
                         app:srcCompat="@drawable/facebook" />
 
                     <ImageView
                         android:id="@+id/googlePlusIcon"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
                         android:layout_marginTop="8dp"
                         android:layout_marginEnd="16dp"
                         android:layout_marginBottom="30dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@+id/twitterIcon"
                         app:layout_constraintStart_toEndOf="@+id/facebookIcon"
-                        app:layout_constraintTop_toBottomOf="@+id/loginButton"
+                        app:layout_constraintTop_toBottomOf="@+id/dividerOnStart"
                         app:srcCompat="@drawable/google_plus" />
 
                     <ImageView
                         android:id="@+id/twitterIcon"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
                         android:layout_marginTop="8dp"
                         android:layout_marginEnd="123dp"
                         android:layout_marginBottom="30dp"
+                        android:visibility="invisible"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/googlePlusIcon"
-                        app:layout_constraintTop_toBottomOf="@+id/loginButton"
+                        app:layout_constraintTop_toBottomOf="@+id/dividerOnStart"
                         app:srcCompat="@drawable/twitter" />
+
+                    <ProgressBar
+                        android:id="@+id/progressBar"
+                        style="?android:attr/progressBarStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="179dp"
+                        android:layout_marginTop="131dp"
+                        android:layout_marginEnd="184dp"
+                        android:layout_marginBottom="11dp"
+                        android:visibility="gone"
+                        app:layout_constraintBottom_toTopOf="@+id/signupButton"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/welcomeMsgTextView3" />
+
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
