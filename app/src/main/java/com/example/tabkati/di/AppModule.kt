@@ -2,7 +2,6 @@ package com.example.tabkati.di
 
 import android.app.Application
 import android.content.Intent
-import com.example.tabkati.R
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -12,9 +11,11 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 
 
-
+@Module
+@InstallIn(SingletonComponent::class)
 object AppModule {
 
+    @Provides
     fun provideGoogleSignInOptions(): GoogleSignInOptions {
         return GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken("185765143475-6bniaqlrg8ejrvf0vqgi6tu4huqpnmoi.apps.googleusercontent.com")
@@ -23,14 +24,15 @@ object AppModule {
     }
 
 
-//    fun provideGoogleSignInClient(
-//
-//        options: GoogleSignInOptions
-//    ): GoogleSignInClient {
-//        return GoogleSignIn.getClient(application, options)
-//    }
+    @Provides
+    fun provideGoogleSignInClient(application: Application,
+        options: GoogleSignInOptions
+    ): GoogleSignInClient {
+        return GoogleSignIn.getClient(application, options)
+    }
 
 
+    @Provides
     fun provideSignInIntent(googleSignInClient: GoogleSignInClient): Intent {
         return googleSignInClient.signInIntent
     }

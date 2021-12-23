@@ -8,7 +8,7 @@ import com.example.tabkati.R
 import com.example.tabkati.databinding.ActivityAuthMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class AuthMainActivity : AppCompatActivity() {
     private var _binding: ActivityAuthMainBinding? = null
     private lateinit var binding: ActivityAuthMainBinding

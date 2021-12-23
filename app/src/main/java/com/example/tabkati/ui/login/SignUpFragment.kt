@@ -10,6 +10,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.tabkati.R
 import com.example.tabkati.databinding.FragmentSignUpBinding
+import dagger.hilt.android.AndroidEntryPoint
 
 
 class SignUpFragment : Fragment() {

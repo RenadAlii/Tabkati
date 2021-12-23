@@ -27,26 +27,31 @@ import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import dagger.hilt.EntryPoint
+import dagger.hilt.InstallIn
 import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.components.SingletonComponent
 import javax.inject.Inject
 import javax.inject.Named
 
 
+@AndroidEntryPoint
 class AuthenticationFragment : Fragment() {
 
 
+    @Inject lateinit var signInIntent: Intent
     private lateinit var auth: FirebaseAuth
     private var _binding: FragmentAuthenticationBinding? = null
     private lateinit var binding: FragmentAuthenticationBinding
     private val sharedViewModel: LoginViewModel by activityViewModels()
     private lateinit var resultLauncher: ActivityResultLauncher<Intent>
-//    private val viewModel: AuthViewModel by activityViewModels()
+    private val viewModel: AuthViewModel by activityViewModels()
 
-//    override fun onCreate(savedInstanceState: Bundle?) {
-//        super.onCreate(savedInstanceState)
-////        initResultLauncher()
-//    }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        initResultLauncher()
+    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -70,7 +75,8 @@ class AuthenticationFragment : Fragment() {
             // not the class AuthenticationFragment.
             authenticationFragment = this@AuthenticationFragment
             googlePlusIcon.setOnClickListener {
-                //resultLauncher.launch(provideSignInIntent(GoogleSignIn.getClient(requireContext(), provideGoogleSignInOptions())))
+
+               resultLauncher.launch(provideSignInIntent(GoogleSignIn.getClient(requireContext(), provideGoogleSignInOptions())))
 
             }
 
@@ -78,63 +84,63 @@ class AuthenticationFragment : Fragment() {
     }
 
 
+    private fun initResultLauncher() {
+        resultLauncher =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+                if (result.resultCode == AppCompatActivity.RESULT_OK) {
+                    val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
+                    try {
+                        val googleSignInAccount = task.getResult(ApiException::class.java)
+                        googleSignInAccount?.apply {
+                            idToken?.let { idToken ->
+                                signInWithGoogle(idToken)
+                            }
+                        }
+                    } catch (e: ApiException) {
+                        print(e.message)
+                    }
+                }
+            }
+    }
 
-//private fun initResultLauncher() {
-//    resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-//        if (result.resultCode == AppCompatActivity.RESULT_OK) {
-//            val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
-//            try {
-//                val googleSignInAccount = task.getResult(ApiException::class.java)
-//                googleSignInAccount?.apply {
-//                    idToken?.let { idToken ->
-//                        signInWithGoogle(idToken)
-//                    }
-//                }
-//            } catch (e: ApiException) {
-//                print(e.message)
-//            }
-//        }
-//    }
-//}
 
+    private fun signInWithGoogle(idToken: String) {
+        viewModel.signInWithGoogle(idToken).observe(this, { response ->
+            when(response) {
+                is Response.Loading -> binding.progressBar.visibility = View.VISIBLE
+                is Response.Success -> {
+                    val isNewUser = response.data
+                    if (isNewUser) {
+                        createUser()
+                    } else {
+                        //goToMainActivity()
+                        binding.progressBar.visibility = View.GONE
+                    }
+                }
+                is Response.Failure -> {
+                    print(response.errorMessage)
+                    binding.progressBar.visibility = View.GONE
+                }
+            }
+        })
+    }
+    private fun createUser() {
+        viewModel.createUser().observe(viewLifecycleOwner, { response ->
+            when (response) {
+                is Response.Loading -> binding.progressBar.visibility = View.VISIBLE
+                is Response.Success -> {
+                    // goToMainActivity()
+                    binding.progressBar.visibility = View.GONE
+                }
+                is Response.Failure -> {
+                    Toast.makeText(requireContext(), response.errorMessage, Toast.LENGTH_SHORT)
+                        .show()
+                    binding.progressBar.visibility = View.GONE
+                }
+            }
+        })
+    }
 
-
-//private fun signInWithGoogle(idToken: String) {
-//    viewModel.signInWithGoogle(idToken).observe(viewLifecycleOwner) { response ->
-//        when (response) {
-//            is Response.Loading -> binding.progressBar.visibility = View.VISIBLE
-//            is Response.Success<*> -> {
-//                val isNewUser = response.data
-//                if (isNewUser) {
-//                    createUser()
-//                } else {
-//                    // goToMainActivity()
-//                    binding.progressBar.visibility = View.GONE
-//                }
-//            }
-//            is Response.Failure -> {
-//                print(response.errorMessage)
-//                binding.progressBar.visibility = View.GONE
-//            }
-//        }
-//    }
-//}
-
-//private fun createUser() {
-//    viewModel.createUser().observe(viewLifecycleOwner, { response ->
-//        when(response) {
-//            is Response.Loading -> binding.progressBar.visibility = View.VISIBLE
-//            is Response.Success -> {
-//               // goToMainActivity()
-//                binding.progressBar.visibility = View.GONE
-//            }
-//            is Response.Failure -> {
-//                Toast.makeText(requireContext(), response.errorMessage, Toast.LENGTH_SHORT).show()
-//                binding.progressBar.visibility = View.GONE
-//            }
-//        }
-//    })
-//}
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
