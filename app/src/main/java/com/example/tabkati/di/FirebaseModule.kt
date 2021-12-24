@@ -19,13 +19,10 @@ import javax.inject.Named
 
         @Provides
         fun provideFirebaseAuthInstance() = FirebaseAuth.getInstance()
-
-
         @Provides
         fun provideFirebaseFirestore() = FirebaseFirestore.getInstance()
-
         @Provides
         @Named(USERS_REF)
-        fun provideUsersRef(db: FirebaseFirestore) = db.collection("users")
+        fun provideUsersRef(db: FirebaseFirestore) = db.collection("Users")
 
     }

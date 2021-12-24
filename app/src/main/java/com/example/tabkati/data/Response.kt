@@ -1,5 +1,7 @@
 package com.example.tabkati.data
 
+import androidx.lifecycle.LiveData
+
 sealed class Response<out T> {
     object Loading : Response<Nothing>()
 
@@ -10,4 +12,6 @@ sealed class Response<out T> {
     data class Failure(
         val errorMessage: String
     ) : Response<Nothing>()
+
+
 }

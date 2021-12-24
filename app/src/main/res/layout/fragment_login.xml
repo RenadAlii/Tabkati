@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.tabkati.ui.login.LoginViewModel" />
+            type="com.example.tabkati.ui.login.AuthViewModel" />
         <variable
             name="loginFragment"
             type="com.example.tabkati.ui.login.LoginFragment" />
@@ -17,7 +17,7 @@
         android:background="@drawable/wafel">
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             tools:context=".ui.login.LoginFragment">
 
 
@@ -43,7 +43,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="148dp"
-                        android:layout_marginTop="100dp"
+                        android:layout_marginTop="90dp"
                         android:layout_marginEnd="148dp"
                         android:text="@string/loginText"
                         android:textAlignment="center"
@@ -112,9 +112,9 @@
                         android:layout_width="350dp"
                         android:layout_height="70dp"
                         android:layout_marginStart="30dp"
-                        android:layout_marginTop="200dp"
+                        android:layout_marginTop="140dp"
                         android:layout_marginEnd="30dp"
-                        android:layout_marginBottom="30dp"
+                        android:layout_marginBottom="50dp"
                         android:text="@string/loginText"
                         android:textSize="15sp"
                         app:layout_constraintBottom_toBottomOf="parent"

@@ -32,14 +32,34 @@ class AuthRepository @Inject constructor(
             emit(Failure(e.message ?: "Unexpected error!"))
         }
     }
+//     suspend fun firebaseSignInWithEmail(email: String,password: String) = flow {
+//         try {
+//
+//                 FirebaseAuth.getInstance()
+//                     .createUserWithEmailAndPassword(email.trim(), password.trim())
+//                     .addOnCanceledListener {
+//                         IsSuccess("canceled")
+//                     }
+//                     .addOnFailureListener {
+//                         IsSuccess (it.message.toString())
+//                     }
+//                     .addOnSuccessListener {
+//                         IsSuccess ("success ${it.user?.email}")
+//                     }
+//
+//         } catch (e: Exception) {
+//             emit(Failure(e.message ?: "Unexpected error!"))
+//         }
+//     }
 
-    suspend fun createUserInFireStore() = flow {
+    suspend fun createUserInFireStore(name: String = auth.currentUser?.displayName!!
+    ) = flow {
         try {
             emit(Loading)
             auth.currentUser?.apply {
                 usersReference.document(uid).set(
                     mapOf(
-                        NAME to displayName,
+                        NAME to name,
                        EMAIL to email
                     )
                 ).await().also {

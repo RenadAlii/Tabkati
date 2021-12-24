@@ -1,6 +1,7 @@
 package com.example.tabkati.ui.login
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -10,15 +11,13 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.tabkati.R
 import com.example.tabkati.databinding.FragmentSignUpBinding
-import dagger.hilt.android.AndroidEntryPoint
 
 
 class SignUpFragment : Fragment() {
 
     private var _binding: FragmentSignUpBinding? = null
     private lateinit var binding: FragmentSignUpBinding
-    private val sharedViewModel: LoginViewModel by activityViewModels()
-
+    private val sharedViewModel: AuthViewModel by activityViewModels()
 
 
     override fun onCreateView(
@@ -36,33 +35,154 @@ class SignUpFragment : Fragment() {
         binding.apply {
             signUpFragment = this@SignUpFragment
             lifecycleOwner = lifecycleOwner
-            sharedViewModel.setEmail(editTextTextEmailAddressSignup.editText?.text.toString())
-            sharedViewModel.setUserName(personNameText.editText?.text.toString())
+
             signup.setOnClickListener {
-                sharedViewModel.signUpUser(
-                    editTextTextPasswordSignUp.editText?.text.toString(),
-                    editTextTextEmailAddressSignup.editText?.text.toString(),
-                    personNameText.editText?.text.toString()
-                )
+                disableErrorTextField()
+                if (!sharedViewModel.isUserInfoForSignUpNotEmpty(
+                        editTextTextPasswordSignUp.editText?.text.toString(),
+                        personNameText.editText?.text.toString(),
+                        editTextTextEmailAddressSignup.editText?.text.toString()
+                    )
+                ) {
+                    sharedViewModel.setToastMsg(getString(R.string.enter_all_info))
+                    enableErrorTextField()
+                    makeToast()
+                }else {
+                    makeToast()
+                }            }
 
 
-            }
-            sharedViewModel.isSuccess.observe(viewLifecycleOwner, {
-                it?.let {
-                    Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
-                }
-
-            })
 
 
         }
+    }
+
+    private fun disableErrorTextField() {
+        binding.apply {
+            // disable error filed for password field.
+            editTextTextPasswordSignUp.isErrorEnabled = false
+            editTextTextPasswordSignUp.error = ""
+            // disable error filed for personal name field.
+            personNameText.isErrorEnabled = false
+            personNameText.error = ""
+            // disable error filed for email field.
+            editTextTextEmailAddressSignup.isErrorEnabled = false
+            editTextTextEmailAddressSignup.error = ""
+        }
+    }
+    private fun enableErrorTextField() {
+        binding.apply {
+            setErrorTextFieldForPassword()
+            setErrorTextFieldForUserName()
+            setErrorTextFieldForEmail()
+            setErrorTextFieldForPasswordAndUserName()
+            setErrorTextFieldForPasswordAndEmail()
+            setErrorTextFieldForUserNameAndEmail()
+            setErrorTextFieldForUserNameAndEmailAndPassword()
+        }
+    }
+
+    private fun FragmentSignUpBinding.setErrorTextFieldForUserNameAndEmail() {
+        sharedViewModel.errorEnableMsg.observe(viewLifecycleOwner, {
+            if (it == "nameemail") {
+                // enable error filed for personal name field.
+                personNameText.isErrorEnabled = true
+                personNameText.error = getString(R.string.user_name_is_required)
+                // enable error filed for email field.
+                editTextTextEmailAddressSignup.isErrorEnabled = true
+                editTextTextEmailAddressSignup.error = getString(R.string.email_is_required)
+            }
+
+        })
+    }
+
+    private fun FragmentSignUpBinding.setErrorTextFieldForUserNameAndEmailAndPassword() {
+        sharedViewModel.errorEnableMsg.observe(viewLifecycleOwner, {
+
+            if (it == "passwordnameemail") {
+                // enable error filed for password field.
+                editTextTextPasswordSignUp.isErrorEnabled = true
+                editTextTextPasswordSignUp.error = getString(R.string.password_is_required)
+                // enable error filed for personal name field.
+                personNameText.isErrorEnabled = true
+                personNameText.error = getString(R.string.user_name_is_required)
+                // enable error filed for email field.
+                editTextTextEmailAddressSignup.isErrorEnabled = true
+                editTextTextEmailAddressSignup.error = getString(R.string.email_is_required)
+            }
+
+        })
+    }
+
+    private fun FragmentSignUpBinding.setErrorTextFieldForPasswordAndEmail() {
+        sharedViewModel.errorEnableMsg.observe(viewLifecycleOwner, {
+            if (it == "passwordemail") {
+                // enable error filed for password field.
+                editTextTextPasswordSignUp.isErrorEnabled = true
+                editTextTextPasswordSignUp.error = getString(R.string.password_is_required)
+                // enable error filed for email field.
+                editTextTextEmailAddressSignup.isErrorEnabled = true
+                editTextTextEmailAddressSignup.error = getString(R.string.email_is_required)
+            }
+        })
+    }
+
+    private fun FragmentSignUpBinding.setErrorTextFieldForPasswordAndUserName() {
+        sharedViewModel.errorEnableMsg.observe(viewLifecycleOwner, {
+            if (it == "passwordname") {
+                // enable error filed for password field.
+                editTextTextPasswordSignUp.isErrorEnabled = true
+                editTextTextPasswordSignUp.error = getString(R.string.password_is_required)
+                // enable error filed for personal name field.
+                personNameText.isErrorEnabled = true
+                personNameText.error = getString(R.string.user_name_is_required)
+            }
+        })
+    }
+
+
+    private fun FragmentSignUpBinding.setErrorTextFieldForEmail() {
+        sharedViewModel.errorEnableMsg.observe(viewLifecycleOwner, {
+            if (it == "email") {
+                editTextTextEmailAddressSignup.isErrorEnabled = true
+                editTextTextEmailAddressSignup.error = getString(R.string.email_is_required)
+            }
+        })
+    }
+
+    private fun FragmentSignUpBinding.setErrorTextFieldForUserName() {
+        sharedViewModel.errorEnableMsg.observe(viewLifecycleOwner, {
+            if (it == "name") {
+                personNameText.isErrorEnabled = true
+                personNameText.error = getString(R.string.user_name_is_required)
+            }
+        })
+    }
+
+    private fun FragmentSignUpBinding.setErrorTextFieldForPassword() {
+        sharedViewModel.errorEnableMsg.observe(viewLifecycleOwner, {
+            if (it == "password") {
+                editTextTextPasswordSignUp.isErrorEnabled = true
+                editTextTextPasswordSignUp.error = getString(R.string.password_is_required)
+            }
+        })
+    }
+
+    // fun to make Toast
+    private fun makeToast() {
+        sharedViewModel.toastMessage.observe(viewLifecycleOwner, {
+            it?.let {
+              if (it != ""){
+                Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
+            }}
+
+        })
     }
 
     // fun to go to Login.
     fun goToLoginFragment() {
         findNavController().navigate(R.id.action_signUpFragment_to_loginFragment)
     }
-
 
 
     override fun onDestroy() {

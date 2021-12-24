@@ -1,9 +1,7 @@
 package com.example.tabkati.ui.login
 
-import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,10 +9,8 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.tabkati.R
 import com.example.tabkati.data.Response
@@ -22,17 +18,12 @@ import com.example.tabkati.databinding.FragmentAuthenticationBinding
 import com.example.tabkati.di.AppModule.provideGoogleSignInOptions
 import com.example.tabkati.di.AppModule.provideSignInIntent
 import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-import dagger.hilt.EntryPoint
-import dagger.hilt.InstallIn
 import dagger.hilt.android.AndroidEntryPoint
-import dagger.hilt.components.SingletonComponent
 import javax.inject.Inject
-import javax.inject.Named
 
 
 @AndroidEntryPoint
@@ -75,7 +66,6 @@ class AuthenticationFragment : Fragment() {
             // not the class AuthenticationFragment.
             authenticationFragment = this@AuthenticationFragment
             googlePlusIcon.setOnClickListener {
-
                resultLauncher.launch(provideSignInIntent(GoogleSignIn.getClient(requireContext(), provideGoogleSignInOptions())))
 
             }
