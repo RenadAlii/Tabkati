@@ -55,21 +55,6 @@ class LoginViewModel : ViewModel() {
 
     }
 
-//    // fun to Login using firebase by user email & password.
-//    fun loginUpUser(userPassword: String): Boolean {
-//        var successful = false
-//            provideFirebaseAuthInstance()
-//                .signInWithEmailAndPassword(_userEmail.value!!.trim(), userPassword.trim())
-//                .addOnCompleteListener {
-//
-//                    successful = it.isSuccessful
-//                    // var hold the user info.
-//                    val firebaseUser: FirebaseUser = it.result!!.user!!
-//         }
-//         }
-//        return successful
-//    }
-//
 
 
 

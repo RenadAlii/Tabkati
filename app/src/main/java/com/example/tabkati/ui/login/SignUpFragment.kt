@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.tabkati.R
+import com.example.tabkati.data.Response
 import com.example.tabkati.databinding.FragmentSignUpBinding
 
 
@@ -49,6 +50,7 @@ class SignUpFragment : Fragment() {
                     makeToast()
                 }else {
                     makeToast()
+                    createUser(personNameText.editText?.text.toString())
                 }            }
 
 
@@ -183,7 +185,26 @@ class SignUpFragment : Fragment() {
     fun goToLoginFragment() {
         findNavController().navigate(R.id.action_signUpFragment_to_loginFragment)
     }
+    private fun createUser(name: String) {
+        sharedViewModel.createUser(name).observe(viewLifecycleOwner, { response ->
+            when (response) {
+                is Response.Loading -> binding.progressBar.visibility = View.VISIBLE
+                is Response.Success -> {
+                   goToMainActivity()
+                    binding.progressBar.visibility = View.GONE
+                }
+                is Response.Failure -> {
+                    Toast.makeText(requireContext(), response.errorMessage, Toast.LENGTH_SHORT)
+                        .show()
+                    binding.progressBar.visibility = View.GONE
+                }
+            }
+        })
+    }
 
+    private fun goToMainActivity() {
+        findNavController().navigate(R.id.action_signUpFragment_to_mainActivity)
+    }
 
     override fun onDestroy() {
         super.onDestroy()

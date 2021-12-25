@@ -1,34 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
     app:startDestination="@id/authenticationFragment">
 
     <fragment
         android:id="@+id/authenticationFragment"
         android:name="com.example.tabkati.ui.login.AuthenticationFragment"
-        android:label="AuthenticationFragment" >
+        android:label="AuthenticationFragment">
         <action
             android:id="@+id/action_authenticationFragment_to_signUpFragment"
             app:destination="@id/signUpFragment" />
         <action
             android:id="@+id/action_authenticationFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_authenticationFragment_to_mainActivity"
+            app:destination="@id/mainActivity" />
+
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.example.tabkati.ui.login.LoginFragment"
-        android:label="LoginFragment" >
+        android:label="LoginFragment">
         <action
             android:id="@+id/action_loginFragment_to_signUpFragment"
             app:destination="@id/signUpFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_mainActivity"
+            app:destination="@id/mainActivity" />
+
     </fragment>
     <fragment
         android:id="@+id/signUpFragment"
         android:name="com.example.tabkati.ui.login.SignUpFragment"
-        android:label="SignUpFragment" >
+        android:label="SignUpFragment">
         <action
             android:id="@+id/action_signUpFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_signUpFragment_to_mainActivity"
+            app:destination="@id/mainActivity" />
+
     </fragment>
+    <activity
+        android:id="@+id/mainActivity"
+        android:name="com.example.tabkati.MainActivity"
+        android:label="activity_main"
+        tools:layout="@layout/activity_main" />
 </navigation>

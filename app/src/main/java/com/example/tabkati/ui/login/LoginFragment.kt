@@ -30,7 +30,7 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.apply {
-            // Allows Data Binding to Observe LiveData with the lifecycle of this Activity.
+            // Allows Data Binding to Observe LiveData with the lifecycle of this Fragment.
             lifecycleOwner = lifecycleOwner
             // @ because inside binding.apply this revers to the binding instance.
             // not the class loginFragment.
@@ -42,7 +42,8 @@ class LoginFragment : Fragment() {
                         editTextTextEmailAddressLogin.editText?.text.toString()
                     )
                 ) {
-                    makeToast()
+                   // makeToast()
+                    goToMainActivity()
                 }else{
                 sharedViewModel.setToastMsg(getString(R.string.enter_all_info))
                 enableErrorTextField()
@@ -107,6 +108,10 @@ class LoginFragment : Fragment() {
     // fun to go to SignUp.
     fun goToSignUpFragment() {
         findNavController().navigate(R.id.action_loginFragment_to_signUpFragment)
+    }
+
+    private fun goToMainActivity() {
+        findNavController().navigate(R.id.action_loginFragment_to_mainActivity)
     }
 
 

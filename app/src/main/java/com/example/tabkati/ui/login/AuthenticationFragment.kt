@@ -103,7 +103,7 @@ class AuthenticationFragment : Fragment() {
                     if (isNewUser) {
                         createUser()
                     } else {
-                        //goToMainActivity()
+                      goToMainActivity()
                         binding.progressBar.visibility = View.GONE
                     }
                 }
@@ -119,7 +119,7 @@ class AuthenticationFragment : Fragment() {
             when (response) {
                 is Response.Loading -> binding.progressBar.visibility = View.VISIBLE
                 is Response.Success -> {
-                    // goToMainActivity()
+                    goToMainActivity()
                     binding.progressBar.visibility = View.GONE
                 }
                 is Response.Failure -> {
@@ -129,6 +129,9 @@ class AuthenticationFragment : Fragment() {
                 }
             }
         })
+    }
+    private fun goToMainActivity() {
+        findNavController().navigate(R.id.action_authenticationFragment_to_mainActivity)
     }
 
     override fun onDestroy() {

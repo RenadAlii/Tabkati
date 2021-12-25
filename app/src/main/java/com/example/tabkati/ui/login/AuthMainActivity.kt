@@ -23,7 +23,7 @@ class AuthMainActivity : AppCompatActivity() {
 
         //get navHost fragment from this Activity
         val navHostFragment = supportFragmentManager
-            .findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+            .findFragmentById(R.id.nav_host_fragment_for_auth_main) as NavHostFragment
         navController = navHostFragment.navController
 
     }

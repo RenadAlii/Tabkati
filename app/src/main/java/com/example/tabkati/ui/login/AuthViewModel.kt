@@ -1,11 +1,14 @@
 package com.example.tabkati.ui.login
 
 
+import android.view.View
+import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import com.example.tabkati.R
+import com.example.tabkati.data.Response
 import com.example.tabkati.di.FirebaseModule
 import com.example.tabkati.repository.AuthRepository
 import com.google.firebase.auth.FirebaseUser
@@ -35,7 +38,7 @@ class AuthViewModel @Inject constructor(
         clearToastMsg()
         _toastMessage.value = Msg
     }
-    fun clearToastMsg() {
+    private fun clearToastMsg() {
         _toastMessage.value = ""
     }
     fun signInWithGoogle(idToken: String) = liveData(Dispatchers.IO) {
@@ -56,6 +59,7 @@ class AuthViewModel @Inject constructor(
             emit(response)
         }
     }
+
 
 
     // fun to check if the user email is empty if true errorEnableMsg = email.
@@ -153,7 +157,8 @@ class AuthViewModel @Inject constructor(
             }
             .addOnSuccessListener {
                 setToastMsg("success ${it.user?.email}")
-                createUser(name)
+
+
 
             }
     }
