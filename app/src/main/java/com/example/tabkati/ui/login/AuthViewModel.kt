@@ -1,12 +1,10 @@
 package com.example.tabkati.ui.login
 
 
+import android.util.Log
 import android.view.View
 import android.widget.Toast
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.liveData
+import androidx.lifecycle.*
 import com.example.tabkati.R
 import com.example.tabkati.data.Response
 import com.example.tabkati.di.FirebaseModule
@@ -14,16 +12,19 @@ import com.example.tabkati.repository.AuthRepository
 import com.google.firebase.auth.FirebaseUser
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 
 // here we emit the data that is collected from the repository class.
 @HiltViewModel
 class AuthViewModel @Inject constructor(
-    private val repository: AuthRepository
+    private val repository: AuthRepository,
 ) : ViewModel() {
 
+    private var _error: MutableStateFlow<Boolean> = MutableStateFlow(false)
+    val error:StateFlow<Boolean> = _error.asStateFlow()
 
     private var _toastMessage = MutableLiveData<String>()
     val toastMessage: LiveData<String> get() = _toastMessage
@@ -38,9 +39,11 @@ class AuthViewModel @Inject constructor(
         clearToastMsg()
         _toastMessage.value = Msg
     }
+
     private fun clearToastMsg() {
         _toastMessage.value = ""
     }
+
     fun signInWithGoogle(idToken: String) = liveData(Dispatchers.IO) {
         repository.firebaseSignInWithGoogle(idToken).collect { response ->
             emit(response)
@@ -54,12 +57,8 @@ class AuthViewModel @Inject constructor(
         }
     }
 
-    fun createUser(name: String) = liveData(Dispatchers.IO) {
-        repository.createUserInFireStore(name).collect { response ->
-            emit(response)
-        }
-    }
-
+    suspend fun createUser(name: String): Flow<Boolean> =
+        repository.createUserInFireStoreh(name)
 
 
     // fun to check if the user email is empty if true errorEnableMsg = email.
@@ -86,7 +85,11 @@ class AuthViewModel @Inject constructor(
         } else true
     }
 
-    fun isUserInfoForSignUpNotEmpty(userPassword: String, userName: String, email: String): Boolean {
+    fun isUserInfoForSignUpNotEmpty(
+        userPassword: String,
+        userName: String,
+        email: String,
+    ): Boolean {
         // clear ErrorEnableMsg.
         clearErrorEnableMsg()
         if (isUserPasswordEmpty(userPassword)) {
@@ -118,10 +121,11 @@ class AuthViewModel @Inject constructor(
         // clear ErrorEnableMsg.
         clearErrorEnableMsg()
         if (isUserPasswordEmpty(userPassword)) {
-                if (isEmailEmpty(email)) {
-                    // if all user info are not empty  signUp the User
-                    loginUpUser(userPassword, email)
-                    return true }
+            if (isEmailEmpty(email)) {
+                // if all user info are not empty  signUp the User
+                loginUpUser(userPassword, email)
+                return true
+            }
         } else
             if (isEmailEmpty(email)) {
                 return false
@@ -130,25 +134,9 @@ class AuthViewModel @Inject constructor(
     }
 
     // fun to Login using firebase by user email & password.
-  private  fun loginUpUser(userPassword: String, email: String) {
-            FirebaseModule.provideFirebaseAuthInstance()
-                .signInWithEmailAndPassword(email.trim(), userPassword.trim())
-                .addOnCanceledListener {
-                    setToastMsg( "canceled")
-                }
-                .addOnFailureListener {
-                    setToastMsg( it.message.toString())
-                }
-                .addOnSuccessListener {
-                    setToastMsg("success ${it.user?.email}")
-
-                }
-    }
-
-    // fun to sign up using firebase by user name, password and email.
-    private fun signUpUser(userPassword: String, email: String, name: String) {
+    private fun loginUpUser(userPassword: String, email: String) {
         FirebaseModule.provideFirebaseAuthInstance()
-            .createUserWithEmailAndPassword(email.trim(), userPassword.trim())
+            .signInWithEmailAndPassword(email.trim(), userPassword.trim())
             .addOnCanceledListener {
                 setToastMsg("canceled")
             }
@@ -158,8 +146,31 @@ class AuthViewModel @Inject constructor(
             .addOnSuccessListener {
                 setToastMsg("success ${it.user?.email}")
 
+            }
+    }
 
+    // fun to sign up using firebase by user name, password and email.
+    private fun signUpUser(userPassword: String, email: String, name: String) {
+        FirebaseModule.provideFirebaseAuthInstance()
+            .createUserWithEmailAndPassword(email.trim(), userPassword.trim())
+            .addOnCanceledListener {
+                setToastMsg("canceled")
+                Log.d("ddd", "signUpUser: cancel")
+            }
+            .addOnFailureListener {
+                setToastMsg(it.message.toString())
+                Log.d("ddd", "signUpUser: ${it.message.toString()} ")
+            }
+            .addOnSuccessListener {
+                setToastMsg("success ${it.user?.email}")
+                Log.d("ddd", "signUpUser:${it.user?.email} ")
 
+             viewModelScope.launch {
+                 createUser(name).collect { it ->
+
+                     _error.value = it
+                 }
+             }
             }
     }
 

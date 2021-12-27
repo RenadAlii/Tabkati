@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.example.tabkati.ui.login.LoginViewModel" />
+            type="com.example.tabkati.ui.login.AuthViewModel" />
 
         <variable
             name="authenticationFragment"
@@ -17,8 +17,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/pasta"
-        >
+        android:background="@drawable/pasta">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"

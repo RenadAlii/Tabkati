@@ -1,35 +1,42 @@
 package com.example.tabkati.ui.recipes
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.tabkati.R
 import com.example.tabkati.data.Response
 import com.example.tabkati.databinding.FragmentHomeBinding
-import com.example.tabkati.databinding.FragmentLoginBinding
+import com.example.tabkati.ui.login.AuthMainActivity
 import com.example.tabkati.ui.login.AuthViewModel
-import dagger.hilt.android.AndroidEntryPoint
 
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+
+
+@ExperimentalCoroutinesApi
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
     private lateinit var binding: FragmentHomeBinding
-    private val viwModel: HomeViewModel by activityViewModels()
+   // private val homeViwModel: HomeViewModel by activityViewModels()
+    private val homeViwModel by viewModels<HomeViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        setHasOptionsMenu(true)
         super.onCreate(savedInstanceState)
-        getAuthState()
+        setHasOptionsMenu(true)
+
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentHomeBinding.inflate(inflater)
         binding = _binding!!
         return binding.root
@@ -39,12 +46,14 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.apply {
             // Allows Data Binding to Observe LiveData with the lifecycle of this fragment.
-            //lifecycleOwner = lifecycleOwner
+            lifecycleOwner = viewLifecycleOwner
             // @ because inside binding.apply this revers to the binding instance.
             // not the class HomeFragment.
-            // homeFragment = this@HomeFragment
-            //viewModel = sharedViewModel
+            homeFragment = this@HomeFragment
+            viewModel = homeViwModel
         }
+
+        getAuthState()
     }
 
 
@@ -62,12 +71,11 @@ class HomeFragment : Fragment() {
     }
 
     private fun signOut() {
-        viwModel.sigOut().observe(viewLifecycleOwner, {
+        homeViwModel.sigOut().observe(viewLifecycleOwner, {
             when (it) {
                 is Response.Loading -> binding.progressBar.visibility = View.VISIBLE
                 is Response.Success -> binding.progressBar.visibility = View.GONE
                 is Response.Failure -> {
-                    Log.e("renad", "signOut: ${it.errorMessage}")
                     binding.progressBar.visibility = View.GONE
                 }
 
@@ -76,17 +84,18 @@ class HomeFragment : Fragment() {
     }
 
     // fun to get the user authentication state so no user not authenticated will stay in home fragment.
-    private fun getAuthState(){
-        viwModel.getAuthState().observe(viewLifecycleOwner,{
-          // if the user signedOut it = true go to Auth Activity to signIn in.
-            if(it){
+    private fun getAuthState() {
+        homeViwModel.getAuthState().observe(viewLifecycleOwner, {
+            // if the user signedOut it = true go to Auth Activity to signIn in.
+            if (it) {
                 goToAuthActivity()
             }
         })
     }
 
     private fun goToAuthActivity() {
-       findNavController().navigate(R.id.action_homeFragment_to_authMainActivity)
+        val intent = Intent(requireContext(), AuthMainActivity::class.java)
+        startActivity(intent)
     }
 
     override fun onDestroy() {

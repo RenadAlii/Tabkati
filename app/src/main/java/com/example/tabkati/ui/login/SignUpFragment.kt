@@ -1,5 +1,6 @@
 package com.example.tabkati.ui.login
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -8,22 +9,33 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
+import com.example.tabkati.MainActivity
 import com.example.tabkati.R
+import com.example.tabkati.ViewModelFactory
 import com.example.tabkati.data.Response
 import com.example.tabkati.databinding.FragmentSignUpBinding
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 
 class SignUpFragment : Fragment() {
 
     private var _binding: FragmentSignUpBinding? = null
     private lateinit var binding: FragmentSignUpBinding
-    private val sharedViewModel: AuthViewModel by activityViewModels()
 
+    //private val sharedViewModel: AuthViewModel by activityViewModels()
+    private val sharedViewModel: AuthViewModel by viewModels {
+        ViewModelFactory()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
         // Inflate the layout for this fragment
         _binding = FragmentSignUpBinding.inflate(inflater)
@@ -35,9 +47,11 @@ class SignUpFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.apply {
             signUpFragment = this@SignUpFragment
-            lifecycleOwner = lifecycleOwner
+            lifecycleOwner = viewLifecycleOwner
 
             signup.setOnClickListener {
+
+
                 disableErrorTextField()
                 if (!sharedViewModel.isUserInfoForSignUpNotEmpty(
                         editTextTextPasswordSignUp.editText?.text.toString(),
@@ -48,14 +62,25 @@ class SignUpFragment : Fragment() {
                     sharedViewModel.setToastMsg(getString(R.string.enter_all_info))
                     enableErrorTextField()
                     makeToast()
-                }else {
-                    makeToast()
-                    createUser(personNameText.editText?.text.toString())
-                }            }
+                } else {
+
+                }
+            }
 
 
+        }
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                sharedViewModel.error.collect {
+                    // Update UI elements
+                    Log.d("ddd", "onViewCreated: ${it.toString()}")
+                    if (it) {
 
-
+                        makeToast()
+                        goToMainActivity()
+                    }
+                }
+            }
         }
     }
 
@@ -72,6 +97,7 @@ class SignUpFragment : Fragment() {
             editTextTextEmailAddressSignup.error = ""
         }
     }
+
     private fun enableErrorTextField() {
         binding.apply {
             setErrorTextFieldForPassword()
@@ -174,9 +200,10 @@ class SignUpFragment : Fragment() {
     private fun makeToast() {
         sharedViewModel.toastMessage.observe(viewLifecycleOwner, {
             it?.let {
-              if (it != ""){
-                Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
-            }}
+                if (it != "") {
+                    Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
+                }
+            }
 
         })
     }
@@ -185,25 +212,27 @@ class SignUpFragment : Fragment() {
     fun goToLoginFragment() {
         findNavController().navigate(R.id.action_signUpFragment_to_loginFragment)
     }
-    private fun createUser(name: String) {
-        sharedViewModel.createUser(name).observe(viewLifecycleOwner, { response ->
-            when (response) {
-                is Response.Loading -> binding.progressBar.visibility = View.VISIBLE
-                is Response.Success -> {
-                   goToMainActivity()
-                    binding.progressBar.visibility = View.GONE
-                }
-                is Response.Failure -> {
-                    Toast.makeText(requireContext(), response.errorMessage, Toast.LENGTH_SHORT)
-                        .show()
-                    binding.progressBar.visibility = View.GONE
-                }
-            }
-        })
-    }
+//    private fun createUser(name: String) {
+//        sharedViewModel.createUser(name).observe(viewLifecycleOwner, { response ->
+//            when (response) {
+//                is Response.Loading -> binding.progressBar.visibility = View.VISIBLE
+//                is Response.Success -> {
+//                   goToMainActivity()
+//                    binding.progressBar.visibility = View.GONE
+//                }
+//                is Response.Failure -> {
+//                    Toast.makeText(requireContext(), response.errorMessage, Toast.LENGTH_SHORT)
+//                        .show()
+//                    binding.progressBar.visibility = View.GONE
+//                }
+//            }
+//        })
+//    }
 
     private fun goToMainActivity() {
-        findNavController().navigate(R.id.action_signUpFragment_to_mainActivity)
+        // findNavController().navigate(R.id.action_signUpFragment_to_mainActivity)
+        val intent = Intent(requireContext(), MainActivity::class.java)
+        startActivity(intent)
     }
 
     override fun onDestroy() {

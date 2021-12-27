@@ -1,5 +1,6 @@
 package com.example.tabkati.ui.login
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -7,17 +8,23 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.example.tabkati.MainActivity
 import com.example.tabkati.R
 import com.example.tabkati.databinding.FragmentLoginBinding
+import dagger.hilt.EntryPoint
+import dagger.hilt.android.AndroidEntryPoint
 
 
-
+@AndroidEntryPoint
 class LoginFragment : Fragment() {
 
     private var _binding: FragmentLoginBinding? = null
     private lateinit var binding: FragmentLoginBinding
-    private val sharedViewModel: AuthViewModel by activityViewModels()
+   // private val sharedViewModel: AuthViewModel by activityViewModels()
+   private val sharedViewModel by viewModels<AuthViewModel>()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -31,11 +38,13 @@ class LoginFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.apply {
             // Allows Data Binding to Observe LiveData with the lifecycle of this Fragment.
-            lifecycleOwner = lifecycleOwner
+            lifecycleOwner = viewLifecycleOwner
             // @ because inside binding.apply this revers to the binding instance.
             // not the class loginFragment.
             loginFragment = this@LoginFragment
             viewModel = sharedViewModel
+
+
             loginButton.setOnClickListener {
                 if (sharedViewModel.isUserInfoForLogInNotEmpty(
                         editTextTextPasswordLogin.editText?.text.toString(),
@@ -48,7 +57,8 @@ class LoginFragment : Fragment() {
                 sharedViewModel.setToastMsg(getString(R.string.enter_all_info))
                 enableErrorTextField()
                 makeToast()
-            }}
+            }
+            }
 
         }
     }
@@ -111,7 +121,9 @@ class LoginFragment : Fragment() {
     }
 
     private fun goToMainActivity() {
-        findNavController().navigate(R.id.action_loginFragment_to_mainActivity)
+     //   findNavController().navigate(R.id.action_loginFragment_to_mainActivity)
+        val intent = Intent(requireContext(), MainActivity::class.java)
+        startActivity(intent)
     }
 
 

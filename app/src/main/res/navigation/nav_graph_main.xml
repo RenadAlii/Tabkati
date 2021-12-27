@@ -8,15 +8,7 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.example.tabkati.ui.recipes.HomeFragment"
-        android:label="fragment_home"
-        tools:layout="@layout/fragment_home" >
-        <action
-            android:id="@+id/action_homeFragment_to_authMainActivity"
-            app:destination="@id/authMainActivity" />
+        android:label="fragment_home">
     </fragment>
-    <activity
-        android:id="@+id/authMainActivity"
-        android:name="com.example.tabkati.ui.login.AuthMainActivity"
-        android:label="activity_auth_main"
-        tools:layout="@layout/activity_auth_main" />
+
 </navigation>

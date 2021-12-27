@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.tabkati.ui.login.LoginViewModel" />
+            type="com.example.tabkati.ui.login.AuthViewModel" />
         <variable
             name="signUpFragment"
             type="com.example.tabkati.ui.login.SignUpFragment" />

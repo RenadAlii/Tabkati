@@ -5,6 +5,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.awaitClose
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.tasks.await
@@ -29,7 +30,7 @@ class MainAuthRepository @Inject constructor(
     }
 
     @ExperimentalCoroutinesApi
-    fun getFirebaseAuthState() = callbackFlow  {
+    fun getFirebaseAuthState(): Flow<Boolean> = callbackFlow  {
         val authStateListener = FirebaseAuth.AuthStateListener { auth ->
             trySend(auth.currentUser == null)
         }

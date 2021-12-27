@@ -11,7 +11,9 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.example.tabkati.MainActivity
 import com.example.tabkati.R
 import com.example.tabkati.data.Response
 import com.example.tabkati.databinding.FragmentAuthenticationBinding
@@ -34,10 +36,10 @@ class AuthenticationFragment : Fragment() {
     private lateinit var auth: FirebaseAuth
     private var _binding: FragmentAuthenticationBinding? = null
     private lateinit var binding: FragmentAuthenticationBinding
-    private val sharedViewModel: LoginViewModel by activityViewModels()
-    private lateinit var resultLauncher: ActivityResultLauncher<Intent>
-    private val viewModel: AuthViewModel by activityViewModels()
 
+    private lateinit var resultLauncher: ActivityResultLauncher<Intent>
+    //private val viewModel: AuthViewModel by activityViewModels()
+    private val viewModel by viewModels<AuthViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,13 +57,13 @@ class AuthenticationFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        FirebaseAuth.getInstance().signOut()
+//        FirebaseAuth.getInstance().signOut()
         // Initialize Firebase Auth
-        auth = Firebase.auth
-        auth.signOut()
+//        auth = Firebase.auth
+//        auth.signOut()
         binding.apply {
-            lifecycleOwner = lifecycleOwner
-            viewModel = sharedViewModel
+            lifecycleOwner = viewLifecycleOwner
+            viewModel = viewModel
             // @ because inside binding.apply this revers to the binding instance.
             // not the class AuthenticationFragment.
             authenticationFragment = this@AuthenticationFragment
@@ -131,7 +133,9 @@ class AuthenticationFragment : Fragment() {
         })
     }
     private fun goToMainActivity() {
-        findNavController().navigate(R.id.action_authenticationFragment_to_mainActivity)
+        //findNavController().navigate(R.id.action_authenticationFragment_to_mainActivity)
+        val intent = Intent(requireContext(), MainActivity::class.java)
+        startActivity(intent)
     }
 
     override fun onDestroy() {

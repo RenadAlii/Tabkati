@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/nav_graph"
+    android:id="@+id/nav_graph_auth"
     app:startDestination="@id/authenticationFragment">
 
     <fragment
@@ -15,6 +15,7 @@
         <action
             android:id="@+id/action_authenticationFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+
         <action
             android:id="@+id/action_authenticationFragment_to_mainActivity"
             app:destination="@id/mainActivity" />
@@ -27,6 +28,7 @@
         <action
             android:id="@+id/action_loginFragment_to_signUpFragment"
             app:destination="@id/signUpFragment" />
+
         <action
             android:id="@+id/action_loginFragment_to_mainActivity"
             app:destination="@id/mainActivity" />
@@ -39,6 +41,8 @@
         <action
             android:id="@+id/action_signUpFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+
+
         <action
             android:id="@+id/action_signUpFragment_to_mainActivity"
             app:destination="@id/mainActivity" />
@@ -49,4 +53,5 @@
         android:name="com.example.tabkati.MainActivity"
         android:label="activity_main"
         tools:layout="@layout/activity_main" />
+
 </navigation>
