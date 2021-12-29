@@ -2,18 +2,18 @@ package com.example.tabkati.ui.recipes
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager.VERTICAL
+import androidx.recyclerview.widget.RecyclerView
 import com.example.tabkati.R
+import com.example.tabkati.adapter.RecipeCategoriesAdapter
+import com.example.tabkati.data.RecipeCategoriesPictureDataSource
 import com.example.tabkati.data.Response
 import com.example.tabkati.databinding.FragmentHomeBinding
 import com.example.tabkati.ui.login.AuthMainActivity
-import com.example.tabkati.ui.login.AuthViewModel
-
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
@@ -24,9 +24,9 @@ class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
     private lateinit var binding: FragmentHomeBinding
-   // private val homeViwModel: HomeViewModel by activityViewModels()
     private val homeViwModel by viewModels<HomeViewModel>()
-
+    private val recipeCategoriesData = RecipeCategoriesPictureDataSource.recipeCategoriesPictureList
+    private lateinit var recyclerViewOfRecipeCategories: RecyclerView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
@@ -35,7 +35,7 @@ class HomeFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         _binding = FragmentHomeBinding.inflate(inflater)
         binding = _binding!!
@@ -51,8 +51,16 @@ class HomeFragment : Fragment() {
             // not the class HomeFragment.
             homeFragment = this@HomeFragment
             viewModel = homeViwModel
-        }
+            recyclerViewOfRecipeCategories = recyclerViewOfRecipeCate
+            recyclerViewOfRecipeCategories.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+            val recipeCateAdapter = RecipeCategoriesAdapter({
+                //val action =
+            })
 
+            recyclerViewOfRecipeCategories.adapter = recipeCateAdapter
+            recipeCateAdapter.submitList(recipeCategoriesData)
+
+        }
         getAuthState()
     }
 
