@@ -8,8 +8,15 @@ plugins {
     // id 'androidx.navigation.safeargs.kotlin'
 }
 
+
 android {
     compileSdk 31
+
+
+
+    kapt {
+        correctErrorTypes = true
+    }
 
     defaultConfig {
         applicationId "com.example.tabkati"
@@ -62,10 +69,17 @@ dependencies {
     // Navigation.
     implementation 'androidx.navigation:navigation-fragment-ktx:2.3.5'
     implementation 'androidx.navigation:navigation-ui-ktx:2.3.5'
-    // Moshi
+     //Moshi
     implementation 'com.squareup.moshi:moshi-kotlin:1.9.3'
-    // Retrofit with Moshi Converter
+     //Retrofit with Moshi Converter
     implementation 'com.squareup.retrofit2:converter-moshi:2.9.0'
+
+    //Retrofit
+    def retrofit_version = "2.9.0"
+    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
+    implementation "com.squareup.okhttp3:logging-interceptor:4.9.0"
+    implementation "com.squareup.retrofit2:converter-scalars:$retrofit_version"
     // Coil
     implementation "io.coil-kt:coil:1.1.1"
     // ... Coil (https://github.com/coil-kt/coil)

@@ -8,13 +8,13 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 
-class RecipesRemoteDataSource @Inject constructor(private val api: RecipeApiService, private val dispatcher: CoroutineDispatcher
+class RecipesRemoteDataSource @Inject constructor(private val api: RecipeApiService, private val dispatcher: CoroutineDispatcher=Dispatchers.IO
 ) {
 
 
     suspend fun getRandomRecipes(pages: String):List<RecipesItem?>? =
         withContext(dispatcher){
-            api.getRandomRecipes(pages).recipes
+            api.getRandomRecipes().recipes
         }
 
     suspend fun getRecipesByCategory(category: String):List<RecipesItem?>? =
