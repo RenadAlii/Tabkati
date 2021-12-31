@@ -35,7 +35,7 @@ class RecipeCategoriesAdapter(private val onItemClicked: (RecipeCategoriesPictur
         private var binding: GridViewRecipeCateItemBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(category: RecipeCategoriesPictureLocalDataSource) {
             binding.catImage.setImageResource(category.CategoryImage.toInt())
-            binding.recipeCatTitle.text = category.titleOFCat
+            binding.data = category
 
         }
     }
@@ -54,6 +54,11 @@ class RecipeCategoriesAdapter(private val onItemClicked: (RecipeCategoriesPictur
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         holder.bind(getItem(position))
+
+
+
+
+
     }
 
 

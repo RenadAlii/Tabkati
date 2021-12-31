@@ -8,6 +8,12 @@
         name="data"
         type="com.example.tabkati.data.RecipesItem" />
     </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp">
     <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -20,10 +26,8 @@
         android:layout_height="200dp"
         android:fitsSystemWindows="false"
         android:scaleType="fitXY"
-        app:id="@{data.originalId.toString()}"
-        app:imageType="@{data.imageType.toString()}"
-        android:src="@drawable/pasta"
-        android:tint="#3B191C1C"
+        app:imageUrl="@{data.image}"
+               android:tint="#3B191C1C"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -34,7 +38,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:fontFamily="@font/nunito"
-        android:text="@string/app_name"
+        android:text="@{data.title}"
         android:textColor="#323131"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -63,9 +67,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="26dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="20dp"
         android:fontFamily="@font/nunito_extralight_italic"
-        android:text="@string/timer_with_unicode"
+        android:text="@{@string/timer_with_unicode(data.readyInMinutes.toString())}"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/recipe_title" />
 
@@ -76,10 +80,11 @@
         android:layout_marginStart="26dp"
         android:layout_marginTop="8dp"
         android:fontFamily="@font/nunito_extralight_italic"
-        android:text="2 Serving "
+        android:text="@{@string/_2_serving(data.servings.toString())}"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/timer_textView" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
 </layout>

@@ -38,9 +38,7 @@ class RecipesAdapter(private val onItemClicked: (RecipesItem) -> Unit) :
         RecipeItemBinding,
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(recipe: RecipesItem) {
-           binding.recipeTitle.text = recipe.title.toString()
-            binding.servingsTextView.text = recipe.servings.toString()
-            binding.timerTextView.text = recipe.readyInMinutes.toString()
+            binding.data = recipe
 
         }
     }
