@@ -74,9 +74,9 @@ class HomeFragment : Fragment() {
                 //action
             })
             recyclerViewOfRecipes.adapter = recipesAdapter
-            Log.e("Renad", "onViewCreated: ")
-            recipesViewModel.getRandomRecipes()
-            subscribeUi(recipesAdapter)
+//            Log.e("Renad", "onViewCreated: ")
+//            recipesViewModel.getRandomRecipes()
+
 
         }
         getAuthState()
@@ -125,11 +125,7 @@ class HomeFragment : Fragment() {
         startActivity(intent)
     }
 
-    private fun subscribeUi(adapter: RecipesAdapter) {
-        recipesViewModel.recipesList.observe(viewLifecycleOwner) { recipes ->
-            adapter.submitList(recipes)
-        }
-    }
+
     override fun onDestroy() {
         super.onDestroy()
         _binding = null

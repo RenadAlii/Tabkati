@@ -13,7 +13,7 @@ import retrofit2.http.Query
 interface RecipeApiService {
 
     //Get Random list of Recipes.
-    @GET("/recipes/random?number=3&apiKey=${API_KEY}")
+    @GET("/recipes/random?number=10&apiKey=${API_KEY}")
     suspend fun getRandomRecipes(): SpoonacularRemoteDatasource
 
     //Get Recipe by id.
@@ -23,6 +23,13 @@ interface RecipeApiService {
     //Get Recipes by category.
     @GET("/recipes/random?number=40&tags={category}&apiKey=${API_KEY}")
     suspend fun getRecipesByCategory(@Query("category") category: String): SpoonacularRemoteDatasource
+
+    //Get Recipes by category.
+    @GET("/recipes/complexSearch?query={search}&apiKey=${API_KEY}")
+    suspend fun searchForRecipes(@Query("search") search: String): SpoonacularRemoteDatasource
+
+
+
 
 }
 

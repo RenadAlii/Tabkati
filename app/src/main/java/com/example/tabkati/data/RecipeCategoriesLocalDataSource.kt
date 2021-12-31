@@ -2,29 +2,29 @@ package com.example.tabkati.data
 
 import com.example.tabkati.R
 
-data class RecipeCategoriesPictureLocalDataSource(val CategoryImage: String, val titleOFCat: String)
+data class RecipeCategoriesPictureLocalDataSource(val CategoryImage:Int, val titleOFCat: String, val id: String)
 
 
 object RecipeCategoriesPictureDataSource {
     val recipeCategoriesPictureList: List<RecipeCategoriesPictureLocalDataSource> = listOf(
         RecipeCategoriesPictureLocalDataSource(
-            R.drawable.desert.toString(), "Desert"), RecipeCategoriesPictureLocalDataSource(
-            R.drawable.breakfast.toString(), "Side Dish "
+            R.drawable.desert, "Desert","dessert"), RecipeCategoriesPictureLocalDataSource(
+            R.drawable.breakfast, "Side Dish","side+dish"
         ), RecipeCategoriesPictureLocalDataSource(
-            R.drawable.diner.toString(), "Main Course"
+            R.drawable.diner, "Main Course","main+course"
         ), RecipeCategoriesPictureLocalDataSource(
-            R.drawable.dreank.toString(), "Drink"
+            R.drawable.dreank, "Drink","drink"
 
         ), RecipeCategoriesPictureLocalDataSource(
-            R.drawable.soap.toString(), "Soup"
+            R.drawable.soap, "Soup","soup"
         ),
         RecipeCategoriesPictureLocalDataSource(
-            R.drawable.saletd.toString(), "Salad"), RecipeCategoriesPictureLocalDataSource(
-            R.drawable.saled2.toString(), "Snack"
+            R.drawable.saletd, "Salad","salad"), RecipeCategoriesPictureLocalDataSource(
+            R.drawable.saled2, "Snack","snack"
         ), RecipeCategoriesPictureLocalDataSource(
-            R.drawable.pagel.toString(), "Breakfast"
+            R.drawable.pagel, "Breakfast","breakfast"
         ), RecipeCategoriesPictureLocalDataSource(
-            R.drawable.lunch.toString(), "Vegetarian"
+            R.drawable.lunch, "Vegetarian","vegetarian"
         )
 
     )

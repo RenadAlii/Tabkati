@@ -34,14 +34,11 @@ init {
     fun getRandomRecipes() {
         viewModelScope.launch {
             _status.value = RecipesApiStatus.LOADING
-            Log.e("Renad", "getRandomRecipes:1 ", )
             try {
                 _RecipesList.value =repository.getRandomRecipes()
                 _status.value = RecipesApiStatus.DONE
-                Log.e("Renad", "getRandomRecipes:2 ", )
             } catch (e: Exception) {
                 _status.value = RecipesApiStatus.ERROR
-                Log.e("Renad", "getRandomRecipes:3 ${e.message} ", )
                 // to clear the RecyclerView.
 
             }

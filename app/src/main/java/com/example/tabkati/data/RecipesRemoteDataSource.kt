@@ -26,6 +26,9 @@ class RecipesRemoteDataSource @Inject constructor(private val api: RecipeApiServ
         withContext(dispatcher){
             api.getRecipe(id)
         }
-
+    suspend fun searchForRecipe(search: String ):List<RecipesItem?>? =
+        withContext(dispatcher){
+            api.searchForRecipes(search).recipes
+        }
 
 }
