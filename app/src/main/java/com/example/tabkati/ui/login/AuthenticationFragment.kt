@@ -10,12 +10,14 @@ import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.activityViewModels
+
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.tabkati.MainActivity
 import com.example.tabkati.R
-import com.example.tabkati.data.Response
+import com.example.tabkati.utils.State.Failure
+import com.example.tabkati.utils.State.Loading
+import com.example.tabkati.utils.State.Success
 import com.example.tabkati.databinding.FragmentAuthenticationBinding
 import com.example.tabkati.di.AppModule.provideGoogleSignInOptions
 import com.example.tabkati.di.AppModule.provideSignInIntent
@@ -99,8 +101,8 @@ class AuthenticationFragment : Fragment() {
     private fun signInWithGoogle(idToken: String) {
         viewModel.signInWithGoogle(idToken).observe(this, { response ->
             when(response) {
-                is Response.Loading -> binding.progressBar.visibility = View.VISIBLE
-                is Response.Success -> {
+                is Loading -> binding.progressBar.visibility = View.VISIBLE
+                is Success -> {
                     val isNewUser = response.data
                     if (isNewUser) {
                         createUser()
@@ -109,7 +111,7 @@ class AuthenticationFragment : Fragment() {
                         binding.progressBar.visibility = View.GONE
                     }
                 }
-                is Response.Failure -> {
+                is Failure -> {
                     print(response.errorMessage)
                     binding.progressBar.visibility = View.GONE
                 }
@@ -119,12 +121,12 @@ class AuthenticationFragment : Fragment() {
     private fun createUser() {
         viewModel.createUser().observe(viewLifecycleOwner, { response ->
             when (response) {
-                is Response.Loading -> binding.progressBar.visibility = View.VISIBLE
-                is Response.Success -> {
+                is Loading -> binding.progressBar.visibility = View.VISIBLE
+                is Success -> {
                     goToMainActivity()
                     binding.progressBar.visibility = View.GONE
                 }
-                is Response.Failure -> {
+                is Failure -> {
                     Toast.makeText(requireContext(), response.errorMessage, Toast.LENGTH_SHORT)
                         .show()
                     binding.progressBar.visibility = View.GONE

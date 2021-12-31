@@ -6,45 +6,48 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tabkati.data.RecipeCategoriesPictureLocalDataSource
+import com.example.tabkati.data.RecipesItem
+import com.example.tabkati.databinding.FragmentHomeBinding
 import com.example.tabkati.databinding.GridViewRecipeCateItemBinding
+import com.example.tabkati.databinding.RecipeItemBinding
 
-class RecipesAdapter(private val onItemClicked: (RecipeCategoriesPictureLocalDataSource) -> Unit) :
-    ListAdapter<RecipeCategoriesPictureLocalDataSource,
+class RecipesAdapter(private val onItemClicked: (RecipesItem) -> Unit) :
+    ListAdapter<RecipesItem,
             RecipesAdapter.ItemViewHolder>(DiffCallback) {
 
 
     companion object DiffCallback :
-        DiffUtil.ItemCallback<RecipeCategoriesPictureLocalDataSource>() {
+        DiffUtil.ItemCallback<RecipesItem>() {
         override fun areItemsTheSame(
-            oldItem: RecipeCategoriesPictureLocalDataSource,
-            newItem: RecipeCategoriesPictureLocalDataSource,
+            oldItem: RecipesItem,
+            newItem: RecipesItem,
         ): Boolean {
-            return oldItem.titleOFCat == newItem.titleOFCat
+            return oldItem.originalId == newItem.originalId
         }
 
         override fun areContentsTheSame(
-            oldItem: RecipeCategoriesPictureLocalDataSource,
-            newItem: RecipeCategoriesPictureLocalDataSource,
+            oldItem: RecipesItem,
+            newItem: RecipesItem,
         ): Boolean {
-            return oldItem.CategoryImage == newItem.CategoryImage
+            return oldItem.title == newItem.title
         }
     }
 
     class ItemViewHolder(
         private var binding:
-        GridViewRecipeCateItemBinding,
+        RecipeItemBinding,
     ) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(category: RecipeCategoriesPictureLocalDataSource) {
-            binding.catImage.setImageResource(category.CategoryImage.toInt())
-            binding.recipeCatTitle.text = category.titleOFCat
+        fun bind(recipe: RecipesItem) {
+           binding.recipeTitle.text = recipe.title.toString()
+            binding.servingsTextView.text = recipe.servings.toString()
+            binding.timerTextView.text = recipe.readyInMinutes.toString()
 
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):
-            ItemViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
         val viewHolder = ItemViewHolder(
-            GridViewRecipeCateItemBinding.inflate(
+            RecipeItemBinding.inflate(
                 LayoutInflater.from(parent.context), parent, false))
         viewHolder.itemView.setOnClickListener {
             val position = viewHolder.adapterPosition
@@ -55,6 +58,7 @@ class RecipesAdapter(private val onItemClicked: (RecipeCategoriesPictureLocalDat
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         holder.bind(getItem(position))
+
     }
 
 

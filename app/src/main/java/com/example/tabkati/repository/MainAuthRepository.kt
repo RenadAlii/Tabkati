@@ -1,6 +1,8 @@
 package com.example.tabkati.repository
 
-import com.example.tabkati.data.Response
+import com.example.tabkati.utils.State.Failure
+import com.example.tabkati.utils.State.Loading
+import com.example.tabkati.utils.State.Success
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -18,14 +20,15 @@ class MainAuthRepository @Inject constructor(
     private val auth: FirebaseAuth
 ){
     fun signOut() = flow {
+
         try {
-            emit(Response.Loading)
+            emit(Loading)
             googleSignInClient.signOut().await().also {
-                emit(Response.Success(it))
+                emit(Success(it))
             }
             auth.signOut()
         } catch (e: Exception) {
-            emit(Response.Failure(e.message ?: "Unexpected error!"))
+            emit(Failure(e.message ?: "Unexpected error!"))
         }
     }
 

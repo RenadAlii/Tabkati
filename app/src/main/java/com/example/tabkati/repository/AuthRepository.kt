@@ -1,9 +1,7 @@
 package com.example.tabkati.repository
 
 import android.util.Log
-import androidx.fragment.app.activityViewModels
-import com.example.tabkati.data.Response.*
-import com.example.tabkati.ui.login.AuthViewModel
+import com.example.tabkati.utils.State.*
 import com.example.tabkati.utils.Constants.EMAIL
 import com.example.tabkati.utils.Constants.NAME
 import com.example.tabkati.utils.Constants.USERS_REF
