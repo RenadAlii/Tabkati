@@ -9,6 +9,17 @@
         android:id="@+id/homeFragment"
         android:name="com.example.tabkati.ui.recipes.HomeFragment"
         android:label="fragment_home">
+        <action
+            android:id="@+id/action_homeFragment_to_recipesFragment"
+            app:destination="@id/recipesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/recipesFragment"
+        android:name="com.example.tabkati.ui.recipes.RecipesFragment"
+        android:label="RecipesFragment" >
+        <argument
+            android:name="idOfCat"
+            app:argType="string" />
     </fragment>
 
 </navigation>

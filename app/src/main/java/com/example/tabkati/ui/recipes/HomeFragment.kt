@@ -6,6 +6,8 @@ import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tabkati.R
@@ -58,12 +60,17 @@ class HomeFragment : Fragment() {
             // @ because inside binding.apply this revers to the binding instance.
             // not the class HomeFragment.
             homeFragment = this@HomeFragment
+            recipesViewModel.getRandomRecipes()
             viewModel = recipesViewModel
             recyclerViewOfRecipeCategories = recyclerViewOfRecipeCate
             recyclerViewOfRecipeCategories.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-            val recipeCateAdapter = RecipeCategoriesAdapter({
-                //val action =
-            })
+            val recipeCateAdapter = RecipeCategoriesAdapter({ recipe ->
+                // navigate and send the id of the cat to display the list of recipes by cat.
+                val action = HomeFragmentDirections.actionHomeFragmentToRecipesFragment(
+                    idOfCat = recipe.id
+                )
+                this@HomeFragment.findNavController().navigate(action)
+            } )
 
             recyclerViewOfRecipeCategories.adapter = recipeCateAdapter
             recipeCateAdapter.submitList(recipeCategoriesData)
@@ -74,11 +81,10 @@ class HomeFragment : Fragment() {
                 //action
             })
             recyclerViewOfRecipes.adapter = recipesAdapter
-//            Log.e("Renad", "onViewCreated: ")
-//            recipesViewModel.getRandomRecipes()
 
 
         }
+        // get Auth State
         getAuthState()
     }
 

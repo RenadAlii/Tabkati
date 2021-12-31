@@ -19,7 +19,7 @@ class RecipesRemoteDataSource @Inject constructor(private val api: RecipeApiServ
 
     suspend fun getRecipesByCategory(category: String):List<RecipesItem?>? =
         withContext(dispatcher){
-            api.getRecipesByCategory(category).recipes
+            api.getRecipesByCategory(category=category).recipes
         }
 
     suspend fun getRecipeById(id: String ):Response =

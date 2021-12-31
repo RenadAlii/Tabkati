@@ -3,9 +3,14 @@ package com.example.tabkati.network
 import com.example.tabkati.data.Response
 import com.example.tabkati.data.SpoonacularRemoteDatasource
 import com.example.tabkati.utils.Constants.API_KEY
+import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
+import retrofit2.http.HeaderMap
+
+
+
 
 
 
@@ -21,12 +26,18 @@ interface RecipeApiService {
     suspend fun getRecipe(@Path("id") RecipeId: String): Response
 
     //Get Recipes by category.
-    @GET("/recipes/random?number=40&tags={category}&apiKey=${API_KEY}")
-    suspend fun getRecipesByCategory(@Query("category") category: String): SpoonacularRemoteDatasource
+    @GET("/recipes/random?")
+    suspend fun getRecipesByCategory(
+        @Query("number") pages: String="20"
+        ,@Query("tags") category: String
+        ,@Query("apiKey") apiKey: String=API_KEY
+    ):SpoonacularRemoteDatasource
 
-    //Get Recipes by category.
-    @GET("/recipes/complexSearch?query={search}&apiKey=${API_KEY}")
-    suspend fun searchForRecipes(@Query("search") search: String): SpoonacularRemoteDatasource
+    //search for Recipes.
+    @GET("/recipes/complexSearch?")
+    suspend fun searchForRecipes(@Query("search") search: String
+                                 ,@Query("apiKey") apiKey: String=API_KEY
+    ): SpoonacularRemoteDatasource
 
 
 

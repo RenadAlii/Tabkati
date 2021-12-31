@@ -9,9 +9,9 @@ object RecipeCategoriesPictureDataSource {
     val recipeCategoriesPictureList: List<RecipeCategoriesPictureLocalDataSource> = listOf(
         RecipeCategoriesPictureLocalDataSource(
             R.drawable.desert, "Desert","dessert"), RecipeCategoriesPictureLocalDataSource(
-            R.drawable.breakfast, "Side Dish","side+dish"
+            R.drawable.breakfast, "Side Dish","side dish"
         ), RecipeCategoriesPictureLocalDataSource(
-            R.drawable.diner, "Main Course","main+course"
+            R.drawable.diner, "Main Course","main course"
         ), RecipeCategoriesPictureLocalDataSource(
             R.drawable.dreank, "Drink","drink"
 
