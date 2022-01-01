@@ -13,9 +13,9 @@ android {
 
 
 
-    kapt {
-        correctErrorTypes = true
-    }
+//    kapt {
+//        correctErrorTypes = true
+//    }
 
     defaultConfig {
         applicationId "com.example.tabkati"
@@ -90,6 +90,11 @@ dependencies {
     kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
 
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.4.0"
+
+    //lottie
+    implementation 'com.airbnb.android:lottie:4.2.2'
+
+
 
 
 }

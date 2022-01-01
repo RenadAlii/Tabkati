@@ -77,10 +77,21 @@ class HomeFragment : Fragment() {
 
            recyclerViewOfRecipes = recyclerViewOfRandomRecipes
             recyclerViewOfRecipes.layoutManager = LinearLayoutManager(requireContext())
-            val recipesAdapter = RecipesAdapter({
-                //action
-            })
+            val recipesAdapter = RecipesAdapter { recipe ->
+                // navigate and send the id of the cat to display the list of recipes by cat.
+                val action = HomeFragmentDirections.actionHomeFragmentToRecipeDetailsFragment(
+                    recipeId = recipe.id.toString()
+                )
+                this@HomeFragment.findNavController().navigate(action)
+            }
             recyclerViewOfRecipes.adapter = recipesAdapter
+
+            searchBar.setOnSearchClickListener {
+                val action = HomeFragmentDirections.actionHomeFragmentToSearchFragment(
+                    search = "recipe.id.toString()"
+                )
+                this@HomeFragment.findNavController().navigate(action)
+            }
 
 
         }

@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="_2_serving">%1$s Serving</string>
+    <string name="ingredient">Avocado</string>
+    <string name="ingredints_">%1$s</string>
+    <string name="instruct">%1$s .</string>
+    <string name="step">%1$s</string>
+    <string name="likes">%1$s Likes</string>
 </resources>

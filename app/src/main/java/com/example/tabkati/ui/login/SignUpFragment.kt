@@ -19,7 +19,6 @@ import androidx.navigation.fragment.findNavController
 import com.example.tabkati.MainActivity
 import com.example.tabkati.R
 import com.example.tabkati.ViewModelFactory
-import com.example.tabkati.data.Response
 import com.example.tabkati.databinding.FragmentSignUpBinding
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch

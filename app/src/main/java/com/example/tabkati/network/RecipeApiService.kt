@@ -1,13 +1,11 @@
 package com.example.tabkati.network
 
-import com.example.tabkati.data.Response
+import com.example.tabkati.data.RecipesItem
 import com.example.tabkati.data.SpoonacularRemoteDatasource
 import com.example.tabkati.utils.Constants.API_KEY
-import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
-import retrofit2.http.HeaderMap
 
 
 
@@ -23,7 +21,7 @@ interface RecipeApiService {
 
     //Get Recipe by id.
     @GET("/recipes/{id}/information?includeNutrition=false&apiKey=${API_KEY}")
-    suspend fun getRecipe(@Path("id") RecipeId: String): Response
+    suspend fun getRecipe(@Path("id") RecipeId: String): RecipesItem
 
     //Get Recipes by category.
     @GET("/recipes/random?")

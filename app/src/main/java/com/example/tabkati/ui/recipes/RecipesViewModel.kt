@@ -26,21 +26,14 @@ class RecipesViewModel @Inject constructor(private val repository: RecipesReposi
     private val _recipesList = MutableLiveData <List<RecipesItem?>?>()
     val recipesList: LiveData<List<RecipesItem?>?> = _recipesList
 
-    private var _recipeId = MutableLiveData<String?>()
-    val recipeId: LiveData<String?> = _recipeId
 
     private var _categoryId = MutableLiveData<String?>()
     val categoryId: LiveData<String?> = _categoryId
 
-    // fun to set the recipe id.
-    fun setRecipeId(id: String){
-        _recipeId.value = id
-        getRecipeDetails()
-    }
 
-    // fun to set the recipe id.
-    fun setCategoryId(id: String){
-        _categoryId.value = id
+    // fun to set the category query.
+    fun setCategoryId(query: String){
+        _categoryId.value = query
         getRecipeByCategory()
     }
 
@@ -65,17 +58,6 @@ class RecipesViewModel @Inject constructor(private val repository: RecipesReposi
     }
 
 
-
-
-    // fun to get the recipe details.
-    private fun getRecipeDetails() {
-        viewModelScope.launch {
-            try {
-//                _movieDetails.value = MovieApi.retrofitService.getSingleMovieDetails(_recipeId.value!!)
-            } catch (e: Exception) {
-            }
-        }
-    }
 
 
 

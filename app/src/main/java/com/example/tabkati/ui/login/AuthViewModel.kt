@@ -2,14 +2,9 @@ package com.example.tabkati.ui.login
 
 
 import android.util.Log
-import android.view.View
-import android.widget.Toast
 import androidx.lifecycle.*
-import com.example.tabkati.R
-import com.example.tabkati.data.Response
 import com.example.tabkati.di.FirebaseModule
 import com.example.tabkati.repository.AuthRepository
-import com.google.firebase.auth.FirebaseUser
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*

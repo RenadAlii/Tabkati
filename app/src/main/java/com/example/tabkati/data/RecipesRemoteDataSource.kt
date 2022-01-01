@@ -22,7 +22,7 @@ class RecipesRemoteDataSource @Inject constructor(private val api: RecipeApiServ
             api.getRecipesByCategory(category=category).recipes
         }
 
-    suspend fun getRecipeById(id: String ):Response =
+    suspend fun getRecipeById(id: String ):RecipesItem? =
         withContext(dispatcher){
             api.getRecipe(id)
         }

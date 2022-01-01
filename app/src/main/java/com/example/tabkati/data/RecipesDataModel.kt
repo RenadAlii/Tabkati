@@ -19,8 +19,6 @@ data class Length(
 
 data class AnalyzedInstructionsItem(
 
-	@Json(name="name")
-	val name: String? = null,
 
 	@Json(name="steps")
 	val steps: List<StepsItem?>? = null
@@ -171,6 +169,48 @@ data class StepsItem(
 	val length: Length? = null
 )
 
+data class ExtendedIngredientsItem(
+
+	@Json(name="image")
+	val image: String? = null,
+
+	@Json(name="amount")
+	val amount: Double? = null,
+
+	@Json(name="nameClean")
+	val nameClean: String? = null,
+
+	@Json(name="original")
+	val original: String? = null,
+
+	@Json(name="aisle")
+	val aisle: String? = null,
+
+	@Json(name="consistency")
+	val consistency: String? = null,
+
+	@Json(name="originalName")
+	val originalName: String? = null,
+
+	@Json(name="unit")
+	val unit: String? = null,
+
+
+	@Json(name="meta")
+	val meta: List<String?>? = null,
+
+	@Json(name="name")
+	val name: String? = null,
+
+	@Json(name="originalString")
+	val originalString: String? = null,
+
+	@Json(name="id")
+	val id: Int? = null,
+
+	@Json(name="metaInformation")
+	val metaInformation: List<String?>? = null
+)
 
 
 data class IngredientsItem(

@@ -41,7 +41,7 @@ class AuthenticationFragment : Fragment() {
 
     private lateinit var resultLauncher: ActivityResultLauncher<Intent>
     //private val viewModel: AuthViewModel by activityViewModels()
-    private val viewModel by viewModels<AuthViewModel>()
+    private val authviewModel by viewModels<AuthViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -65,7 +65,7 @@ class AuthenticationFragment : Fragment() {
 //        auth.signOut()
         binding.apply {
             lifecycleOwner = viewLifecycleOwner
-            viewModel = viewModel
+            viewModel = authviewModel
             // @ because inside binding.apply this revers to the binding instance.
             // not the class AuthenticationFragment.
             authenticationFragment = this@AuthenticationFragment
@@ -99,7 +99,7 @@ class AuthenticationFragment : Fragment() {
 
 
     private fun signInWithGoogle(idToken: String) {
-        viewModel.signInWithGoogle(idToken).observe(this, { response ->
+        authviewModel.signInWithGoogle(idToken).observe(this, { response ->
             when(response) {
                 is Loading -> binding.progressBar.visibility = View.VISIBLE
                 is Success -> {
@@ -119,7 +119,7 @@ class AuthenticationFragment : Fragment() {
         })
     }
     private fun createUser() {
-        viewModel.createUser().observe(viewLifecycleOwner, { response ->
+        authviewModel.createUser().observe(viewLifecycleOwner, { response ->
             when (response) {
                 is Loading -> binding.progressBar.visibility = View.VISIBLE
                 is Success -> {

@@ -9,6 +9,8 @@
     <color name="black">#FF000000</color>
     <color name="background_white">#F9FFF8</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="light_black">#363837</color>
     <color name="blackTransparent60">#630C0B0B</color>
     <color name="blackTransparent40">#D00C0B0B</color>
+    <color name="transparent">#000C0B0B</color>
 </resources>

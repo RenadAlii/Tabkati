@@ -13,72 +13,60 @@ import com.example.tabkati.R
 import com.example.tabkati.adapter.RecipeCategoriesAdapter
 import com.example.tabkati.adapter.RecipesAdapter
 import com.example.tabkati.databinding.FragmentHomeBinding
-import com.example.tabkati.databinding.FragmentRecipesBinding
-import com.example.tabkati.utils.Constants.CATEGORYID
+import com.example.tabkati.databinding.FragmentSearchBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
+
 @ExperimentalCoroutinesApi
 @AndroidEntryPoint
-class RecipesFragment : Fragment() {
-    private var _binding: FragmentRecipesBinding? = null
-    private lateinit var binding: FragmentRecipesBinding
-    private lateinit var recyclerViewOfRecipes: RecyclerView
+class SearchFragment : Fragment() {
+    private var _binding: FragmentSearchBinding? = null
+    private lateinit var binding: FragmentSearchBinding
+    private val searchViwModel by viewModels<SearchViewModel>()
+    private lateinit var recyclerViewOfRecipe: RecyclerView
 
-
-    private val recipesViewModel by viewModels<RecipesViewModel>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
-
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
-        _binding = FragmentRecipesBinding.inflate(inflater)
+        _binding = FragmentSearchBinding.inflate(inflater)
         binding = _binding!!
         return binding.root
     }
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-
-        arguments?.let {
-            // set the chosen category.
-            recipesViewModel.setCategoryId(it.getString(CATEGORYID).toString())
-        }
-
-
         binding.apply {
             // Allows Data Binding to Observe LiveData with the lifecycle of this fragment.
             lifecycleOwner = viewLifecycleOwner
             // @ because inside binding.apply this revers to the binding instance.
-            // not the class RecipesFragment.
-            recipesFragment = this@RecipesFragment
-            viewModel = recipesViewModel
-            recyclerViewOfRecipes = recyclerViewOfRandomRecipes
-            recyclerViewOfRecipes.layoutManager = LinearLayoutManager(requireContext())
+            // not the class SearchFragment.
+            searchFragment = this@SearchFragment
+            viewModel = searchViwModel
 
 
-
-            val recipesAdapter = RecipesAdapter({
-                val action = RecipesFragmentDirections.actionRecipesFragmentToRecipeDetailsFragment(
-                    recipeId = it.originalId.toString()
+            recyclerViewOfRecipe = recyclerViewOfRecipes
+            recyclerViewOfRecipe.layoutManager = LinearLayoutManager(requireContext())
+            val recipesAdapter = RecipesAdapter({ recipe ->
+                // navigate and send the id of the cat to display the list of recipes by cat.
+                val action = SearchFragmentDirections.actionSearchFragmentToRecipeDetailsFragment(
+                    recipeId = recipe.id.toString()
                 )
-                this@RecipesFragment.findNavController().navigate(action)
+                this@SearchFragment.findNavController().navigate(action)
             })
-            recyclerViewOfRecipes.adapter = recipesAdapter
+            recyclerViewOfRecipe.adapter = recipesAdapter
 
 
-
-        }
-
+        }}
 
 
-        }
 
 
 
