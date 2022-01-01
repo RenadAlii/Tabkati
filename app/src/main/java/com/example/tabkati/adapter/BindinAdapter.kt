@@ -51,7 +51,7 @@ fun bindStatus(statusImageView: LottieAnimationView,
         }
         RecipesApiStatus.ERROR ->{
             statusImageView.visibility = View.VISIBLE
-            statusImageView.setAnimation("29-Error Cloud.json")
+            statusImageView.setAnimation("29-Error-Cloud.json")
         }
         RecipesApiStatus.DONE -> {
             statusImageView.visibility = View.GONE

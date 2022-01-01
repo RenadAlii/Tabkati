@@ -64,13 +64,13 @@ class HomeFragment : Fragment() {
             viewModel = recipesViewModel
             recyclerViewOfRecipeCategories = recyclerViewOfRecipeCate
             recyclerViewOfRecipeCategories.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-            val recipeCateAdapter = RecipeCategoriesAdapter({ recipe ->
+            val recipeCateAdapter = RecipeCategoriesAdapter { recipe ->
                 // navigate and send the id of the cat to display the list of recipes by cat.
                 val action = HomeFragmentDirections.actionHomeFragmentToRecipesFragment(
                     idOfCat = recipe.id
                 )
                 this@HomeFragment.findNavController().navigate(action)
-            } )
+            }
 
             recyclerViewOfRecipeCategories.adapter = recipeCateAdapter
             recipeCateAdapter.submitList(recipeCategoriesData)

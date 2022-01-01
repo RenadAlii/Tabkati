@@ -59,10 +59,10 @@ class AuthenticationFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        FirebaseAuth.getInstance().signOut()
+        FirebaseAuth.getInstance().signOut()
         // Initialize Firebase Auth
-//        auth = Firebase.auth
-//        auth.signOut()
+        auth = Firebase.auth
+        auth.signOut()
         binding.apply {
             lifecycleOwner = viewLifecycleOwner
             viewModel = authviewModel

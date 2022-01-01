@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.example.tabkati.ui.recipes.HomeFragment"
-        android:label="fragment_home">
+        android:label="Home">
         <action
             android:id="@+id/action_homeFragment_to_recipesFragment"
             app:destination="@id/recipesFragment" />
@@ -22,7 +22,7 @@
     <fragment
         android:id="@+id/recipesFragment"
         android:name="com.example.tabkati.ui.recipes.RecipesFragment"
-        android:label="RecipesFragment" >
+        android:label="Recipes">
         <argument
             android:name="idOfCat"
             app:argType="string" />
@@ -33,7 +33,7 @@
     <fragment
         android:id="@+id/recipeDetailsFragment"
         android:name="com.example.tabkati.ui.recipes.RecipeDetailsFragment"
-        android:label="RecipeDetailsFragment" >
+        android:label="Recipe">
         <argument
             android:name="recipe_id"
             app:argType="string" />
@@ -41,7 +41,7 @@
     <fragment
         android:id="@+id/searchFragment"
         android:name="com.example.tabkati.ui.recipes.SearchFragment"
-        android:label="SearchFragment" >
+        android:label="Search">
         <action
             android:id="@+id/action_searchFragment_to_recipeDetailsFragment"
             app:destination="@id/recipeDetailsFragment" />

@@ -64,12 +64,12 @@ class RecipesFragment : Fragment() {
 
 
 
-            val recipesAdapter = RecipesAdapter({
+            val recipesAdapter = RecipesAdapter {
                 val action = RecipesFragmentDirections.actionRecipesFragmentToRecipeDetailsFragment(
-                    recipeId = it.originalId.toString()
+                    recipeId = it.id.toString()
                 )
                 this@RecipesFragment.findNavController().navigate(action)
-            })
+            }
             recyclerViewOfRecipes.adapter = recipesAdapter
 
 
