@@ -6,4 +6,7 @@
     <string name="instruct">%1$s .</string>
     <string name="step">%1$s</string>
     <string name="likes">%1$s Likes</string>
+    <string name="search">search</string>
+    <string name="instructions">Instructions</string>
+    <string name="ingredients">Ingredients</string>
 </resources>

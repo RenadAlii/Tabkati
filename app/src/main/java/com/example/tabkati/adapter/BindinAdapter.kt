@@ -12,6 +12,7 @@ import com.airbnb.lottie.LottieAnimationView
 import com.example.tabkati.R
 import com.example.tabkati.data.ExtendedIngredientsItem
 import com.example.tabkati.data.RecipesItem
+import com.example.tabkati.data.ResultsItem
 import com.example.tabkati.data.StepsItem
 import com.example.tabkati.utils.RecipesApiStatus
 
@@ -51,10 +52,39 @@ fun bindStatus(statusImageView: LottieAnimationView,
         }
         RecipesApiStatus.ERROR ->{
             statusImageView.visibility = View.VISIBLE
-            statusImageView.setAnimation("29-Error-Cloud.json")
+            statusImageView.setAnimation("12978-error.json")
         }
         RecipesApiStatus.DONE -> {
             statusImageView.visibility = View.GONE
         }
     }
+}
+
+@BindingAdapter("recipeSearchStatus")
+fun bindSearchStatus(statusImageView: LottieAnimationView,
+               status: RecipesApiStatus?) {
+    when (status) {
+        RecipesApiStatus.LOADING -> {
+            statusImageView.visibility = View.VISIBLE
+            statusImageView.setAnimation("28952-seacrching.json")
+        }
+        RecipesApiStatus.ERROR ->{
+            statusImageView.visibility = View.VISIBLE
+            statusImageView.setAnimation("12978-error.json")
+        }
+        RecipesApiStatus.DONE -> {
+            statusImageView.visibility = View.GONE
+        }
+    }
+}
+
+
+
+
+
+@BindingAdapter("listOFSearch")
+fun bindSearchRecyclerView(recyclerView: RecyclerView, data: List<ResultsItem>?){
+    val adapter= recyclerView.adapter as RecipesSearchAdapter
+    // this tell the RecyclerView new list is available.
+    adapter.submitList(data)
 }

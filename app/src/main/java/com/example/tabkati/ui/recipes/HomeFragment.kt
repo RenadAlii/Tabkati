@@ -1,12 +1,12 @@
 package com.example.tabkati.ui.recipes
 
+
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.*
+import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -14,6 +14,7 @@ import com.example.tabkati.R
 import com.example.tabkati.adapter.RecipeCategoriesAdapter
 import com.example.tabkati.adapter.RecipesAdapter
 import com.example.tabkati.data.RecipeCategoriesPictureDataSource
+import com.example.tabkati.data.RecipeCategoriesPictureLocalDataSource
 import com.example.tabkati.data.RecipesItem
 import com.example.tabkati.databinding.FragmentHomeBinding
 import com.example.tabkati.ui.login.AuthMainActivity
@@ -29,14 +30,14 @@ class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private lateinit var binding: FragmentHomeBinding
     private val homeViwModel by viewModels<HomeViewModel>()
-    private val recipeCategoriesData = RecipeCategoriesPictureDataSource.recipeCategoriesPictureList
+    private val recipesViewModel by viewModels<RecipesViewModel>()
 
+    private val recipeCategoriesData = RecipeCategoriesPictureDataSource.recipeCategoriesPictureList
 
     private lateinit var recyclerViewOfRecipeCategories: RecyclerView
     private lateinit var recyclerViewOfRecipes: RecyclerView
 
 
-    private val recipesViewModel by viewModels<RecipesViewModel>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
@@ -52,6 +53,7 @@ class HomeFragment : Fragment() {
         return binding.root
     }
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.apply {
@@ -62,42 +64,60 @@ class HomeFragment : Fragment() {
             homeFragment = this@HomeFragment
             recipesViewModel.getRandomRecipes()
             viewModel = recipesViewModel
-            recyclerViewOfRecipeCategories = recyclerViewOfRecipeCate
-            recyclerViewOfRecipeCategories.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-            val recipeCateAdapter = RecipeCategoriesAdapter { recipe ->
-                // navigate and send the id of the cat to display the list of recipes by cat.
-                val action = HomeFragmentDirections.actionHomeFragmentToRecipesFragment(
-                    idOfCat = recipe.id
-                )
-                this@HomeFragment.findNavController().navigate(action)
+            linkRecipesAdapter()
+
+            // recyclerView & adapter of random recipes.
+            linkRandomRecipesAdapter()
+
+            searchBar.setOnClickListener {
+                goToSearchFragment()
             }
-
-            recyclerViewOfRecipeCategories.adapter = recipeCateAdapter
-            recipeCateAdapter.submitList(recipeCategoriesData)
-
-           recyclerViewOfRecipes = recyclerViewOfRandomRecipes
-            recyclerViewOfRecipes.layoutManager = LinearLayoutManager(requireContext())
-            val recipesAdapter = RecipesAdapter { recipe ->
-                // navigate and send the id of the cat to display the list of recipes by cat.
-                val action = HomeFragmentDirections.actionHomeFragmentToRecipeDetailsFragment(
-                    recipeId = recipe.id.toString()
-                )
-                this@HomeFragment.findNavController().navigate(action)
-            }
-            recyclerViewOfRecipes.adapter = recipesAdapter
-
-            searchBar.setOnSearchClickListener {
-                val action = HomeFragmentDirections.actionHomeFragmentToSearchFragment(
-                    search = "recipe.id.toString()"
-                )
-                this@HomeFragment.findNavController().navigate(action)
-            }
-
-
         }
         // get Auth State
         getAuthState()
     }
+
+
+    private fun FragmentHomeBinding.linkRandomRecipesAdapter() {
+        recyclerViewOfRecipes = recyclerViewOfRandomRecipes
+        recyclerViewOfRecipes.layoutManager = LinearLayoutManager(requireContext())
+        val recipesAdapter = RecipesAdapter { recipe ->
+            // navigate and send the id of the recipe to display the recipe details.
+            navigateAndSendRecipesID(recipe)
+        }
+        recyclerViewOfRecipes.adapter = recipesAdapter
+    }
+
+    private fun navigateAndSendRecipesID(recipe: RecipesItem) {
+        navigateToRecipesCategory(recipe)
+    }
+
+    private fun navigateToRecipesCategory(recipe: RecipesItem) {
+        val action = HomeFragmentDirections.actionHomeFragmentToRecipeDetailsFragment(
+            recipeId = recipe.id.toString()
+        )
+        this@HomeFragment.findNavController().navigate(action)
+    }
+
+    private fun FragmentHomeBinding.linkRecipesAdapter() {
+        recyclerViewOfRecipeCategories = recyclerViewOfRecipeCate
+        recyclerViewOfRecipeCategories.layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        val recipeCateAdapter = RecipeCategoriesAdapter { recipe ->
+            // navigate and send the id of the cat to display the list of recipes by cat.
+            navigateAndSendCategory(recipe)
+        }
+        recyclerViewOfRecipeCategories.adapter = recipeCateAdapter
+        recipeCateAdapter.submitList(recipeCategoriesData)
+    }
+
+    private fun navigateAndSendCategory(recipe: RecipeCategoriesPictureLocalDataSource) {
+        val action = HomeFragmentDirections.actionHomeFragmentToRecipesFragment(
+            idOfCat = recipe.id
+        )
+        this@HomeFragment.findNavController().navigate(action)
+    }
+
 
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -118,7 +138,7 @@ class HomeFragment : Fragment() {
             when (it) {
                 is State.Loading -> binding.progressBar.visibility = View.VISIBLE
                 is State.Success -> binding.progressBar.visibility = View.GONE
-                is State.Failure
+                is State.Failure,
                 -> {
                     binding.progressBar.visibility = View.GONE
                 }
@@ -142,6 +162,11 @@ class HomeFragment : Fragment() {
         startActivity(intent)
     }
 
+    //fun to navigate to the SearchFragment.
+    private fun goToSearchFragment() {
+        val action = HomeFragmentDirections.actionHomeFragmentToSearchFragment()
+        this@HomeFragment.findNavController().navigate(action)
+    }
 
     override fun onDestroy() {
         super.onDestroy()

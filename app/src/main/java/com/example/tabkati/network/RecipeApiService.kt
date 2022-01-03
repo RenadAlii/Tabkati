@@ -1,6 +1,7 @@
 package com.example.tabkati.network
 
 import com.example.tabkati.data.RecipesItem
+import com.example.tabkati.data.SearchResultDataModel
 import com.example.tabkati.data.SpoonacularRemoteDatasource
 import com.example.tabkati.utils.Constants.API_KEY
 import retrofit2.http.GET
@@ -30,12 +31,12 @@ interface RecipeApiService {
         ,@Query("tags") category: String
         ,@Query("apiKey") apiKey: String=API_KEY
     ):SpoonacularRemoteDatasource
-
     //search for Recipes.
+    //https://api.spoonacular.com/recipes/complexSearch?titlematch=cake&apiKey=a749dc5c1de24b10a225a2a8334f76b8
     @GET("/recipes/complexSearch?")
-    suspend fun searchForRecipes(@Query("search") search: String
+    suspend fun searchForRecipes(@Query("query") query: String
                                  ,@Query("apiKey") apiKey: String=API_KEY
-    ): SpoonacularRemoteDatasource
+    ): SearchResultDataModel
 
 
 

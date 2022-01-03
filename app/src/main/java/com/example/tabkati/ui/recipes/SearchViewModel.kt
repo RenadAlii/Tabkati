@@ -1,11 +1,11 @@
 package com.example.tabkati.ui.recipes
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.tabkati.data.RecipesItem
-import com.example.tabkati.repository.MainAuthRepository
+import com.example.tabkati.data.ResultsItem
 import com.example.tabkati.repository.RecipesRepository
 import com.example.tabkati.utils.RecipesApiStatus
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -22,21 +22,35 @@ class SearchViewModel @Inject constructor(private val repository: RecipesReposit
     // The external immutable LiveData for the request status.
     val status: LiveData<RecipesApiStatus> = _status
 
-    private val _recipesList = MutableLiveData <List<RecipesItem?>?>()
-    val recipesList: LiveData<List<RecipesItem?>?> = _recipesList
+    private val _recipesList = MutableLiveData <List<ResultsItem?>?>()
+    val recipesList: LiveData<List<ResultsItem?>?> = _recipesList
 
-    private val _search = MutableLiveData <List<RecipesItem?>?>()
-    val search: LiveData<List<RecipesItem?>?> = _search
+    private val _search = MutableLiveData <String>()
+    val search: LiveData<String> = _search
 
 
+
+    // fun to set the search.
+    fun setSearchQuery(query: String){
+        _search.value = query
+        getRecipes()
+    }
+
+
+    // fun to set the search.
+    fun setSearchState(state: RecipesApiStatus){
+        _status.value = state
+    }
 
     // fun to get recipes.
     fun getRecipes() {
         viewModelScope.launch {
-            _status.value = RecipesApiStatus.LOADING
             try {
-               // _recipesList.value =repository.searchForRecipes()
+             _recipesList.value = repository.searchForRecipes(_search.value!!)
                 _status.value = RecipesApiStatus.DONE
+                if( _recipesList.value.isNullOrEmpty()){
+                    _status.value = RecipesApiStatus.ERROR
+                }
             } catch (e: Exception) {
                 _status.value = RecipesApiStatus.ERROR
                 // to clear the RecyclerView.

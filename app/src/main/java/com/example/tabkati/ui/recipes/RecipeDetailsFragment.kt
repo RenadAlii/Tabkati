@@ -1,5 +1,6 @@
 package com.example.tabkati.ui.recipes
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -16,7 +17,6 @@ import com.example.tabkati.adapter.InstructionsAdapter
 import com.example.tabkati.adapter.RecipesAdapter
 import com.example.tabkati.data.StepsItem
 import com.example.tabkati.databinding.FragmentRecipeDetailsBinding
-import com.example.tabkati.databinding.FragmentRecipesBinding
 import com.example.tabkati.utils.Constants
 import com.example.tabkati.utils.Constants.RECIPEID
 import com.example.tabkati.utils.Constants.TAG
@@ -31,7 +31,8 @@ class RecipeDetailsFragment : Fragment() {
     private lateinit var binding: FragmentRecipeDetailsBinding
     private lateinit var recyclerViewOfIngredient: RecyclerView
     private lateinit var recyclerViewOfInstruction: RecyclerView
-    var dataStep: List<StepsItem?>? = listOf()
+      var  srcUrl : String? = null
+    private var dataStep: List<StepsItem?>? = listOf()
     private val recipeDetailsViewModel by viewModels<RecipeDetailsViewModel>()
 
 
@@ -53,11 +54,12 @@ class RecipeDetailsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
+        //region send arguments
         arguments?.let {
             // set the chosen recipe id .
             recipeDetailsViewModel.setRecipeId(it.getString(RECIPEID).toString())
-            Log.e(TAG, "onViewCreated: ${it.getString(RECIPEID).toString()}")
         }
+        //endregion
 
 
         binding.apply {
@@ -76,13 +78,13 @@ class RecipeDetailsFragment : Fragment() {
             })
 
             val recipeIngredientAdapter = IngredientsAdapter({
-
+//action
 
             })
 
             val recipeInstructionsAdapter = InstructionsAdapter({
 
-
+//action
             })
             recyclerViewOfIngredient.adapter = recipeIngredientAdapter
 
@@ -94,7 +96,19 @@ class RecipeDetailsFragment : Fragment() {
             recipeInstructionsAdapter.submitList(dataStep)
 
 
+            shareIcon.setOnClickListener {
+                val shred = Intent().apply {
+                    this.action = Intent.ACTION_SEND
+                    recipeDetailsViewModel.recipe.observe(viewLifecycleOwner, { recipe ->
+                        srcUrl = recipe?.sourceUrl.toString()
+                    })
+                    this.putExtra(Intent.EXTRA_TEXT,srcUrl)
+                    this.type = "text/plain"
+                }
+                startActivity(shred)
+            }
 
+            //region tab Listener
             tabs.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
 
                 override fun onTabSelected(tab: TabLayout.Tab?) {
@@ -146,6 +160,8 @@ class RecipeDetailsFragment : Fragment() {
 
 
             })
+            // endregion
+
 
 
         }
