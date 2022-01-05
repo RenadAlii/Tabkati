@@ -1,11 +1,13 @@
 package com.example.tabkati.data.database
+
+
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.example.tabkati.data.*
 
-@Entity(tableName = "recipes")
-data class DatabaseRecipes(
+@Entity(tableName = "salad")
+data class DatabaseSaladRecipes(
     @PrimaryKey val id: Int,
     @ColumnInfo(name = "title")
     val title: String,
@@ -18,11 +20,11 @@ data class DatabaseRecipes(
     @ColumnInfo(name = "readyInMinutes")
     val readyInMinutes: Int,
     @ColumnInfo(name="sourceUrl")
-val sourceUrl: String? = null,
+    val sourceUrl: String? = null,
     @ColumnInfo(name="ingredients")
-val ingredients: List<ExtendedIngredientsItem>,
+    val ingredients: List<ExtendedIngredientsItem>,
     @ColumnInfo(name="steps")
-val steps: List<AnalyzedInstructionsItem?>?,
+    val steps: List<AnalyzedInstructionsItem?>?,
     @ColumnInfo(name = "dairyFree")
     val dairyFree: Boolean,
     @ColumnInfo(name = "vegetarian")
@@ -34,7 +36,7 @@ val steps: List<AnalyzedInstructionsItem?>?,
 
 
 //converts from database objects to domain objects
-fun List<DatabaseRecipes>.asDomainModel(): List<RecipesItem> {
+fun List<DatabaseSaladRecipes>.asDomainModel(): List<RecipesItem> {
     return map {
         RecipesItem(
             id = it.id,
