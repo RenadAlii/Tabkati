@@ -32,7 +32,12 @@ data class DatabaseDrinkRecipes(
     @ColumnInfo(name = "veryHealthy")
     val veryHealthy: Boolean,
     @ColumnInfo(name = "glutenFree")
-    val glutenFree: Boolean)
+    val glutenFree: Boolean
+    ,@ColumnInfo(name = "instructions")
+    val instructions: String
+
+
+    )
 
 
 //converts from database objects to domain objects
@@ -52,7 +57,7 @@ fun List<DatabaseDrinkRecipes>.asDomainModel(): List<RecipesItem> {
             glutenFree = it.glutenFree,
             extendedIngredients = it.ingredients,
             analyzedInstructions = it.steps
-
+                 ,   instructions = it.instructions
         )
     }
 }
