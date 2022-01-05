@@ -40,7 +40,7 @@ class RecipesViewModel @Inject constructor(private val repository: RecipesReposi
     }
 
     init {
-        getRecipeByCategory()
+        getRandomRecipes()
 
     }
 
