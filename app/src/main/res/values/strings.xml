@@ -29,5 +29,6 @@
     <string name="search">search</string>
     <string name="instructions">Instructions</string>
     <string name="ingredients">Ingredients</string>
+    <string name="home">Home</string>
 
 </resources>

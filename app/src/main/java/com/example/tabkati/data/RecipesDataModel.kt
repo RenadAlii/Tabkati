@@ -133,8 +133,6 @@ data class RecipesItem(
 	@Json(name="occasions")
 	val occasions: List<Any?>? = null,
 
-	@Json(name="spoonacularScore")
-	val spoonacularScore: Double? = null,
 
 	@Json(name="pricePerServing")
 	val pricePerServing: Double? = null,
@@ -142,8 +140,7 @@ data class RecipesItem(
 	@Json(name="sourceName")
 	val sourceName: String? = null,
 
-	@Json(name="originalId")
-	val originalId: Any? = null,
+
 
 	@Json(name="spoonacularSourceUrl")
 	val spoonacularSourceUrl: String? = null
@@ -158,9 +155,6 @@ data class StepsItem(
 
 	@Json(name="ingredients")
 	val ingredients: List<IngredientsItem?>? = null,
-
-	@Json(name="equipment")
-	val equipment: List<Any?>? = null,
 
 	@Json(name="step")
 	val step: String? = null,

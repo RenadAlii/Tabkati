@@ -46,5 +46,10 @@
             android:id="@+id/action_searchFragment_to_recipeDetailsFragment"
             app:destination="@id/recipeDetailsFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/groceriesFragment"
+        android:name="com.example.tabkati.ui.recipes.GroceriesFragment"
+        android:label="fragment_groceries"
+        tools:layout="@layout/fragment_groceries" />
 
 </navigation>

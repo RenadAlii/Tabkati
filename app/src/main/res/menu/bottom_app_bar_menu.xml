@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/mennn"
+        android:id="@+id/recipesFragment"
         android:enabled="true"
         android:icon="@drawable/menu"
         android:title="Recipes"/>
@@ -12,10 +12,10 @@
         android:icon="@drawable/calander"
         android:title="Meal Plan"/>
     <item
-        android:id="@+id/page_1"
+        android:id="@+id/homeFragment"
         android:enabled="true"
         android:icon="@drawable/home"
-        android:title="Home"/>
+        android:title="@string/home"/>
 
     <item
         android:id="@+id/page_4"
@@ -23,7 +23,7 @@
         android:icon="@drawable/add"
         android:title="Your Recipes"/>
     <item
-        android:id="@+id/page_2"
+        android:id="@+id/groceriesFragment"
         android:enabled="true"
         android:icon="@drawable/ic_baseline_shopping_basket_24"
         android:title="Groceries"/>

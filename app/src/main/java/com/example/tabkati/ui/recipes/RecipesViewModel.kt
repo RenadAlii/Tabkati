@@ -15,30 +15,34 @@ import javax.inject.Inject
 
 
 @HiltViewModel
-class RecipesViewModel @Inject constructor(private val repository: RecipesRepository) : ViewModel() {
+class RecipesViewModel @Inject constructor(private val repository: RecipesRepository) :
+    ViewModel() {
 
 
     // The internal MutableLiveData that stores the status of the most recent request.
     private val _status = MutableLiveData<RecipesApiStatus>()
+
     // The external immutable LiveData for the request status.
     val status: LiveData<RecipesApiStatus> = _status
 
-    private val _recipesList = MutableLiveData <List<RecipesItem?>?>()
+    private val _recipesList = MutableLiveData<List<RecipesItem?>?>()
     val recipesList: LiveData<List<RecipesItem?>?> = _recipesList
 
 
-    private var _categoryId = MutableLiveData<String?>()
-    val categoryId: LiveData<String?> = _categoryId
+    private var _categoryId = MutableLiveData<String>()
+    val categoryId: LiveData<String?> get() = _categoryId
 
 
     // fun to set the category query.
-    fun setCategoryId(query: String){
+    fun setCategoryId(query: String) {
         _categoryId.value = query
         getRecipeByCategory()
     }
 
+    init {
+        getRecipeByCategory()
 
-
+    }
 
 
     // fun to get the recipe details.
@@ -48,18 +52,13 @@ class RecipesViewModel @Inject constructor(private val repository: RecipesReposi
 
             try {
                 _recipesList.value = repository.getRecipesByCategory(_categoryId.value!!)
-                Log.e(TAG, "getRecipeByCategory: ${  _recipesList.value}", )
                 _status.value = RecipesApiStatus.DONE
             } catch (e: Exception) {
                 _status.value = RecipesApiStatus.ERROR
-                Log.e(TAG, "getRecipeByCategory:${e.message} ", )
+                Log.e(TAG, "getRecipeByCategory:${e.message} ")
             }
         }
     }
-
-
-
-
 
 
     // fun to get the popular movie.
@@ -67,7 +66,7 @@ class RecipesViewModel @Inject constructor(private val repository: RecipesReposi
         viewModelScope.launch {
             _status.value = RecipesApiStatus.LOADING
             try {
-                _recipesList.value =repository.getRandomRecipes()
+                _recipesList.value = repository.getRandomRecipes()
                 _status.value = RecipesApiStatus.DONE
             } catch (e: Exception) {
                 _status.value = RecipesApiStatus.ERROR
@@ -76,8 +75,6 @@ class RecipesViewModel @Inject constructor(private val repository: RecipesReposi
             }
         }
     }
-
-
 
 
 }

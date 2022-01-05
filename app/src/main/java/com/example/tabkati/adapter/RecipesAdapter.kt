@@ -22,7 +22,7 @@ class RecipesAdapter(private val onItemClicked: (RecipesItem) -> Unit) :
             oldItem: RecipesItem,
             newItem: RecipesItem,
         ): Boolean {
-            return oldItem.originalId == newItem.originalId
+            return oldItem.id == newItem.id
         }
 
         override fun areContentsTheSame(
