@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">طبختي</string>
+    <string name="loginText">تسجيل الدخول</string>
+    <string name="full_name">الأسم الكامل</string>
+    <string name="email_address">البريد الإلكتروني؟</string>
+    <string name="sign_up">إنشاء حساب</string>
+    <string name="register">إنشاء حساب</string>
+    <string name="enter_all_info">أدخل كل المعلومات المطلوبه!</string>
+    <string name="PasswordHelperText">يجب ان يتكون الرقم السري من 6احرف او ارقام على الاقل.</string>
+    <string name="email_is_required">البريد الألكتروني مطلوب.</string>
+    <string name="password_is_required">الرقم السري مطلوب.</string>
+    <string name="user_name_is_required">الأسم مطلوب.</string>
+    <string name="home">الصفحة الرئيسية</string>
+    <string name="ingredients">المكونات</string>
+    <string name="search">البحث</string>
+    <string name="instructions">التعليمات</string>
+    <string name="what_you_like_to_cook_today">مذا ترغب ان تطهو اليوم؟</string>
+    <string name="already_signup_login">تملك حساب؟ سجل الدخول.</string>
+    <string name="don_t_have_an_account_sign_up">لايوجد لديك حساب؟ انشىء حساب.</string>
+    <string name="password">الرقم السري.</string>
+</resources>
