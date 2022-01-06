@@ -5,16 +5,16 @@ import com.squareup.moshi.Json
 data class SpoonacularRemoteDatasource(
 
 	@Json(name="recipes")
-	val recipes: List<RecipesItem?>? = null
+	val recipes: List<RecipesItem?>?
 )
 
 data class Length(
 
 	@Json(name="number")
-	val number: Int? = null,
+	val number: Int? ,
 
 	@Json(name="unit")
-	val unit: String? = null
+	val unit: String?
 )
 
 data class AnalyzedInstructionsItem(
@@ -50,10 +50,10 @@ data class RecipesItem(
 	val sustainable: Boolean? = null,
 
 	@Json(name="analyzedInstructions")
-	val analyzedInstructions: List<AnalyzedInstructionsItem?>? = null,
+	val analyzedInstructions: List<AnalyzedInstructionsItem?>? ,
 
 	@Json(name="glutenFree")
-	val glutenFree: Boolean? = null,
+	val glutenFree: Boolean? ,
 
 	@Json(name="veryPopular")
 	val veryPopular: Boolean? = null,
@@ -110,7 +110,7 @@ data class RecipesItem(
 	val cheap: Boolean? = null,
 
 	@Json(name="extendedIngredients")
-	val extendedIngredients: List<ExtendedIngredientsItem?>? = null,
+	val extendedIngredients: List<ExtendedIngredientsItem?>? ,
 
 	@Json(name="dishTypes")
 	val dishTypes: List<String?>? = null,
@@ -166,59 +166,58 @@ data class StepsItem(
 data class ExtendedIngredientsItem(
 
 	@Json(name="image")
-	val image: String? = null,
+	val image: String? ,
 
 	@Json(name="amount")
-	val amount: Double? = null,
-
+	val amount: Double?  ,
 	@Json(name="nameClean")
-	val nameClean: String? = null,
+	val nameClean: String? ,
 
 	@Json(name="original")
-	val original: String? = null,
+	val original: String? ,
 
 	@Json(name="aisle")
-	val aisle: String? = null,
+	val aisle: String? ,
 
 	@Json(name="consistency")
-	val consistency: String? = null,
+	val consistency: String? ,
 
 	@Json(name="originalName")
-	val originalName: String? = null,
+	val originalName: String? ,
 
 	@Json(name="unit")
-	val unit: String? = null,
+	val unit: String? ,
 
 
 	@Json(name="meta")
-	val meta: List<String?>? = null,
+	val meta: List<String>,
 
 	@Json(name="name")
-	val name: String? = null,
+	val name: String? ,
 
 	@Json(name="originalString")
-	val originalString: String? = null,
+	val originalString: String? ,
 
 	@Json(name="id")
-	val id: Int? = null,
+	val id: Int? ,
 
 	@Json(name="metaInformation")
-	val metaInformation: List<String?>? = null
+	val metaInformation: List<String?>?
 )
 
 
 data class IngredientsItem(
 
 	@Json(name="image")
-	val image: String? = null,
+	val image: String? ,
 
 	@Json(name="localizedName")
-	val localizedName: String? = null,
+	val localizedName: String? ,
 
 	@Json(name="name")
-	val name: String? = null,
+	val name: String? ,
 
 	@Json(name="id")
-	val id: Int? = null
+	val id: Int?
 )
 

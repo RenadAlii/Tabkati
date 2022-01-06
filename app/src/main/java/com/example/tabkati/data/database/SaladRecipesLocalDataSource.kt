@@ -1,13 +1,13 @@
 package com.example.tabkati.data.database
 
-import android.provider.MediaStore
+
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.example.tabkati.data.*
 
-@Entity(tableName = "recipes")
-data class RecipesEntity(
+@Entity(tableName = "salad")
+data class SaladRecipesEntity(
     @PrimaryKey val id: Int,
     @ColumnInfo(name = "title")
     val title: String,
@@ -20,11 +20,11 @@ data class RecipesEntity(
     @ColumnInfo(name = "readyInMinutes")
     val readyInMinutes: Int,
     @ColumnInfo(name="sourceUrl")
-val sourceUrl: String? = null,
+    val sourceUrl: String? = null,
     @ColumnInfo(name="ingredients")
-val ingredients: List<ExtendedIngredientsItem>,
+    val ingredients: List<ExtendedIngredientsItem>,
     @ColumnInfo(name="steps")
-val steps: List<AnalyzedInstructionsItem?>?,
+    val steps: List<AnalyzedInstructionsItem?>?,
     @ColumnInfo(name = "dairyFree")
     val dairyFree: Boolean,
     @ColumnInfo(name = "vegetarian")
@@ -32,11 +32,14 @@ val steps: List<AnalyzedInstructionsItem?>?,
     @ColumnInfo(name = "veryHealthy")
     val veryHealthy: Boolean,
     @ColumnInfo(name = "glutenFree")
-    val glutenFree: Boolean)
+    val glutenFree: Boolean
+    ,@ColumnInfo(name = "instructions")
+    val instructions: String
+    )
 
 
 //converts from database objects to domain objects
-fun List<RecipesEntity>.asDomainModel(): List<RecipesItem> {
+fun List<SaladRecipesEntity>.asDomainModel(): List<RecipesItem> {
     return map {
         RecipesItem(
             id = it.id,
@@ -52,6 +55,7 @@ fun List<RecipesEntity>.asDomainModel(): List<RecipesItem> {
             glutenFree = it.glutenFree,
             extendedIngredients = it.ingredients,
             analyzedInstructions = it.steps
+        ,    instructions = it.instructions
 
         )
     }

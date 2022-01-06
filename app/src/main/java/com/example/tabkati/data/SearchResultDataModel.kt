@@ -5,24 +5,24 @@ import com.squareup.moshi.Json
 data class SearchResultDataModel(
 
 	@Json(name="number")
-	val number: Int? = null,
+	val number: Int,
 
 	@Json(name="totalResults")
-	val totalResults: Int? = null,
+	val totalResults: Int,
 
 	@Json(name="results")
-	val results: List<ResultsItem?>? = null
+	val results: List<ResultsItem>
 )
 
 data class ResultsItem(
 
 	@Json(name="image")
-	val image: String? = null,
+	val image: String,
 
 	@Json(name="id")
-	val id: Int? = null,
+	val id: Int,
 
 	@Json(name="title")
-	val title: String? = null,
+	val title: String,
 
 )
