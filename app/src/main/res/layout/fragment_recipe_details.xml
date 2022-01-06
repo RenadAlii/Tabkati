@@ -35,7 +35,7 @@
                 android:id="@+id/recipe_image"
                 android:layout_width="414dp"
                 android:layout_height="205dp"
-                android:scaleType="fitXY"
+                android:scaleType="centerCrop"
                 android:tint="#3B191C1C"
                 app:imageUrl="@{data.image}"
                 app:layout_constraintEnd_toEndOf="parent"

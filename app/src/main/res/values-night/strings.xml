@@ -10,4 +10,12 @@
     <string name="instructions">Instructions</string>
     <string name="ingredients">Ingredients</string>
     <string name="home">Home</string>
+    <string name="recipes">Recipes</string>
+    <string name="meal_plan" translatable="false">Meal Plan</string>
+    <string name="your_recipes">Your Recipes</string>
+    <string name="groceries">Groceries</string>
+    <string name="profile">Profile</string>
+    <string name="english">English</string>
+    <string name="arabic">Arabic</string>
+    <string name="language">Language</string>
 </resources>

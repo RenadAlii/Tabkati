@@ -5,12 +5,12 @@
         android:id="@+id/recipesFragment"
         android:enabled="true"
         android:icon="@drawable/menu"
-        android:title="Recipes"/>
+        android:title="@string/recipes"/>
     <item
         android:id="@+id/page_3"
         android:enabled="true"
         android:icon="@drawable/calander"
-        android:title="Meal Plan"/>
+        android:title="@string/meal_plan"/>
     <item
         android:id="@+id/homeFragment"
         android:enabled="true"
@@ -21,11 +21,11 @@
         android:id="@+id/page_4"
         android:enabled="true"
         android:icon="@drawable/add"
-        android:title="Your Recipes"/>
+        android:title="@string/your_recipes"/>
     <item
         android:id="@+id/groceriesFragment"
         android:enabled="true"
         android:icon="@drawable/ic_baseline_shopping_basket_24"
-        android:title="Groceries"/>
+        android:title="@string/groceries"/>
 
 </menu>
