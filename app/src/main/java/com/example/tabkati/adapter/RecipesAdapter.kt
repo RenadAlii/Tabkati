@@ -7,24 +7,25 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tabkati.data.RecipesItemResponse
 import com.example.tabkati.databinding.RecipeItemBinding
+import com.example.tabkati.ui.recipes.RecipesItemUiState
 
-class RecipesAdapter(private val onItemClicked: (RecipesItemResponse) -> Unit) :
-    ListAdapter<RecipesItemResponse,
+class RecipesAdapter(private val onItemClicked: (RecipesItemUiState) -> Unit) :
+    ListAdapter<RecipesItemUiState,
             RecipesAdapter.ItemViewHolder>(DiffCallback) {
 
 
     companion object DiffCallback :
-        DiffUtil.ItemCallback<RecipesItemResponse>() {
+        DiffUtil.ItemCallback<RecipesItemUiState>() {
         override fun areItemsTheSame(
-            oldItem: RecipesItemResponse,
-            newItem: RecipesItemResponse,
+            oldItem: RecipesItemUiState,
+            newItem: RecipesItemUiState,
         ): Boolean {
             return oldItem.id == newItem.id
         }
 
         override fun areContentsTheSame(
-            oldItem: RecipesItemResponse,
-            newItem: RecipesItemResponse,
+            oldItem: RecipesItemUiState,
+            newItem: RecipesItemUiState,
         ): Boolean {
             return oldItem.title == newItem.title
         }
@@ -34,7 +35,7 @@ class RecipesAdapter(private val onItemClicked: (RecipesItemResponse) -> Unit) :
         private var binding:
         RecipeItemBinding,
     ) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(recipe: RecipesItemResponse) {
+        fun bind(recipe: RecipesItemUiState) {
             binding.data = recipe
 
         }

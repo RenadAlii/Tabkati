@@ -36,8 +36,8 @@ class RecipeDetailsViewModel @Inject constructor(private val repository: Recipes
 
 
 
-    private val _uiState: MutableStateFlow<StepsUiState>  = MutableStateFlow(StepsUiState())
-    val uiState: StateFlow<StepsUiState> = _uiState.asStateFlow()
+//    private val _uiState: MutableStateFlow<StepsUiState>  = MutableStateFlow(StepsUiState())
+//    val uiState: StateFlow<StepsUiState> = _uiState.asStateFlow()
 
 
     // fun to set the recipe id.

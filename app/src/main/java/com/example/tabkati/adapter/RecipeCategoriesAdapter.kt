@@ -8,33 +8,34 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.example.tabkati.ui.recipes.CategoryUIState
 
-class RecipeCategoriesAdapter(private val onItemClicked: (RecipeCategoriesPictureLocalDataSource) -> Unit) :
-    ListAdapter<RecipeCategoriesPictureLocalDataSource,
+class RecipeCategoriesAdapter(private val onItemClicked: (CategoryUIState) -> Unit) :
+    ListAdapter<CategoryUIState,
             RecipeCategoriesAdapter.ItemViewHolder>(DiffCallback) {
 
 
     companion object DiffCallback :
-        DiffUtil.ItemCallback<RecipeCategoriesPictureLocalDataSource>() {
+        DiffUtil.ItemCallback<CategoryUIState>() {
         override fun areItemsTheSame(
-            oldItem: RecipeCategoriesPictureLocalDataSource,
-            newItem: RecipeCategoriesPictureLocalDataSource,
+            oldItem: CategoryUIState,
+            newItem: CategoryUIState,
         ): Boolean {
-            return oldItem.titleOFCat == newItem.titleOFCat
+            return oldItem.title == newItem.title
         }
 
         override fun areContentsTheSame(
-            oldItem: RecipeCategoriesPictureLocalDataSource,
-            newItem: RecipeCategoriesPictureLocalDataSource,
+            oldItem: CategoryUIState,
+            newItem: CategoryUIState,
         ): Boolean {
-            return oldItem.CategoryImage == newItem.CategoryImage
+            return oldItem.image == newItem.image
         }
     }
 
     class ItemViewHolder(
         private var binding: GridViewRecipeCateItemBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(category: RecipeCategoriesPictureLocalDataSource) {
-            binding.catImage.setImageResource(category.CategoryImage.toInt())
+        fun bind(category: CategoryUIState) {
+            binding.catImage.setImageResource(category.image.toInt())
             binding.data = category
 
         }

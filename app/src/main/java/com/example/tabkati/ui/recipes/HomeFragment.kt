@@ -8,6 +8,9 @@ import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -22,6 +25,8 @@ import com.example.tabkati.ui.login.AuthMainActivity
 import com.example.tabkati.utils.State
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 
 @ExperimentalCoroutinesApi
@@ -33,7 +38,6 @@ class HomeFragment : Fragment() {
     private val homeViwModel by viewModels<HomeViewModel>()
     private val recipesViewModel by viewModels<RecipesViewModel>()
 
-    private val recipeCategoriesData = RecipeCategoriesPictureDataSource.recipeCategoriesPictureList
 
     private lateinit var recyclerViewOfRecipeCategories: RecyclerView
     private lateinit var recyclerViewOfRecipes: RecyclerView
@@ -65,7 +69,7 @@ class HomeFragment : Fragment() {
             homeFragment = this@HomeFragment
             recipesViewModel.getRandomRecipes()
             viewModel = recipesViewModel
-            linkRecipesAdapter()
+
 
             // recyclerView & adapter of random recipes.
             linkRandomRecipesAdapter()
@@ -76,6 +80,14 @@ class HomeFragment : Fragment() {
         }
         // get Auth State
         getAuthState()
+        lifecycleScope.launch{
+            repeatOnLifecycle(Lifecycle.State.RESUMED){
+                recipesViewModel.respicesUIState.collect {
+                    linkRecipesAdapter(it.category)
+                }
+            }
+
+        }
     }
 
 
@@ -90,19 +102,20 @@ class HomeFragment : Fragment() {
 
     }
 
-    private fun navigateAndSendRecipesID(recipe: RecipesItemResponse) {
+    private fun navigateAndSendRecipesID(recipe: RecipesItemUiState) {
         navigateToRecipesCategory(recipe)
     }
 
-    private fun navigateToRecipesCategory(recipe: RecipesItemResponse) {
+    private fun navigateToRecipesCategory(recipe: RecipesItemUiState) {
         val action = HomeFragmentDirections.actionHomeFragmentToRecipeDetailsFragment(
             recipeId = recipe.id.toString()
         )
         this@HomeFragment.findNavController().navigate(action)
     }
 
-    private fun FragmentHomeBinding.linkRecipesAdapter() {
-        recyclerViewOfRecipeCategories = recyclerViewOfRecipeCate
+    private fun linkRecipesAdapter(recipeCategoriesData:List<CategoryUIState>) {
+
+        recyclerViewOfRecipeCategories = binding.recyclerViewOfRecipeCate
         recyclerViewOfRecipeCategories.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         val recipeCateAdapter = RecipeCategoriesAdapter { recipe ->
@@ -113,7 +126,7 @@ class HomeFragment : Fragment() {
         recipeCateAdapter.submitList(recipeCategoriesData)
     }
 
-    private fun navigateAndSendCategory(recipe: RecipeCategoriesPictureLocalDataSource) {
+    private fun navigateAndSendCategory(recipe: CategoryUIState) {
         val action = HomeFragmentDirections.actionHomeFragmentToRecipesFragment(
             idOfCat = recipe.id
         )

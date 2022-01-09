@@ -12,6 +12,8 @@ import com.example.tabkati.R
 import com.example.tabkati.data.ExtendedIngredientsItemResponse
 import com.example.tabkati.data.RecipesItemResponse
 import com.example.tabkati.data.ResultsItem
+import com.example.tabkati.ui.recipes.CategoryUIState
+import com.example.tabkati.ui.recipes.RecipesItemUiState
 import com.example.tabkati.utils.RecipesApiStatus
 
 @BindingAdapter("imageUrl")
@@ -28,7 +30,7 @@ fun AppCompatImageView.bindImage( imageUrl: String?) {
 
 
 @BindingAdapter("listData")
-fun bindRecyclerView(recyclerView: RecyclerView, data: List<RecipesItemResponse>?){
+fun bindRecyclerView(recyclerView: RecyclerView, data: List<RecipesItemUiState>?){
     val adapter= recyclerView.adapter as RecipesAdapter
     // this tell the RecyclerView new list is available.
     adapter.submitList(data)

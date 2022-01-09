@@ -8,7 +8,7 @@
 
         <variable
             name="data"
-            type="com.example.tabkati.data.RecipesItemResponse" />
+            type="com.example.tabkati.ui.recipes.RecipesItemUiState" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
@@ -72,7 +72,7 @@
                 android:layout_marginStart="26dp"
                 android:layout_marginTop="20dp"
                 android:fontFamily="@font/nunito_extralight_italic"
-                android:text="@{@string/timer_with_unicode(data.readyInMinutes)}"
+                android:text="@{@string/timer_with_unicode(data.mintus)}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/recipe_title" />
 
@@ -83,7 +83,7 @@
                 android:layout_marginStart="26dp"
                 android:layout_marginTop="8dp"
                 android:fontFamily="@font/nunito_extralight_italic"
-                android:text="@{@string/_2_serving(data.servings)}"
+                android:text="@{@string/_2_serving(data.serving)}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/timer_textView" />
 

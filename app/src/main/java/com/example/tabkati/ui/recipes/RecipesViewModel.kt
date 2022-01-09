@@ -5,12 +5,16 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.tabkati.data.RecipeCategoriesPictureDataSource
 import com.example.tabkati.data.RecipesItemResponse
 import com.example.tabkati.data.database.RecipesEntity
 import com.example.tabkati.repository.RecipesRepository
 import com.example.tabkati.utils.Constants.TAG
 import com.example.tabkati.utils.RecipesApiStatus
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -30,11 +34,14 @@ class RecipesViewModel @Inject constructor(private val repository: RecipesReposi
         MutableLiveData<List<RecipesEntity>>()
     val recipesListE: LiveData<List<RecipesEntity>> get() = _recipesListE
 
-    private val _recipesList = MutableLiveData<List<RecipesItemResponse?>?>()
-    val recipesList: LiveData<List<RecipesItemResponse?>?> get() = _recipesList
+    private val _recipesList = MutableLiveData<List<RecipesItemUiState?>?>()
+    val recipesList: LiveData<List<RecipesItemUiState?>?> get() = _recipesList
 
     private var _categoryId = MutableLiveData<String>()
     val categoryId: LiveData<String?> get() = _categoryId
+
+    private var _respicesUIState = MutableStateFlow(RecipesScreenUiState())
+    val respicesUIState = _respicesUIState.asStateFlow()
 
 
     // fun to set the category query.
@@ -49,10 +56,15 @@ class RecipesViewModel @Inject constructor(private val repository: RecipesReposi
         }
         getRandomRecipes()
         getRandomRecipesE()
+        getCatories()
 //        Log.e("popo", ": ${recipesListE.value}")
 
     }
+fun getCatories(){
+     val recipeCategoriesData = RecipeCategoriesPictureDataSource.recipeCategoriesPictureList.map { CategoryUIState(it.id,it.titleOFCat,it.CategoryImage) }
 
+    _respicesUIState.update { it.copy(category = recipeCategoriesData) }
+}
 
     // fun to get the recipe details.
     private fun getRecipeByCategory() {
@@ -60,7 +72,7 @@ class RecipesViewModel @Inject constructor(private val repository: RecipesReposi
             _status.value = RecipesApiStatus.LOADING
 
             try {
-                _recipesList.value = repository.getRecipesByCategory(_categoryId.value!!)
+              //  _recipesList.value = repository.getRecipesByCategory(_categoryId.value!!)
                 _status.value = RecipesApiStatus.DONE
             } catch (e: Exception) {
                 _status.value = RecipesApiStatus.ERROR
@@ -70,13 +82,23 @@ class RecipesViewModel @Inject constructor(private val repository: RecipesReposi
     }
 
 
-
     // fun to get the popular movie.
     fun getRandomRecipes() {
         viewModelScope.launch {
             _status.value = RecipesApiStatus.LOADING
             try {
-                _recipesList.value = repository.getRandomRecipes()
+                val result = repository.getRandomRecipes()
+                val list = result?.map {
+                    RecipesItemUiState(
+                        title = it?.title!!,
+                        image = it?.image!!,
+                        id = it?.id!!,
+                        mintus =  it?.readyInMinutes!!.toString(),
+                        serving = it?.servings.toString()
+
+                    )
+                }
+                _recipesList.value = list
                 _status.value = RecipesApiStatus.DONE
             } catch (e: Exception) {
                 _status.value = RecipesApiStatus.ERROR
@@ -87,16 +109,13 @@ class RecipesViewModel @Inject constructor(private val repository: RecipesReposi
     }
 
 
-
-
-
     // fun to get the popular movie.
     fun getRandomRecipesE() {
         viewModelScope.launch {
             _status.value = RecipesApiStatus.LOADING
             try {
                 _recipesListE.value = repository.getAllRecipesE()
-                Log.e(TAG, "getRandomRecipesE: ${ _recipesListE.value}", )
+                Log.e(TAG, "getRandomRecipesE: ${_recipesListE.value}")
                 _status.value = RecipesApiStatus.DONE
             } catch (e: Exception) {
                 _status.value = RecipesApiStatus.ERROR

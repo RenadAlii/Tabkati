@@ -1,40 +1,14 @@
 package com.example.tabkati.ui.recipes
 
-
-data class StepsUiState(
-    val steps: List<StepsItemUiState?>? = listOf(),
-
-    )
-
-data class StepsItemUiState(
-    val number: Int? = null,
-    val ingredients: List<IngredientsItemUiState?>? = listOf(),
-    val step: String? = null
-)
+import com.example.tabkati.R
 
 
+data class RecipesItemUiState(val id: Int=0,val image:String ="",val title: String="",val mintus:String="",val serving:String){
 
-data class IngredientsItemUiState(
-    val originalString: String? = null,
-)
+}
+data class  CategoryUIState(val id: String="",val title: String="",val image: Int= R.drawable.bancake)
 
 
-
-//data class RecipesUiState(
-//    val recipesItems: List<RecipesItemUiState> = listOf())
-data class RecipesUiState(
-    val id: Int? = null,
-    val instructions: String? = null,
-    val glutenFree: Boolean? = null,
-    val healthScore: Double? = null,
-    val title: String? = null,
-    val diets: List<String?>? = null,
-    val aggregateLikes: Int? = null,
-    val readyInMinutes: Int? = null,
-    val sourceUrl: String? = null,
-    val dairyFree: Boolean? = null,
-    val servings: Int? = null,
-    val vegetarian: Boolean? = null,
-    val image: String? = null,
-    val veryHealthy: Boolean? = null,
-    val vegan: Boolean? = null)
+data class RecipesScreenUiState(
+    val category: List<CategoryUIState> = listOf(),
+    val recipesItems: List<RecipesItemUiState> = listOf())

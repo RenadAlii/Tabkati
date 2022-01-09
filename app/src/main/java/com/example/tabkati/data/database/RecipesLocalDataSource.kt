@@ -5,7 +5,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.example.tabkati.data.*
-import com.example.tabkati.ui.recipes.RecipesUiState
+import com.example.tabkati.ui.recipes.RecipesItemUiState
 
 @Entity(tableName = "recipes")
 data class RecipesEntity(
@@ -40,30 +40,30 @@ val sourceUrl: String?,
 
 
 //helper to converts from database objects to domain objects
-fun List<RecipesEntity>.asDomainModel(): List<RecipesUiState> {
-    return map {
-        RecipesUiState(
-                id = it.id,
-                title = it.title,
-                image = it.image,
-                servings = it.servings,
-                aggregateLikes = it.aggregateLikes,
-                readyInMinutes = it.readyInMinutes,
-                sourceUrl = it.sourceUrl,
-                dairyFree = it.dairyFree,
-                vegetarian = it.vegetarian,
-                veryHealthy = it.veryHealthy,
-                glutenFree = it.glutenFree,
-                instructions = it.instructions,
-//                extendedIngredients = it.ingredients.map {
-//                    ExtendedIngredientsItemResponse(
-//                        id= it.id,
-//                        nameClean = it.nameClean,
-//                        amount = it.amount,
-//                        unit = it.unit,
+//fun List<RecipesEntity>.asDomainModel(): List<RecipesItemUiState> {
+//    return map {
+//        RecipesItemUiState(
+//                id = it.id,
+//                title = it.title,
+//                image = it.image,
+//                servings = it.servings,
+//                aggregateLikes = it.aggregateLikes,
+//                readyInMinutes = it.readyInMinutes,
+//                sourceUrl = it.sourceUrl,
+//                dairyFree = it.dairyFree,
+//                vegetarian = it.vegetarian,
+//                veryHealthy = it.veryHealthy,
+//                glutenFree = it.glutenFree,
+//                instructions = it.instructions,
+////                extendedIngredients = it.ingredients.map {
+////                    ExtendedIngredientsItemResponse(
+////                        id= it.id,
+////                        nameClean = it.nameClean,
+////                        amount = it.amount,
+////                        unit = it.unit,
+////
+//                        )
 //
-                        )
-
-
-    }
-}
+//
+//    }
+//}
