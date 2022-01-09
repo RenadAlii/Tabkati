@@ -1,42 +1,30 @@
 package com.example.tabkati.data
 
+import android.provider.MediaStore
+import com.example.tabkati.data.database.RecipesEntity
+import com.example.tabkati.ui.recipes.RecipesUiState
 import com.squareup.moshi.Json
 
+
 data class SpoonacularRemoteDatasource(
-
-	@Json(name="recipes")
-	val recipes: List<RecipesItem?>?
+@Json(name="recipes")
+val recipes: List<RecipesItem?>? = null
 )
-
 data class Length(
 
 	@Json(name="number")
-	val number: Int? ,
+	val number: Int? = null,
 
 	@Json(name="unit")
-	val unit: String?
+	val unit: String? = null
 )
+
 
 data class AnalyzedInstructionsItem(
 
 
 	@Json(name="steps")
 	val steps: List<StepsItem?>? = null
-)
-
-data class EquipmentItem(
-
-	@Json(name="image")
-	val image: String? = null,
-
-	@Json(name="localizedName")
-	val localizedName: String? = null,
-
-	@Json(name="name")
-	val name: String? = null,
-
-	@Json(name="id")
-	val id: Int? = null
 )
 
 
@@ -46,17 +34,12 @@ data class RecipesItem(
 	@Json(name="instructions")
 	val instructions: String? = null,
 
-	@Json(name="sustainable")
-	val sustainable: Boolean? = null,
-
 	@Json(name="analyzedInstructions")
-	val analyzedInstructions: List<AnalyzedInstructionsItem?>? ,
+	val analyzedInstructions: List<AnalyzedInstructionsItem?>? = null,
 
 	@Json(name="glutenFree")
-	val glutenFree: Boolean? ,
+	val glutenFree: Boolean? = null,
 
-	@Json(name="veryPopular")
-	val veryPopular: Boolean? = null,
 
 	@Json(name="healthScore")
 	val healthScore: Double? = null,
@@ -70,8 +53,6 @@ data class RecipesItem(
 	@Json(name="aggregateLikes")
 	val aggregateLikes: Int? = null,
 
-	@Json(name="creditsText")
-	val creditsText: String? = null,
 
 	@Json(name="readyInMinutes")
 	val readyInMinutes: Int? = null,
@@ -106,46 +87,17 @@ data class RecipesItem(
 	@Json(name="vegan")
 	val vegan: Boolean? = null,
 
-	@Json(name="cheap")
-	val cheap: Boolean? = null,
 
 	@Json(name="extendedIngredients")
-	val extendedIngredients: List<ExtendedIngredientsItem?>? ,
+	val extendedIngredients: List<ExtendedIngredientsItem?>? = null,
 
-	@Json(name="dishTypes")
-	val dishTypes: List<String?>? = null,
-
-	@Json(name="gaps")
-	val gaps: String? = null,
-
-	@Json(name="cuisines")
-	val cuisines: List<Any?>? = null,
-
-	@Json(name="lowFodmap")
-	val lowFodmap: Boolean? = null,
-
-	@Json(name="license")
-	val license: String? = null,
 
 	@Json(name="weightWatcherSmartPoints")
 	val weightWatcherSmartPoints: Int? = null,
 
-	@Json(name="occasions")
-	val occasions: List<Any?>? = null,
-
-
-	@Json(name="pricePerServing")
-	val pricePerServing: Double? = null,
-
-	@Json(name="sourceName")
-	val sourceName: String? = null,
-
-
-
 	@Json(name="spoonacularSourceUrl")
 	val spoonacularSourceUrl: String? = null
 )
-
 
 
 data class StepsItem(
@@ -166,58 +118,121 @@ data class StepsItem(
 data class ExtendedIngredientsItem(
 
 	@Json(name="image")
-	val image: String? ,
+	val image: String? = null,
 
 	@Json(name="amount")
-	val amount: Double?  ,
+	val amount: Double? = null,
+
 	@Json(name="nameClean")
-	val nameClean: String? ,
+	val nameClean: String? = null,
 
 	@Json(name="original")
-	val original: String? ,
+	val original: String? = null,
 
 	@Json(name="aisle")
-	val aisle: String? ,
+	val aisle: String? = null,
 
 	@Json(name="consistency")
-	val consistency: String? ,
+	val consistency: String? = null,
 
 	@Json(name="originalName")
-	val originalName: String? ,
+	val originalName: String? = null,
 
 	@Json(name="unit")
-	val unit: String? ,
+	val unit: String? = null,
 
 
 	@Json(name="meta")
-	val meta: List<String>,
+	val meta: List<String?>? = null,
 
 	@Json(name="name")
-	val name: String? ,
+	val name: String? = null,
 
 	@Json(name="originalString")
-	val originalString: String? ,
+	val originalString: String? = null,
 
 	@Json(name="id")
-	val id: Int? ,
+	val id: Int? = null,
 
 	@Json(name="metaInformation")
-	val metaInformation: List<String?>?
+	val metaInformation: List<String?>? = null
 )
-
 
 data class IngredientsItem(
 
 	@Json(name="image")
-	val image: String? ,
+	val image: String? = null,
 
 	@Json(name="localizedName")
-	val localizedName: String? ,
+	val localizedName: String? = null,
 
 	@Json(name="name")
-	val name: String? ,
+	val name: String? = null,
 
 	@Json(name="id")
-	val id: Int?
+	val id: Int? = null
 )
 
+/**
+ * Convert Network results to database objects
+ */
+fun SpoonacularRemoteDatasource.asDomainModel(): List<RecipesItem>? {
+    return recipes?.map {
+		RecipesItem(
+			id = it?.id,
+			title = it?.title,
+			image = it?.image,
+			servings = it?.servings,
+			aggregateLikes = it?.aggregateLikes,
+			readyInMinutes = it?.readyInMinutes,
+			sourceUrl = it?.sourceUrl,
+			dairyFree = it?.dairyFree,
+			vegetarian = it?.vegetarian,
+			veryHealthy = it?.veryHealthy,
+			glutenFree = it?.glutenFree,
+			instructions = it?.instructions,
+//			extendedIngredients = it.extendedIngredients.map {
+//				ExtendedIngredientsItem(
+//					id= it.id,
+//					nameClean = it.nameClean,
+//					amount = it.amount,
+//					unit = it.unit,
+//
+//				)
+			//}
+        )
+    }
+}
+
+//converts from data transfer objects to database objects.
+fun SpoonacularRemoteDatasource.asDatabaseModel(): Array<RecipesEntity>? {
+    return recipes?.map {
+		RecipesEntity(
+			id = it?.id,
+			title = it?.title,
+			image = it?.image,
+			servings = it?.servings,
+			aggregateLikes = it?.aggregateLikes,
+			readyInMinutes = it?.readyInMinutes,
+			sourceUrl = it?.sourceUrl,
+			dairyFree = it?.dairyFree,
+			vegetarian = it?.vegetarian,
+			veryHealthy = it?.veryHealthy,
+			glutenFree = it?.glutenFree,
+			instructions = it?.instructions,
+//			ingredients = it.extendedIngredients.map {
+//				ExtendedIngredientsItem(
+//					id= it.id,
+//					nameClean = it.nameClean,
+//					amount = it.amount,
+//					unit = it.unit,
+//
+//					)
+			//}
+
+
+
+
+		)
+    }?.toTypedArray()
+}

@@ -1,6 +1,7 @@
 package com.example.tabkati.di
 
 import com.example.tabkati.data.RecipesRemoteDataSource
+import com.example.tabkati.data.database.RecipesDao
 import com.example.tabkati.network.RecipeApiService
 import com.example.tabkati.repository.RecipesRepository
 import com.example.tabkati.utils.Constants.BASE_URL
@@ -57,18 +58,27 @@ object NetworkModel {
         .build()
 
 
-@Provides
-fun provideDispatcher(): CoroutineDispatcher = Dispatchers.IO
+    @Provides
+    fun provideDispatcher(): CoroutineDispatcher = Dispatchers.IO
 
-@Provides
-@Singleton
-fun provideRecipesRemoteDataSource(recipeApiService: RecipeApiService) =     RecipesRemoteDataSource(recipeApiService,provideDispatcher())
+    @Provides
+    @Singleton
+    fun provideRecipesRemoteDataSource(recipeApiService: RecipeApiService) =
+        RecipesRemoteDataSource(recipeApiService, provideDispatcher())
+
+//    @Provides
+//    @Singleton
+//    fun provideAppDataBase(recipeApiService: RecipeApiService, recipesDao: RecipesDao): RecipesRepository =
+//        RecipesRepository(provideRecipesRemoteDataSource(recipeApiService),recipesDao )
 
 
-@Provides
-@Singleton
-fun provideRecipesRepository(recipeApiService: RecipeApiService): RecipesRepository =
-    RecipesRepository(provideRecipesRemoteDataSource(recipeApiService))
+    @Provides
+    @Singleton
+    fun provideRecipesRepository(
+        recipeApiService: RecipeApiService,
+        recipesDao: RecipesDao,
+    ): RecipesRepository =
+        RecipesRepository(provideRecipesRemoteDataSource(recipeApiService), recipesDao)
 
 }
 

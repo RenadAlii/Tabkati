@@ -4,6 +4,7 @@ import com.example.tabkati.data.RecipesItem
 import com.example.tabkati.data.SearchResultDataModel
 import com.example.tabkati.data.SpoonacularRemoteDatasource
 import com.example.tabkati.utils.Constants.API_KEY
+import kotlinx.coroutines.Deferred
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -18,7 +19,7 @@ interface RecipeApiService {
 
     //Get Random list of Recipes.
     @GET("/recipes/random?number=10&apiKey=${API_KEY}")
-    suspend fun getRandomRecipes(): SpoonacularRemoteDatasource
+    suspend fun getRandomRecipes():  SpoonacularRemoteDatasource
 
     //Get Recipe by id.
     @GET("/recipes/{id}/information?includeNutrition=false&apiKey=${API_KEY}")

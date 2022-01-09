@@ -23,7 +23,7 @@ class IngredientsAdapter(private val onItemClicked: (ExtendedIngredientsItem) ->
         }
 
         override fun areContentsTheSame(oldItem: ExtendedIngredientsItem, newItem: ExtendedIngredientsItem): Boolean {
-            return oldItem.original == newItem.original
+            return oldItem.nameClean == newItem.nameClean
         }
     }
 

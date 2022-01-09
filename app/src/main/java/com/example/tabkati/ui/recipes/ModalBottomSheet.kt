@@ -21,6 +21,7 @@ import android.widget.Toast
 import com.example.tabkati.MainActivity
 import com.example.tabkati.databinding.FragmentSearchBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import java.util.*
 
 
 class ModalBottomSheet : BottomSheetDialogFragment() {
@@ -29,7 +30,7 @@ class ModalBottomSheet : BottomSheetDialogFragment() {
     private lateinit var binding: FragmentModalBottomSheetBinding
     private lateinit var languages: Array<String>
     override fun getTheme(): Int = R.style.Theme_AppBottomSheetDialogTheme
-
+    private lateinit var local: Locale
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -64,18 +65,27 @@ class ModalBottomSheet : BottomSheetDialogFragment() {
 
                     when (languages[position]) {
                         "Arabic" -> {
-                            Toast.makeText(requireContext(), "Arabic", Toast.LENGTH_LONG).show()
-
+                            changeLocalLanguage("ar")
                         }
                         "English" -> {
-                            Toast.makeText(requireContext(), "English", Toast.LENGTH_LONG).show()
-                        }
+                            changeLocalLanguage("en")                        }
+
                     }
                 }
 
         }
     }
 
+    // fun to change the local language.
+    private fun changeLocalLanguage(language: String) {
+        // send the selected language.
+        local = Locale(language)
+        val res = resources
+        var dm = res.displayMetrics
+        val configuration = res.configuration
+        res.updateConfiguration(configuration, dm)
+
+    }
 
     override fun onDestroy() {
         super.onDestroy()

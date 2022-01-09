@@ -88,6 +88,7 @@ class HomeFragment : Fragment() {
             navigateAndSendRecipesID(recipe)
         }
         recyclerViewOfRecipes.adapter = recipesAdapter
+       
     }
 
     private fun navigateAndSendRecipesID(recipe: RecipesItem) {

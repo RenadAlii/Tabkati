@@ -20,11 +20,11 @@ data class DrinkRecipesEntity(
     @ColumnInfo(name = "readyInMinutes")
     val readyInMinutes: Int,
     @ColumnInfo(name="sourceUrl")
-    val sourceUrl: String? = null,
-    @ColumnInfo(name="ingredients")
-    val ingredients: List<ExtendedIngredientsItem>,
-    @ColumnInfo(name="steps")
-    val steps: List<AnalyzedInstructionsItem?>?,
+    val sourceUrl: String,
+//    @ColumnInfo(name="ingredients")
+//    val ingredients: List<ExtendedIngredientsItem>,
+//    @ColumnInfo(name="steps")
+//    val steps: List<AnalyzedInstructionsItem?>?,
     @ColumnInfo(name = "dairyFree")
     val dairyFree: Boolean,
     @ColumnInfo(name = "vegetarian")
@@ -55,9 +55,9 @@ fun List<DrinkRecipesEntity>.asDomainModel(): List<RecipesItem> {
             vegetarian = it.vegetarian,
             veryHealthy = it.veryHealthy,
             glutenFree = it.glutenFree,
-            extendedIngredients = it.ingredients,
-            analyzedInstructions = it.steps
-                 ,   instructions = it.instructions
+//            extendedIngredients = it.ingredients,
+//            analyzedInstructions = it.steps
+                    instructions = it.instructions
         )
     }
 }

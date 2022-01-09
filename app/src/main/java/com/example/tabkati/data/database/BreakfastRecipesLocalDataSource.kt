@@ -8,7 +8,8 @@ import com.example.tabkati.data.*
 
 @Entity(tableName = "breakfast")
 data class BreakfastRecipesEntity(
-    @PrimaryKey val id: Int,
+    @PrimaryKey(autoGenerate = false)
+    val id: Int,
     @ColumnInfo(name = "title")
     val title: String,
     @ColumnInfo(name = "image")
@@ -19,12 +20,8 @@ data class BreakfastRecipesEntity(
     val aggregateLikes: Int,
     @ColumnInfo(name = "readyInMinutes")
     val readyInMinutes: Int,
-    @ColumnInfo(name="sourceUrl")
+    @ColumnInfo(name = "sourceUrl")
     val sourceUrl: String,
-    @ColumnInfo(name="ingredients")
-    val ingredients: List<ExtendedIngredientsItem>,
-    @ColumnInfo(name="steps")
-    val steps: List<AnalyzedInstructionsItem?>?,
     @ColumnInfo(name = "dairyFree")
     val dairyFree: Boolean,
     @ColumnInfo(name = "vegetarian")
@@ -32,15 +29,15 @@ data class BreakfastRecipesEntity(
     @ColumnInfo(name = "veryHealthy")
     val veryHealthy: Boolean,
     @ColumnInfo(name = "glutenFree")
-    val glutenFree: Boolean
-    ,@ColumnInfo(name = "instructions")
-val instructions: String
+    val glutenFree: Boolean,
+    @ColumnInfo(name = "instructions")
+    val instructions: String,
 
     )
 
 
 //converts from database objects to domain objects
-fun List<BreakfastRecipesEntity>.asDomainModel(): List<RecipesItem> {
+fun List<BreakfastRecipesEntity>.asDomainModel(): List<Any> {
     return map {
         RecipesItem(
             id = it.id,
@@ -54,10 +51,9 @@ fun List<BreakfastRecipesEntity>.asDomainModel(): List<RecipesItem> {
             vegetarian = it.vegetarian,
             veryHealthy = it.veryHealthy,
             glutenFree = it.glutenFree,
-            extendedIngredients = it.ingredients,
-            analyzedInstructions = it.steps,
             instructions = it.instructions
-
         )
+
+
     }
 }
