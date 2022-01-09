@@ -1,15 +1,13 @@
 package com.example.tabkati.data
 
-import android.provider.MediaStore
 import com.example.tabkati.domain.models.RecipesModel
 import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
 
 
 data class SpoonacularContainer(
 
 	@Json(name="recipes")
-	val recipes: List<RecipesItem?>?
+	val recipes: List<RecipesItemResponse?>?
 )
 data class Length(
 
@@ -25,7 +23,7 @@ data class AnalyzedInstructionsItem(
 
 
 	@Json(name="steps")
-	val steps: List<StepsItem?>? = null
+	val steps: List<StepsItemResponse?>? = null
 )
 
 
@@ -36,10 +34,10 @@ data class RecipesItem(
 	val instructions: String? = null,
 
 	@Json(name="analyzedInstructions")
-	val analyzedInstructions: List<AnalyzedInstructionsItem?>? ,
+	val analyzedInstructions: List<AnalyzedInstructionsItemResponse?>?,
 
 	@Json(name="glutenFree")
-	val glutenFree: Boolean? ,
+	val glutenFree: Boolean?,
 
 
 	@Json(name="healthScore")
@@ -90,7 +88,7 @@ data class RecipesItem(
 
 
 	@Json(name="extendedIngredients")
-	val extendedIngredients: List<ExtendedIngredientsItem?>? ,
+	val extendedIngredients: List<ExtendedIngredientsItemResponse?>?,
 
 
 	@Json(name="weightWatcherSmartPoints")
@@ -107,13 +105,13 @@ data class StepsItem(
 	val number: Int? = null,
 
 	@Json(name="ingredients")
-	val ingredients: List<IngredientsItem?>? = null,
+	val ingredients: List<IngredientsItemResponse?>? = null,
 
 	@Json(name="step")
 	val step: String? = null,
 
 	@Json(name="length")
-	val length: Length? = null
+	val length: LengthResponse? = null
 )
 
 data class ExtendedIngredientsItem(

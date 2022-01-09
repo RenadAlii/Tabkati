@@ -23,9 +23,9 @@ data class RecipesEntity(
     @ColumnInfo(name="sourceUrl")
 val sourceUrl: String?,
 //    @ColumnInfo(name="ingredients")
-//val ingredients: List<ExtendedIngredientsItem>,
+//val ingredients: List<ExtendedIngredientsItemResponse>,
 //    @ColumnInfo(name="steps")
-//val steps: List<AnalyzedInstructionsItem>,
+//val steps: List<AnalyzedInstructionsItemResponse>,
     @ColumnInfo(name = "dairyFree")
     val dairyFree: Boolean?,
     @ColumnInfo(name = "vegetarian")
@@ -56,7 +56,7 @@ fun List<RecipesEntity>.asDomainModel(): List<RecipesUiState> {
                 glutenFree = it.glutenFree,
                 instructions = it.instructions,
 //                extendedIngredients = it.ingredients.map {
-//                    ExtendedIngredientsItem(
+//                    ExtendedIngredientsItemResponse(
 //                        id= it.id,
 //                        nameClean = it.nameClean,
 //                        amount = it.amount,

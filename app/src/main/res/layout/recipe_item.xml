@@ -8,7 +8,7 @@
 
         <variable
             name="data"
-            type="com.example.tabkati.data.RecipesItem" />
+            type="com.example.tabkati.data.RecipesItemResponse" />
     </data>
 
     <com.google.android.material.card.MaterialCardView

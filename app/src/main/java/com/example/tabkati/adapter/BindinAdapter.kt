@@ -2,7 +2,6 @@ package com.example.tabkati.adapter
 
 import android.util.Log
 import android.view.View
-import android.widget.ImageView
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
@@ -10,10 +9,9 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.airbnb.lottie.LottieAnimationView
 import com.example.tabkati.R
-import com.example.tabkati.data.ExtendedIngredientsItem
-import com.example.tabkati.data.RecipesItem
+import com.example.tabkati.data.ExtendedIngredientsItemResponse
+import com.example.tabkati.data.RecipesItemResponse
 import com.example.tabkati.data.ResultsItem
-import com.example.tabkati.data.StepsItem
 import com.example.tabkati.utils.RecipesApiStatus
 
 @BindingAdapter("imageUrl")
@@ -30,14 +28,14 @@ fun AppCompatImageView.bindImage( imageUrl: String?) {
 
 
 @BindingAdapter("listData")
-fun bindRecyclerView(recyclerView: RecyclerView, data: List<RecipesItem>?){
+fun bindRecyclerView(recyclerView: RecyclerView, data: List<RecipesItemResponse>?){
     val adapter= recyclerView.adapter as RecipesAdapter
     // this tell the RecyclerView new list is available.
     adapter.submitList(data)
 }
 
 @BindingAdapter("listIngredients")
-fun bindIngredientsRecyclerView(recyclerView: RecyclerView, data: List<ExtendedIngredientsItem>?){
+fun bindIngredientsRecyclerView(recyclerView: RecyclerView, data: List<ExtendedIngredientsItemResponse>?){
     val adapter= recyclerView.adapter as IngredientsAdapter
     // this tell the RecyclerView new list is available.
     adapter.submitList(data)

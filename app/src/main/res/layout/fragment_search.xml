@@ -13,7 +13,7 @@
         type="com.example.tabkati.ui.recipes.SearchViewModel" />
     <variable
         name="data"
-        type="com.example.tabkati.data.RecipesItem" />
+        type="com.example.tabkati.data.RecipesItemResponse" />
     <variable
         name="searchFragment"
         type="com.example.tabkati.ui.recipes.SearchFragment" />

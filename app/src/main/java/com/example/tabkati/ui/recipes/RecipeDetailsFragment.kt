@@ -2,24 +2,18 @@ package com.example.tabkati.ui.recipes
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.tabkati.R
 import com.example.tabkati.adapter.IngredientsAdapter
 import com.example.tabkati.adapter.InstructionsAdapter
-import com.example.tabkati.adapter.RecipesAdapter
-import com.example.tabkati.data.StepsItem
+import com.example.tabkati.data.StepsItemResponse
 import com.example.tabkati.databinding.FragmentRecipeDetailsBinding
-import com.example.tabkati.utils.Constants
 import com.example.tabkati.utils.Constants.RECIPEID
-import com.example.tabkati.utils.Constants.TAG
 import com.google.android.material.tabs.TabLayout
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -32,7 +26,7 @@ class RecipeDetailsFragment : Fragment() {
     private lateinit var recyclerViewOfIngredient: RecyclerView
     private lateinit var recyclerViewOfInstruction: RecyclerView
       var  srcUrl : String? = null
-    private var dataStep: List<StepsItem?>? = listOf()
+    private var dataStep: List<StepsItemResponse?>? = listOf()
     private val recipeDetailsViewModel by viewModels<RecipeDetailsViewModel>()
 
 

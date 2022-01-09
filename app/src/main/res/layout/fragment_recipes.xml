@@ -10,7 +10,7 @@
             type="com.example.tabkati.ui.recipes.RecipesViewModel" />
         <variable
             name="data"
-            type="com.example.tabkati.data.RecipesItem" />
+            type="com.example.tabkati.data.RecipesItemResponse" />
         <variable
             name="recipesFragment"
             type="com.example.tabkati.ui.recipes.RecipesFragment" />

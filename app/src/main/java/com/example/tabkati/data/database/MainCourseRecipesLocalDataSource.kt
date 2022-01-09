@@ -22,9 +22,9 @@ data class MainCourseRecipesEntity(
     @ColumnInfo(name="sourceUrl")
     val sourceUrl: String,
 //    @ColumnInfo(name="ingredients")
-//    val ingredients: List<ExtendedIngredientsItem>,
+//    val ingredients: List<ExtendedIngredientsItemResponse>,
 //    @ColumnInfo(name="steps")
-//    val steps: List<AnalyzedInstructionsItem?>?,
+//    val steps: List<AnalyzedInstructionsItemResponse?>?,
     @ColumnInfo(name = "dairyFree")
     val dairyFree: Boolean,
     @ColumnInfo(name = "vegetarian")
@@ -36,13 +36,13 @@ data class MainCourseRecipesEntity(
     ,@ColumnInfo(name = "instructions")
     val instructions: String
 
-    )
+)
 
 
 //converts from database objects to domain objects
-fun List<MainCourseRecipesEntity>.asDomainModel(): List<RecipesItem> {
+fun List<MainCourseRecipesEntity>.asDomainModel(): List<RecipesItemResponse> {
     return map {
-        RecipesItem(
+        RecipesItemResponse(
             id = it.id,
             title = it.title,
             image = it.image,

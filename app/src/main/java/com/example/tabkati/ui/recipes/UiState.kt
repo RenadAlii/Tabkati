@@ -1,14 +1,10 @@
 package com.example.tabkati.ui.recipes
 
-import com.example.tabkati.data.IngredientsItem
-import com.squareup.moshi.Json
-
-
 
 data class StepsUiState(
-val steps: List<StepsItemUiState?>? = listOf(),
+    val steps: List<StepsItemUiState?>? = listOf(),
 
-)
+    )
 
 data class StepsItemUiState(
     val number: Int? = null,

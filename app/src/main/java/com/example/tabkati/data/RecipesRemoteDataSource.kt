@@ -3,7 +3,6 @@ package com.example.tabkati.data
 
 import com.example.tabkati.network.RecipeApiService
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -18,12 +17,12 @@ class RecipesRemoteDataSource @Inject constructor(private val api: RecipeApiServ
             api.getRandomRecipes()
         }
 
-    suspend fun getRecipesByCategory(category: String):List<RecipesItem?>? =
+    suspend fun getRecipesByCategory(category: String):List<RecipesItemResponse?>? =
         withContext(dispatcher){
             api.getRecipesByCategory(category=category).recipes
         }
 
-    suspend fun getRecipeById(id: String ):RecipesItem? =
+    suspend fun getRecipeById(id: String ):RecipesItemResponse? =
         withContext(dispatcher){
             api.getRecipe(id)
         }

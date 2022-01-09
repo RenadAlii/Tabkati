@@ -81,4 +81,3 @@ object NetworkModel {
         RecipesRepository(provideRecipesRemoteDataSource(recipeApiService), recipesDao)
 
 }
-

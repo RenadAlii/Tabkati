@@ -5,29 +5,26 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.tabkati.data.RecipeCategoriesPictureLocalDataSource
-import com.example.tabkati.data.RecipesItem
-import com.example.tabkati.databinding.FragmentHomeBinding
-import com.example.tabkati.databinding.GridViewRecipeCateItemBinding
+import com.example.tabkati.data.RecipesItemResponse
 import com.example.tabkati.databinding.RecipeItemBinding
 
-class RecipesAdapter(private val onItemClicked: (RecipesItem) -> Unit) :
-    ListAdapter<RecipesItem,
+class RecipesAdapter(private val onItemClicked: (RecipesItemResponse) -> Unit) :
+    ListAdapter<RecipesItemResponse,
             RecipesAdapter.ItemViewHolder>(DiffCallback) {
 
 
     companion object DiffCallback :
-        DiffUtil.ItemCallback<RecipesItem>() {
+        DiffUtil.ItemCallback<RecipesItemResponse>() {
         override fun areItemsTheSame(
-            oldItem: RecipesItem,
-            newItem: RecipesItem,
+            oldItem: RecipesItemResponse,
+            newItem: RecipesItemResponse,
         ): Boolean {
             return oldItem.id == newItem.id
         }
 
         override fun areContentsTheSame(
-            oldItem: RecipesItem,
-            newItem: RecipesItem,
+            oldItem: RecipesItemResponse,
+            newItem: RecipesItemResponse,
         ): Boolean {
             return oldItem.title == newItem.title
         }
@@ -37,7 +34,7 @@ class RecipesAdapter(private val onItemClicked: (RecipesItem) -> Unit) :
         private var binding:
         RecipeItemBinding,
     ) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(recipe: RecipesItem) {
+        fun bind(recipe: RecipesItemResponse) {
             binding.data = recipe
 
         }

@@ -16,7 +16,3 @@ data class ExtendedIngredientsLocalDataSource(
     @ColumnInfo(name = "amount")
     val readyInMinutes: Double,
 )
-
-
-
-

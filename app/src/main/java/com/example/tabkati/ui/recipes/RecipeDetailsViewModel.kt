@@ -5,17 +5,15 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.tabkati.data.RecipesItem
+import com.example.tabkati.data.RecipesItemResponse
 import com.example.tabkati.repository.RecipesRepository
 import com.example.tabkati.utils.Constants
 import com.example.tabkati.utils.RecipesApiStatus
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
-import java.io.IOException
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -33,8 +31,8 @@ class RecipeDetailsViewModel @Inject constructor(private val repository: Recipes
     private var _recipeId = MutableLiveData<String?>()
     val recipeId: LiveData<String?> get() =  _recipeId
 
-    private var _recipe = MutableLiveData<RecipesItem?>()
-    val recipe: LiveData<RecipesItem?> get() =  _recipe
+    private var _recipe = MutableLiveData<RecipesItemResponse?>()
+    val recipe: LiveData<RecipesItemResponse?> get() =  _recipe
 
 
 

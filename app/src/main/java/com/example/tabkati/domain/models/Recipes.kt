@@ -1,9 +1,7 @@
 package com.example.tabkati.domain.models
 
-import androidx.room.ColumnInfo
-import androidx.room.PrimaryKey
-import com.example.tabkati.data.AnalyzedInstructionsItem
-import com.example.tabkati.data.ExtendedIngredientsItem
+import com.example.tabkati.data.AnalyzedInstructionsItemResponse
+import com.example.tabkati.data.ExtendedIngredientsItemResponse
 
 data class RecipesModel(
     val id: Int?,
@@ -13,8 +11,8 @@ data class RecipesModel(
     val aggregateLikes: Int?,
     val readyInMinutes: Int?,
     val sourceUrl: String? = null,
-    val ingredients: List<ExtendedIngredientsItem?>?,
-    val steps: List<AnalyzedInstructionsItem?>?,
+    val ingredients: List<ExtendedIngredientsItemResponse?>?,
+    val steps: List<AnalyzedInstructionsItemResponse?>?,
     val dairyFree: Boolean?,
     val vegetarian: Boolean?,
     val veryHealthy: Boolean?,

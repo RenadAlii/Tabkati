@@ -39,7 +39,7 @@ data class BreakfastRecipesEntity(
 //converts from database objects to domain objects
 fun List<BreakfastRecipesEntity>.asDomainModel(): List<Any> {
     return map {
-        RecipesItem(
+        RecipesItemResponse(
             id = it.id,
             title = it.title,
             image = it.image,

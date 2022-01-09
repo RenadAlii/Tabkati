@@ -7,7 +7,6 @@ import android.view.*
 import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
-import androidx.fragment.app.commit
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,7 +16,7 @@ import com.example.tabkati.adapter.RecipeCategoriesAdapter
 import com.example.tabkati.adapter.RecipesAdapter
 import com.example.tabkati.data.RecipeCategoriesPictureDataSource
 import com.example.tabkati.data.RecipeCategoriesPictureLocalDataSource
-import com.example.tabkati.data.RecipesItem
+import com.example.tabkati.data.RecipesItemResponse
 import com.example.tabkati.databinding.FragmentHomeBinding
 import com.example.tabkati.ui.login.AuthMainActivity
 import com.example.tabkati.utils.State
@@ -88,14 +87,14 @@ class HomeFragment : Fragment() {
             navigateAndSendRecipesID(recipe)
         }
         recyclerViewOfRecipes.adapter = recipesAdapter
-       
+
     }
 
-    private fun navigateAndSendRecipesID(recipe: RecipesItem) {
+    private fun navigateAndSendRecipesID(recipe: RecipesItemResponse) {
         navigateToRecipesCategory(recipe)
     }
 
-    private fun navigateToRecipesCategory(recipe: RecipesItem) {
+    private fun navigateToRecipesCategory(recipe: RecipesItemResponse) {
         val action = HomeFragmentDirections.actionHomeFragmentToRecipeDetailsFragment(
             recipeId = recipe.id.toString()
         )

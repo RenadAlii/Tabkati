@@ -11,7 +11,7 @@
 
         <variable
             name="data"
-            type="com.example.tabkati.data.RecipesItem" />
+            type="com.example.tabkati.data.RecipesItemResponse" />
 
         <variable
             name="recipeDetailsFragment"
@@ -23,235 +23,235 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/cardOne"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="0dp">
-
-
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardOne"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/white">
+            android:layout_height="wrap_content"
+            android:layout_margin="0dp">
 
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/recipe_image"
-                android:layout_width="414dp"
-                android:layout_height="205dp"
-                android:scaleType="fitXY"
-                android:tint="#3B191C1C"
-                app:imageUrl="@{data.image}"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/recipe_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="4dp"
-                android:fontFamily="@font/nunito"
-                android:gravity="start"
-                android:text="@{data.title}"
-                android:textColor="@color/white"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@id/card_for_recipe"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
-
-            <ImageView
-                android:id="@+id/share_icon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
-                android:layout_marginEnd="4dp"
-                android:orientation="vertical"
-                android:src="@drawable/ic_baseline_share_24"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/card_for_recipe"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="180dp"
-                android:scrollbars="vertical"
-                app:cardBackgroundColor="#F9FFF8"
-                app:cardCornerRadius="30dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                android:layout_height="match_parent"
+                android:background="@color/white">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/recipe_image"
+                    android:layout_width="414dp"
+                    android:layout_height="205dp"
+                    android:scaleType="fitXY"
+                    android:tint="#3B191C1C"
+                    app:imageUrl="@{data.image}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/recipe_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="4dp"
+                    android:fontFamily="@font/nunito"
+                    android:gravity="start"
+                    android:text="@{data.title}"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toTopOf="@id/card_for_recipe"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <ImageView
+                    android:id="@+id/share_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp"
+                    android:layout_marginEnd="4dp"
+                    android:orientation="vertical"
+                    android:src="@drawable/ic_baseline_share_24"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/card_for_recipe"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="180dp"
+                    android:scrollbars="vertical"
+                    app:cardBackgroundColor="#F9FFF8"
+                    app:cardCornerRadius="30dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
 
-                    <com.google.android.material.imageview.ShapeableImageView
-                        android:id="@+id/timer_icon"
-                        android:layout_width="35dp"
-                        android:layout_height="35dp"
-                        android:layout_marginStart="44dp"
-                        android:layout_marginTop="20dp"
-                        android:src="@drawable/combined_shape"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:id="@+id/timer_textView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="32dp"
-                        android:text="@{@string/timer_with_unicode(data.readyInMinutes.toString())}"
-                        app:layout_constraintStart_toEndOf="@+id/timer_icon"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <com.google.android.material.imageview.ShapeableImageView
-                        android:id="@+id/servings_icon"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:layout_marginStart="24dp"
-                        android:layout_marginTop="26dp"
-                        android:src="@drawable/serving_dish"
-                        app:layout_constraintStart_toEndOf="@+id/timer_textView"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:id="@+id/servings_textView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="4dp"
-                        android:layout_marginTop="32dp"
-                        android:text="@{@string/_2_serving(data.servings.toString())}"
-                        app:layout_constraintStart_toEndOf="@+id/servings_icon"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-
-                    <com.google.android.material.imageview.ShapeableImageView
-                        android:id="@+id/likes_icon"
-                        android:layout_width="26dp"
-                        android:layout_height="26dp"
-                        android:layout_marginStart="24dp"
-                        android:layout_marginTop="26dp"
-                        android:src="@drawable/graphics___lighttheme___like_unselected"
-                        app:layout_constraintEnd_toStartOf="@+id/likes_textView"
-                        app:layout_constraintStart_toEndOf="@+id/servings_textView"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:id="@+id/likes_textView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="4dp"
-                        android:layout_marginTop="32dp"
-                        android:layout_marginEnd="44dp"
-                        android:text="@{@string/likes(data.aggregateLikes)}"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/likes_icon"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <View
-                        android:id="@+id/divider_between_taps_and_recipe_info"
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_marginStart="4dp"
-                        android:layout_marginTop="16dp"
-                        android:layout_marginEnd="4dp"
-                        android:background="#CDCDCD"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/likes_textView" />
+                        android:layout_height="match_parent">
 
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:id="@+id/timer_icon"
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:layout_marginStart="44dp"
+                            android:layout_marginTop="20dp"
+                            android:src="@drawable/combined_shape"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
 
-                    <com.google.android.material.tabs.TabLayout
-                        android:id="@+id/tabs"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/divider_between_taps_and_recipe_info"
-                        app:tabMode="fixed">
-
-                        <com.google.android.material.tabs.TabItem
-                            android:id="@+id/Ingredients_tap"
+                        <TextView
+                            android:id="@+id/timer_textView"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/ingredients" />
+                            android:layout_marginTop="32dp"
+                            android:text="@{@string/timer_with_unicode(data.readyInMinutes.toString())}"
+                            app:layout_constraintStart_toEndOf="@+id/timer_icon"
+                            app:layout_constraintTop_toTopOf="parent" />
 
-                        <com.google.android.material.tabs.TabItem
-                            android:id="@+id/Instructions_tap"
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:id="@+id/servings_icon"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_marginStart="24dp"
+                            android:layout_marginTop="26dp"
+                            android:src="@drawable/serving_dish"
+                            app:layout_constraintStart_toEndOf="@+id/timer_textView"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/servings_textView"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/instructions" />
+                            android:layout_marginStart="4dp"
+                            android:layout_marginTop="32dp"
+                            android:text="@{@string/_2_serving(data.servings.toString())}"
+                            app:layout_constraintStart_toEndOf="@+id/servings_icon"
+                            app:layout_constraintTop_toTopOf="parent" />
 
 
-                    </com.google.android.material.tabs.TabLayout>
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:id="@+id/likes_icon"
+                            android:layout_width="26dp"
+                            android:layout_height="26dp"
+                            android:layout_marginStart="24dp"
+                            android:layout_marginTop="26dp"
+                            android:src="@drawable/graphics___lighttheme___like_unselected"
+                            app:layout_constraintEnd_toStartOf="@+id/likes_textView"
+                            app:layout_constraintStart_toEndOf="@+id/servings_textView"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/likes_textView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="4dp"
+                            android:layout_marginTop="32dp"
+                            android:layout_marginEnd="44dp"
+                            android:text="@{@string/likes(data.aggregateLikes)}"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/likes_icon"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <View
+                            android:id="@+id/divider_between_taps_and_recipe_info"
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginStart="4dp"
+                            android:layout_marginTop="16dp"
+                            android:layout_marginEnd="4dp"
+                            android:background="#CDCDCD"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/likes_textView" />
 
 
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/recycler_view_of_recipe_details_ingredients"
-                        listIngredients="@{data.extendedIngredients}"
-                        android:layout_width="387dp"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="4dp"
-                        android:layout_marginTop="24dp"
-                        android:clipToPadding="false"
-                        android:focusableInTouchMode="true"
-                        android:orientation="vertical"
-                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/tabs" />
-
-                    <com.google.android.material.card.MaterialCardView
-                        android:id="@+id/card"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="4dp"
-                        android:padding="4dp"
-                        android:background="@color/cardview_light_background"
-                        android:visibility="gone"
-                        app:cardElevation="1dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/tabs">
-
-                        <com.google.android.material.textview.MaterialTextView
-                            android:id="@+id/instruction_textview"
+                        <com.google.android.material.tabs.TabLayout
+                            android:id="@+id/tabs"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-android:layout_margin="4dp"
-                            android:padding="4dp"
-                            android:fontFamily="@font/nunito_extralight"
-                            android:text="@{data.instructions}"
-                            android:textColor="@color/light_black" />
-                    </com.google.android.material.card.MaterialCardView>
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/divider_between_taps_and_recipe_info"
+                            app:tabMode="fixed">
 
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/recycler_view_of_recipe_details_instructions"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:clipToPadding="false"
-                        android:orientation="horizontal"
-                        android:scrollbars="vertical"
-                        android:visibility="gone"
-                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/tabs"
-                        app:spanCount="1" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
-            </com.google.android.material.card.MaterialCardView>
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </com.google.android.material.card.MaterialCardView>
+                            <com.google.android.material.tabs.TabItem
+                                android:id="@+id/Ingredients_tap"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/ingredients" />
+
+                            <com.google.android.material.tabs.TabItem
+                                android:id="@+id/Instructions_tap"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/instructions" />
+
+
+                        </com.google.android.material.tabs.TabLayout>
+
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/recycler_view_of_recipe_details_ingredients"
+                            listIngredients="@{data.extendedIngredients}"
+                            android:layout_width="387dp"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="4dp"
+                            android:layout_marginTop="24dp"
+                            android:clipToPadding="false"
+                            android:focusableInTouchMode="true"
+                            android:orientation="vertical"
+                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/tabs" />
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/card"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="4dp"
+                            android:padding="4dp"
+                            android:background="@color/cardview_light_background"
+                            android:visibility="gone"
+                            app:cardElevation="1dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/tabs">
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/instruction_textview"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="4dp"
+                                android:padding="4dp"
+                                android:fontFamily="@font/nunito_extralight"
+                                android:text="@{data.instructions}"
+                                android:textColor="@color/light_black" />
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/recycler_view_of_recipe_details_instructions"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:clipToPadding="false"
+                            android:orientation="horizontal"
+                            android:scrollbars="vertical"
+                            android:visibility="gone"
+                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/tabs"
+                            app:spanCount="1" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </com.google.android.material.card.MaterialCardView>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
     </ScrollView>
 </layout>
