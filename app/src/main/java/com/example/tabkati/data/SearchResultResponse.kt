@@ -2,7 +2,7 @@ package com.example.tabkati.data
 
 import com.squareup.moshi.Json
 
-data class SearchResultDataModel(
+data class SearchResultResponse(
 
 	@Json(name="number")
 	val number: Int,
