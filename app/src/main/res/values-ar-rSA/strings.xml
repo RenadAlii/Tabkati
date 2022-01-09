@@ -19,4 +19,11 @@
     <string name="already_signup_login">تملك حساب؟ سجل الدخول.</string>
     <string name="don_t_have_an_account_sign_up">لايوجد لديك حساب؟ انشىء حساب.</string>
     <string name="password">الرقم السري.</string>
+    <string name="recipes">الوصفات</string>
+    <string name="your_recipes">وصفاتك</string>
+    <string name="english">الانقليزيه</string>
+    <string name="arabic">العربيه</string>
+    <string name="language">اللغات</string>
+    <string name="groceries">قائمة المشتريات</string>
+    <string name="profile">الملف الشخصي</string>
 </resources>

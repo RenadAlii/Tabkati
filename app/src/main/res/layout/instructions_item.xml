@@ -64,7 +64,7 @@
                 android:layout_marginTop="4dp"
                 android:layout_marginBottom="4dp"
                 android:fontFamily="@font/nunito"
-                android:text="@{@string/ingredints_(dataIng.originalString)}"
+                android:text="@{@string/ingredints_(dataIng.nameClean)}"
                 android:textColor="@color/teal_700"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"

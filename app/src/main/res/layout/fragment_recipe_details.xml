@@ -18,11 +18,16 @@
             type="com.example.tabkati.ui.recipes.RecipeDetailsFragment" />
     </data>
 
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cardOne"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp">
+        android:layout_margin="0dp">
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -75,7 +80,7 @@
                 android:id="@+id/card_for_recipe"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="200dp"
+                android:layout_marginTop="180dp"
                 android:scrollbars="vertical"
                 app:cardBackgroundColor="#F9FFF8"
                 app:cardCornerRadius="30dp"
@@ -193,7 +198,7 @@
                         android:id="@+id/recycler_view_of_recipe_details_ingredients"
                         listIngredients="@{data.extendedIngredients}"
                         android:layout_width="387dp"
-                        android:layout_height="419dp"
+                        android:layout_height="wrap_content"
                         android:layout_margin="4dp"
                         android:layout_marginTop="24dp"
                         android:clipToPadding="false"
@@ -209,6 +214,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="4dp"
+                        android:padding="4dp"
                         android:background="@color/cardview_light_background"
                         android:visibility="gone"
                         app:cardElevation="1dp"
@@ -221,7 +227,8 @@
                             android:id="@+id/instruction_textview"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginBottom="8dp"
+android:layout_margin="4dp"
+                            android:padding="4dp"
                             android:fontFamily="@font/nunito_extralight"
                             android:text="@{data.instructions}"
                             android:textColor="@color/light_black" />
@@ -246,5 +253,5 @@
             </com.google.android.material.card.MaterialCardView>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
-
+    </ScrollView>
 </layout>

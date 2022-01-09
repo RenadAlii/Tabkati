@@ -6,6 +6,8 @@ import android.os.Bundle
 import android.view.*
 import android.widget.*
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
+import androidx.fragment.app.commit
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -86,6 +88,7 @@ class HomeFragment : Fragment() {
             navigateAndSendRecipesID(recipe)
         }
         recyclerViewOfRecipes.adapter = recipesAdapter
+       
     }
 
     private fun navigateAndSendRecipesID(recipe: RecipesItem) {
@@ -119,7 +122,6 @@ class HomeFragment : Fragment() {
     }
 
 
-
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.top_app_bar_menu, menu)
         super.onCreateOptionsMenu(menu, inflater)
@@ -129,8 +131,18 @@ class HomeFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.authenticationFragment -> signOut()
+            R.id.setting -> showModelSheet()
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun showModelSheet() {
+        val bottomSheet = ModalBottomSheet()
+        val fragmentManger = (activity as FragmentActivity).supportFragmentManager
+        fragmentManger?.let {
+            bottomSheet.show(it, ModalBottomSheet.TAG)
+        }
+
     }
 
     private fun signOut() {
