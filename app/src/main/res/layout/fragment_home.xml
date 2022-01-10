@@ -12,6 +12,9 @@
         <variable
             name="searchViewmodel"
             type="com.example.tabkati.ui.recipes.SearchViewModel" />
+        <variable
+            name="userViewmodel"
+            type="com.example.tabkati.ui.recipes.UserInfoViewModel" />
 
         <variable
             name="data"
@@ -37,11 +40,23 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
+
+
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/constraint"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/user_welcome_textview"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="16dp"
+                        android:text="@{@string/welcome(userViewmodel.profileUIState.name)}"
+                        android:textColor="@color/teal_700"
+                        app:fontFamily="@font/nunito_semibold_italic"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/msg_to_user_textview"
@@ -52,7 +67,7 @@
                         android:textColor="@color/teal_700"
                         app:fontFamily="@font/nunito_semibold_italic"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toBottomOf="@+id/user_welcome_textview" />
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/search_bar"
@@ -61,13 +76,13 @@
                         android:layout_marginStart="8dp"
                         android:layout_marginTop="8dp"
                         android:layout_marginEnd="8dp"
-                        app:startIconDrawable="@drawable/ic_baseline_search_24"
                         android:background="@drawable/searchview_background"
-                        android:iconifiedByDefault="false"
                         android:hint="@string/search"
+                        android:iconifiedByDefault="false"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/msg_to_user_textview" />
+                        app:layout_constraintTop_toBottomOf="@+id/msg_to_user_textview"
+                        app:startIconDrawable="@drawable/ic_baseline_search_24" />
 
                     <View
                         android:id="@+id/divider"
@@ -84,10 +99,10 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:scrollbars="vertical"
+                        android:clipToPadding="false"
                         android:focusableInTouchMode="true"
                         android:orientation="horizontal"
-                        android:clipToPadding="false"
+                        android:scrollbars="vertical"
                         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -96,6 +111,7 @@
                         app:layout_constraintTop_toBottomOf="@+id/divider"
                         app:layout_constraintVertical_bias="0.0"
                         app:spanCount="1" />
+
                     <View
                         android:id="@+id/divider_two"
                         android:layout_width="match_parent"
@@ -106,7 +122,6 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/recycler_view_of_recipe_cate" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
-
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recycler_view_of_random_recipes"

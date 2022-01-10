@@ -2,8 +2,11 @@ package com.example.tabkati.di
 
 import android.app.Application
 import android.content.Intent
+import com.example.tabkati.domain.use_case.GetUserUseCase
+import com.example.tabkati.domain.use_case.UserUseCase
 import com.example.tabkati.repository.AuthRepository
 import com.example.tabkati.repository.MainAuthRepository
+import com.example.tabkati.repository.UserInfoFirestoreRepository
 import com.example.tabkati.utils.Constants
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -53,4 +56,9 @@ object AppModule {
     fun provideAuthRepo( auth: FirebaseAuth,
                            @Named(Constants.USERS_REF) usersReference: CollectionReference
     ):AuthRepository = AuthRepository(auth,usersReference)
+
+
+    @Provides
+    fun provideUserUseCases(repository: UserInfoFirestoreRepository) = UserUseCase(
+        getUserInfo = GetUserUseCase(repository))
 }

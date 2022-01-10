@@ -66,11 +66,6 @@ object NetworkModel {
     fun provideRecipesRemoteDataSource(recipeApiService: RecipeApiService) =
         RecipesRemoteDataSource(recipeApiService, provideDispatcher())
 
-//    @Provides
-//    @Singleton
-//    fun provideAppDataBase(recipeApiService: RecipeApiService, recipesDao: RecipesDao): RecipesRepository =
-//        RecipesRepository(provideRecipesRemoteDataSource(recipeApiService),recipesDao )
-
 
     @Provides
     @Singleton

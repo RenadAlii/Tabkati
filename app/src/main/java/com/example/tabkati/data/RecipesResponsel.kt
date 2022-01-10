@@ -1,6 +1,6 @@
 package com.example.tabkati.data
 
-import com.example.tabkati.domain.models.RecipesModel
+import com.example.tabkati.model.RecipesModel
 import com.squareup.moshi.Json
 
 

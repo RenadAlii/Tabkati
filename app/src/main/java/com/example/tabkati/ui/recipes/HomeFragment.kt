@@ -17,9 +17,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.tabkati.R
 import com.example.tabkati.adapter.RecipeCategoriesAdapter
 import com.example.tabkati.adapter.RecipesAdapter
-import com.example.tabkati.data.RecipeCategoriesPictureDataSource
-import com.example.tabkati.data.RecipeCategoriesPictureLocalDataSource
-import com.example.tabkati.data.RecipesItemResponse
 import com.example.tabkati.databinding.FragmentHomeBinding
 import com.example.tabkati.ui.login.AuthMainActivity
 import com.example.tabkati.utils.State
@@ -37,6 +34,7 @@ class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
     private val homeViwModel by viewModels<HomeViewModel>()
     private val recipesViewModel by viewModels<RecipesViewModel>()
+    private val userInfoViewModel by viewModels<UserInfoViewModel>()
 
 
     private lateinit var recyclerViewOfRecipeCategories: RecyclerView
@@ -69,7 +67,7 @@ class HomeFragment : Fragment() {
             homeFragment = this@HomeFragment
             recipesViewModel.getRandomRecipes()
             viewModel = recipesViewModel
-
+            userViewmodel = userInfoViewModel
 
             // recyclerView & adapter of random recipes.
             linkRandomRecipesAdapter()
@@ -83,8 +81,10 @@ class HomeFragment : Fragment() {
         lifecycleScope.launch{
             repeatOnLifecycle(Lifecycle.State.RESUMED){
                 recipesViewModel.respicesUIState.collect {
-                    linkRecipesAdapter(it.category)
-                }
+                    linkRecipesAdapter(it.category)}
+//                UserViewModel.respicesUIState.collect {
+//                    binding.userWelcomeTextview.setText(it.userName)
+//                }
             }
 
         }

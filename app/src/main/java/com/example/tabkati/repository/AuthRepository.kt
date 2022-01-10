@@ -4,6 +4,7 @@ import android.util.Log
 import com.example.tabkati.utils.State.*
 import com.example.tabkati.utils.Constants.EMAIL
 import com.example.tabkati.utils.Constants.NAME
+import com.example.tabkati.utils.Constants.THEME
 import com.example.tabkati.utils.Constants.USERS_REF
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
@@ -51,6 +52,7 @@ class AuthRepository @Inject constructor(
                     mapOf(
                         NAME to name,
                         EMAIL to email
+
                     )
                 ).await().also {
                     emit(Success(it))
@@ -58,14 +60,12 @@ class AuthRepository @Inject constructor(
 
             }
         } catch (exception: Exception) {
-            Log.d("ddd", "createUserInFireStore: ${exception.toString()}")
             emit(Failure(exception.message ?: "Unexpected error!"))
         }
     }
 
     suspend fun createUserInFireStoreh(name: String): Flow<Boolean> = callbackFlow {
 
-        Log.d("ddd", "createUserInFireStore: ")
         auth.currentUser?.apply {
             val eventDocument = usersReference.document(uid)
 

@@ -1,4 +1,4 @@
-package com.example.tabkati.domain.models
+package com.example.tabkati.model
 
 import com.example.tabkati.data.AnalyzedInstructionsItemResponse
 import com.example.tabkati.data.ExtendedIngredientsItemResponse

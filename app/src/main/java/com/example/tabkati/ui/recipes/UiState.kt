@@ -11,4 +11,15 @@ data class  CategoryUIState(val id: String="",val title: String="",val image: In
 
 data class RecipesScreenUiState(
     val category: List<CategoryUIState> = listOf(),
-    val recipesItems: List<RecipesItemUiState> = listOf())
+    val recipesItems: List<RecipesItemUiState> = listOf(),
+val userName: String? = "renad ")
+
+
+
+
+
+data class UserProfileScreenUiState(
+    val name: String?="",val email:String?="",
+    val loading: Boolean = false,
+    val errorMsg: String =""
+)

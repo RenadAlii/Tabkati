@@ -9,6 +9,7 @@ object Constants {
     //Fields
     const val NAME = "name"
     const val EMAIL = "email"
+    const val THEME = "theme"
 
 
     //args
