@@ -6,6 +6,7 @@ import com.example.tabkati.domain.use_case.GetUserUseCase
 import com.example.tabkati.domain.use_case.UserUseCase
 import com.example.tabkati.model.User
 import com.example.tabkati.utils.RecipesApiStatus
+import com.example.tabkati.utils.State
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -27,61 +28,22 @@ class UserInfoViewModel @Inject constructor(private val userUseCase: UserUseCase
     // The external immutable LiveData for the request status.
     val status: LiveData<RecipesApiStatus> = _status
 
+    // The internal MutableLiveData that stores the status of the most recent request.
+    private val _userName = MutableLiveData<String>()
+
+    // The external immutable LiveData for the request status.
+    val userName: LiveData<String> = _userName
 
     private var _profileUIState = MutableStateFlow(UserProfileScreenUiState())
     val profileUIState = _profileUIState.asStateFlow()
 
-    private var _respicesUIState = MutableStateFlow(RecipesScreenUiState())
-    val respicesUIState = _respicesUIState.asStateFlow()
+
 
 
     init {
         getUser()
         Log.e("init", "getUser:${_UserInfoState.value?.name} ", )
     }
-
-
-
-//    viewModelScope.launch {
-//        try {
-//            val result = repository.getRandomRecipes()
-//            val list = result?.map {
-//                RecipesItemUiState(
-//                    title = it?.title!!,
-//                    image = it?.image!!,
-//                    id = it?.id!!,
-//                    mintus =  it?.readyInMinutes!!.toString(),
-//                    serving = it?.servings.toString()
-//
-//                )
-//            }
-//            _recipesList.value = list
-//           //        _status.value = RecipesApiStatus.LOADING _status.value = RecipesApiStatus.DONE
-//        } catch (e: Exception) {
-//            _status.value = RecipesApiStatus.ERROR
-//            // to clear the RecyclerView.
-//
-//        }
-//
-//    @ExperimentalCoroutinesApi
-//    fun getUserInfo() {
-//        viewModelScope.launch {
-//            _status.value = RecipesApiStatus.LOADING
-//
-//            userUseCase.getUserInfo().collect { response ->
-//                _UserInfoState.value = getUser().value
-//
-//
-//                   }
-//            }
-//        }
-//
-//
-
-
-
-
-
 
     @ExperimentalCoroutinesApi
     private  fun getUser(){
@@ -93,7 +55,8 @@ class UserInfoViewModel @Inject constructor(private val userUseCase: UserUseCase
                     _profileUIState.update {
                         it.copy(
                             name = user.name,
-                            email = user.email
+                            email = user.email,
+                            loading = false
                         )
                     }
                     Log.e("PP", "getUser:${user.name} ", )
@@ -105,6 +68,26 @@ class UserInfoViewModel @Inject constructor(private val userUseCase: UserUseCase
 
 
         }}
+
+    fun setUserName(name: String){
+        _userName.value = name
+    }
+
+    @ExperimentalCoroutinesApi
+   private fun editUserName(){
+        viewModelScope.launch {
+           try{
+               userUseCase.editUserName(_userName.value).collect {
+                           _profileUIState.update {
+                               it.copy(loading = true)
+                           }
+                               getUser()
+               }}
+           catch (e: Exception){
+               Log.e("roa", "editUserName: ${e.message}", )
+           }
+        }
+    }
 
 
     }

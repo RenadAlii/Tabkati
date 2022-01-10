@@ -39,6 +39,11 @@
     <string name="arabic">Arabic</string>
     <string name="language">Language</string>
     <string name="welcome">Hello %1$s</string>
+    <string name="your_name">Your Name</string>
+    <string name="name">Name</string>
+    <string name="email">Email</string>
+    <string name="save">Save</string>
+    <string name="setting">Setting</string>
     <string-array name="language_array">
         <item>Arabic</item>
         <item>English</item>

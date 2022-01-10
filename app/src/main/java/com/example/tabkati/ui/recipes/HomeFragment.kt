@@ -82,9 +82,7 @@ class HomeFragment : Fragment() {
             repeatOnLifecycle(Lifecycle.State.RESUMED){
                 recipesViewModel.respicesUIState.collect {
                     linkRecipesAdapter(it.category)}
-//                UserViewModel.respicesUIState.collect {
-//                    binding.userWelcomeTextview.setText(it.userName)
-//                }
+
             }
 
         }
@@ -177,6 +175,8 @@ class HomeFragment : Fragment() {
             // if the user signedOut it = true go to Auth Activity to signIn in.
             if (it) {
                 goToAuthActivity()
+            }else{
+                binding.progressBar.visibility = View.GONE
             }
         })
     }

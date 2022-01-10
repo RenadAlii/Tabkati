@@ -14,8 +14,13 @@
     <string name="meal_plan" translatable="false">Meal Plan</string>
     <string name="your_recipes">Your Recipes</string>
     <string name="groceries">Groceries</string>
-    <string name="profile">Profile</string>
     <string name="english">English</string>
     <string name="arabic">Arabic</string>
     <string name="language">Language</string>
+    <string name="profile">Profile</string>
+    <string name="your_name">Your Name</string>
+    <string name="name">Name</string>
+    <string name="email">Email</string>
+    <string name="save">Save</string>
+    <string name="setting">Setting</string>
 </resources>

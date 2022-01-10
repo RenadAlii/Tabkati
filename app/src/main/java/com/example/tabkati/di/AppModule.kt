@@ -2,6 +2,7 @@ package com.example.tabkati.di
 
 import android.app.Application
 import android.content.Intent
+import com.example.tabkati.domain.use_case.EditUserNameUseCase
 import com.example.tabkati.domain.use_case.GetUserUseCase
 import com.example.tabkati.domain.use_case.UserUseCase
 import com.example.tabkati.repository.AuthRepository
@@ -34,8 +35,9 @@ object AppModule {
 
 
     @Provides
-    fun provideGoogleSignInClient(application: Application,
-        options: GoogleSignInOptions
+    fun provideGoogleSignInClient(
+        application: Application,
+        options: GoogleSignInOptions,
     ): GoogleSignInClient {
         return GoogleSignIn.getClient(application, options)
     }
@@ -47,18 +49,21 @@ object AppModule {
     }
 
     @Provides
-    fun provideMainAuthRepo(  googleSignInClient: GoogleSignInClient,
-                              auth: FirebaseAuth):MainAuthRepository=
-        MainAuthRepository(googleSignInClient,auth)
+    fun provideMainAuthRepo(
+        googleSignInClient: GoogleSignInClient,
+        auth: FirebaseAuth,
+    ): MainAuthRepository =
+        MainAuthRepository(googleSignInClient, auth)
 
 
     @Provides
-    fun provideAuthRepo( auth: FirebaseAuth,
-                           @Named(Constants.USERS_REF) usersReference: CollectionReference
-    ):AuthRepository = AuthRepository(auth,usersReference)
+    fun provideAuthRepo(
+        auth: FirebaseAuth,
+        @Named(Constants.USERS_REF) usersReference: CollectionReference,
+    ): AuthRepository = AuthRepository(auth, usersReference)
 
 
     @Provides
     fun provideUserUseCases(repository: UserInfoFirestoreRepository) = UserUseCase(
-        getUserInfo = GetUserUseCase(repository))
+        getUserInfo = GetUserUseCase(repository), editUserName = EditUserNameUseCase(repository))
 }

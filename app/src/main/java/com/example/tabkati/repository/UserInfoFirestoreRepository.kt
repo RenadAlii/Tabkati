@@ -6,13 +6,17 @@ import com.example.tabkati.domain.repository.UserFirestereRepository
 import com.example.tabkati.domain.use_case.GetUserUseCase
 import com.example.tabkati.model.User
 import com.example.tabkati.utils.Constants.USERS_REF
+import com.example.tabkati.utils.State
 
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.CollectionReference
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.awaitCancellation
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 import javax.inject.Named
 import javax.inject.Singleton
@@ -45,4 +49,27 @@ class UserInfoFirestoreRepository @Inject constructor(private val auth: Firebase
 
         }
     }
-}
+
+    override suspend fun editUserNameInFirestore(name: String?): Flow<Unit> = callbackFlow {
+        try {
+            auth.currentUser?.apply {
+                usersReference.document(uid).update(mapOf("name" to name)).await().also {
+
+                }
+
+            }
+        } catch (exception: Exception) {
+
+        }
+
+        }
+
+
+
+
+
+
+
+    }
+
+

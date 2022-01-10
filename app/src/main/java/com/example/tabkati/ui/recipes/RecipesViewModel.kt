@@ -72,7 +72,18 @@ fun getCatories(){
             _status.value = RecipesApiStatus.LOADING
 
             try {
-              //  _recipesList.value = repository.getRecipesByCategory(_categoryId.value!!)
+                val result = repository.getRecipesByCategory(_categoryId.value!!)
+                val list = result?.map {
+                    RecipesItemUiState(
+                        title = it?.title!!,
+                        image = it?.image!!,
+                        id = it?.id!!,
+                        mintus =  it?.readyInMinutes!!.toString(),
+                        serving = it?.servings.toString()
+
+                    )
+                }
+                _recipesList.value = list
                 _status.value = RecipesApiStatus.DONE
             } catch (e: Exception) {
                 _status.value = RecipesApiStatus.ERROR
