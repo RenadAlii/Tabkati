@@ -45,6 +45,10 @@ class ModalBottomSheet : BottomSheetDialogFragment() {
         const val TAG = "ModalBottomSheet"
     }
 
+    override fun dismiss() {
+        super.dismiss()
+    }
+
     override fun onResume() {
         super.onResume()
         val arrayAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_item, languages)
@@ -58,7 +62,9 @@ class ModalBottomSheet : BottomSheetDialogFragment() {
         binding.apply {
 
             profile.setOnClickListener {
-                Toast.makeText(requireContext(), "go to profile", Toast.LENGTH_LONG).show()
+                val action = HomeFragmentDirections.actionHomeFragmentToProfileFragment()
+              findNavController().navigate(action)
+                dismiss()
             }
             autoCompleteTextView.onItemClickListener =
                 OnItemClickListener { parent, view, position, id ->

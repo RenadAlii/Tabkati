@@ -18,6 +18,9 @@
         <action
             android:id="@+id/action_homeFragment_to_searchFragment"
             app:destination="@id/searchFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
 
     </fragment>
     <fragment
@@ -52,5 +55,17 @@
         android:name="com.example.tabkati.ui.recipes.GroceriesFragment"
         android:label="fragment_groceries"
         tools:layout="@layout/fragment_groceries" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.tabkati.ui.recipes.ProfileFragment"
+        android:label="ProfileFragment" />
+    <dialog
+        android:id="@+id/modalBottomSheet"
+        android:name="com.example.tabkati.ui.recipes.ModalBottomSheet"
+        android:label="ModalBottomSheet" >
+        <action
+            android:id="@+id/action_modalBottomSheet_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </dialog>
 
 </navigation>

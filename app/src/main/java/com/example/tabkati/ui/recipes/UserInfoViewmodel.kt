@@ -71,6 +71,7 @@ class UserInfoViewModel @Inject constructor(private val userUseCase: UserUseCase
 
     fun setUserName(name: String){
         _userName.value = name
+        editUserName()
     }
 
     @ExperimentalCoroutinesApi

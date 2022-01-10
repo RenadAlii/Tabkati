@@ -39,6 +39,10 @@ interface RecipeApiService {
     ): SearchResultResponse
 
 
+//https://api.spoonacular.com/recipes/149425/analyzedInstructions?stepBreakdown=true&apiKey=f8cc66e0181e4f699147d4871c361439
+    //Get Recipe steps by id.
+    @GET("/recipes/{id}/analyzedInstructions?stepBreakdown=true&apiKey=${API_KEY}")
+    suspend fun getRecipeSteps(@Path("id") RecipeId: String): RecipesItemResponse
 
 
 }

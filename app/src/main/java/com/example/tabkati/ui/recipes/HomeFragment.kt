@@ -149,7 +149,7 @@ class HomeFragment : Fragment() {
     private fun showModelSheet() {
         val bottomSheet = ModalBottomSheet()
         val fragmentManger = (activity as FragmentActivity).supportFragmentManager
-        fragmentManger?.let {
+        fragmentManger.let {
             bottomSheet.show(it, ModalBottomSheet.TAG)
         }
 
