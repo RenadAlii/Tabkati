@@ -4,6 +4,7 @@ object Constants {
 
     //References
     const val USERS_REF = "users"
+    const val SHOPPING_LIST_REF = "shoppingList"
 
 
     //Fields

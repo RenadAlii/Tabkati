@@ -58,7 +58,9 @@ class UserInfoViewModel @Inject constructor(private val userUseCase: UserUseCase
                             email = user.email,
                             loading = false
                         )
+
                     }
+                    _status.value = RecipesApiStatus.DONE
                     Log.e("PP", "getUser:${user.name} ", )
                 } }catch (e: Exception) {
             _status.value = RecipesApiStatus.ERROR

@@ -1,7 +1,9 @@
 package com.example.tabkati.adapter
 
+import android.graphics.Paint
 import android.util.Log
 import android.view.View
+import android.widget.TextView
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
@@ -87,4 +89,21 @@ fun bindSearchRecyclerView(recyclerView: RecyclerView, data: List<ResultsItem>?)
     val adapter= recyclerView.adapter as RecipesSearchAdapter
     // this tell the RecyclerView new list is available.
     adapter.submitList(data)
+}
+
+
+//@BindingAdapter("app:items")
+//fun setItems(listView: RecyclerView, items: List<Task>?) {
+//    items?.let {
+//        (listView.adapter as TasksAdapter).submitList(items)
+//    }
+//}
+
+@BindingAdapter("app:completedTask")
+fun setStyle(textView: TextView, enabled: Boolean) {
+    if (enabled) {
+        textView.paintFlags = textView.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+    } else {
+        textView.paintFlags = textView.paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
+    }
 }
