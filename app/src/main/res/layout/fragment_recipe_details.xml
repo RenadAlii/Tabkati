@@ -42,7 +42,7 @@
                     android:layout_height="205dp"
                     android:scaleType="fitXY"
                     android:tint="#3B191C1C"
-                    app:imageUrl="@{data.image}"
+                    app:imageUrl="@{viewModel.uiState.image}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -56,7 +56,7 @@
                     android:layout_marginBottom="4dp"
                     android:fontFamily="@font/nunito"
                     android:gravity="start"
-                    android:text="@{data.title}"
+                    android:text="@{viewModel.uiState.title}"
                     android:textColor="@color/white"
                     android:textSize="20sp"
                     android:textStyle="bold"
@@ -64,17 +64,40 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />
 
+
+                <ImageView
+                    android:id="@+id/bookMark_empty_icon"
+                    android:layout_width="30dp"
+                    android:layout_height="35dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="4dp"
+                    android:orientation="vertical"
+                    android:src="@drawable/bookmark__1_"
+                    app:layout_constraintEnd_toStartOf="@+id/share_icon"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/bookMark_fill_icon"
+                    android:layout_width="30dp"
+                    android:layout_height="35dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="4dp"
+                    android:orientation="vertical"
+                    android:visibility="gone"
+                    android:src="@drawable/bookmark"
+                    app:layout_constraintEnd_toStartOf="@+id/share_icon"
+                    app:layout_constraintTop_toTopOf="parent" />
+
                 <ImageView
                     android:id="@+id/share_icon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="32dp"
-                    android:layout_marginEnd="4dp"
+                    android:layout_marginStart="200dp"
+                    android:layout_marginTop="16dp"
                     android:orientation="vertical"
                     android:src="@drawable/ic_baseline_share_24"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
-
 
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/card_for_recipe"
@@ -108,7 +131,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="32dp"
-                            android:text="@{@string/timer_with_unicode(data.readyInMinutes.toString())}"
+                            android:text="@{@string/timer_with_unicode(viewModel.uiState.readyInMinutes.toString())}"
                             app:layout_constraintStart_toEndOf="@+id/timer_icon"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -128,7 +151,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="4dp"
                             android:layout_marginTop="32dp"
-                            android:text="@{@string/_2_serving(data.servings.toString())}"
+                            android:text="@{@string/_2_serving(viewModel.uiState.servings.toString())}"
                             app:layout_constraintStart_toEndOf="@+id/servings_icon"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -151,7 +174,7 @@
                             android:layout_marginStart="4dp"
                             android:layout_marginTop="32dp"
                             android:layout_marginEnd="44dp"
-                            android:text="@{@string/likes(data.aggregateLikes)}"
+                            android:text="@{@string/likes(viewModel.uiState.aggregateLikes)}"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toEndOf="@+id/likes_icon"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -196,7 +219,7 @@
 
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/recycler_view_of_recipe_details_ingredients"
-                            listIngredients="@{data.extendedIngredients}"
+                            listIngredients="@{viewModel.uiState.extendedIngredients}"
                             android:layout_width="387dp"
                             android:layout_height="wrap_content"
                             android:layout_margin="4dp"
@@ -230,7 +253,7 @@
                                 android:layout_margin="4dp"
                                 android:padding="4dp"
                                 android:fontFamily="@font/nunito_extralight"
-                                android:text="@{data.instructions}"
+                                android:text="@{viewModel.uiState.instruction}"
                                 android:textColor="@color/light_black" />
                         </com.google.android.material.card.MaterialCardView>
 

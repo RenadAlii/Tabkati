@@ -16,9 +16,7 @@
             name="userViewmodel"
             type="com.example.tabkati.ui.recipes.UserInfoViewModel" />
 
-        <variable
-            name="data"
-            type="com.example.tabkati.data.RecipesItemResponse" />
+
 
         <variable
             name="homeFragment"
@@ -29,6 +27,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <ScrollView
+            android:id="@+id/ScrollView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -121,11 +120,26 @@
                         android:background="#CDCDCD"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/recycler_view_of_recipe_cate" />
+
+
+
+
+                    <com.airbnb.lottie.LottieAnimationView
+                        android:id="@+id/animationView"
+                        app:recipeApiStatus="@{viewModel.status}"
+                        android:layout_width="170dp"
+                        android:layout_height="100dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/divider_two"
+                        app:lottie_autoPlay="true"
+                        app:lottie_loop="true" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recycler_view_of_random_recipes"
-                    listData="@{viewModel.recipesList}"
+                    app:recipeStatus = "@{viewModel.status}"
+                    listData="@{viewModel.respicesUIState.recipesItems}"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:clipToPadding="false"
@@ -135,22 +149,10 @@
 
 
 
-
             </LinearLayout>
         </ScrollView>
 
-        <com.airbnb.lottie.LottieAnimationView
-            android:id="@+id/animationView"
-            recipeApiStatus="@{viewModel.status}"
-            android:layout_width="170dp"
-            android:layout_height="100dp"
-            android:layout_marginTop="200dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:lottie_autoPlay="true"
-            app:lottie_loop="true" />
+
         <ProgressBar
             android:id="@+id/progressBar"
             style="?android:attr/progressBarStyle"

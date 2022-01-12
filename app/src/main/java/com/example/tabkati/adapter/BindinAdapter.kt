@@ -11,10 +11,8 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.airbnb.lottie.LottieAnimationView
 import com.example.tabkati.R
-import com.example.tabkati.data.ExtendedIngredientsItemResponse
-import com.example.tabkati.data.RecipesItemResponse
 import com.example.tabkati.data.ResultsItem
-import com.example.tabkati.ui.recipes.CategoryUIState
+import com.example.tabkati.ui.recipes.ExtendedIngredientsItemUiState
 import com.example.tabkati.ui.recipes.RecipesItemUiState
 import com.example.tabkati.utils.RecipesApiStatus
 
@@ -39,7 +37,7 @@ fun bindRecyclerView(recyclerView: RecyclerView, data: List<RecipesItemUiState>?
 }
 
 @BindingAdapter("listIngredients")
-fun bindIngredientsRecyclerView(recyclerView: RecyclerView, data: List<ExtendedIngredientsItemResponse>?){
+fun bindIngredientsRecyclerView(recyclerView: RecyclerView, data: List<ExtendedIngredientsItemUiState>?){
     val adapter= recyclerView.adapter as IngredientsAdapter
     // this tell the RecyclerView new list is available.
     adapter.submitList(data)
@@ -50,7 +48,8 @@ fun bindStatus(statusImageView: LottieAnimationView,
     when (status) {
         RecipesApiStatus.LOADING -> {
             statusImageView.visibility = View.VISIBLE
-            statusImageView.setAnimation("57429-dots-animation.json")
+            statusImageView.setAnimation("black.json")
+
         }
         RecipesApiStatus.ERROR ->{
             statusImageView.visibility = View.VISIBLE
@@ -62,9 +61,30 @@ fun bindStatus(statusImageView: LottieAnimationView,
     }
 }
 
+
+@BindingAdapter("recipeStatus")
+fun bindStatus(recyclerView: RecyclerView,
+               status: RecipesApiStatus?) {
+    Log.e("TAG", "bindStatus:  recyclerView $status", )
+    when (status) {
+        RecipesApiStatus.LOADING -> {
+            recyclerView.visibility = View.GONE
+        }
+        RecipesApiStatus.ERROR ->{
+            recyclerView.visibility = View.GONE
+
+        }
+        RecipesApiStatus.DONE -> {
+            recyclerView.visibility = View.VISIBLE
+
+        }
+    }
+}
+
 @BindingAdapter("recipeSearchStatus")
 fun bindSearchStatus(statusImageView: LottieAnimationView,
                status: RecipesApiStatus?) {
+
     when (status) {
         RecipesApiStatus.LOADING -> {
             statusImageView.visibility = View.VISIBLE

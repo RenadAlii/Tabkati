@@ -46,6 +46,7 @@ class SearchViewModel @Inject constructor(private val repository: RecipesReposit
     fun getRecipes() {
         viewModelScope.launch {
             try {
+                _status.value = RecipesApiStatus.LOADING
              _recipesList.value = repository.searchForRecipes(_search.value!!)
                 _status.value = RecipesApiStatus.DONE
                 if( _recipesList.value.isNullOrEmpty()){

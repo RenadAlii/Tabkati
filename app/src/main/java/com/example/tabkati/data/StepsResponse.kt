@@ -34,9 +34,6 @@ data class IngredientsItem(
 	@Json(name="image")
 	val image: String? = null,
 
-	@Json(name="localizedName")
-	val localizedName: String? = null,
-
 	@Json(name="name")
 	val name: String? = null,
 

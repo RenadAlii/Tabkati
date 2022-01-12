@@ -7,28 +7,29 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tabkati.data.ExtendedIngredientsItemResponse
 import com.example.tabkati.databinding.IngredientsItemBinding
+import com.example.tabkati.ui.recipes.ExtendedIngredientsItemUiState
 
 
-class IngredientsAdapter(private val onItemClicked: (ExtendedIngredientsItemResponse) -> Unit) :
-    ListAdapter<ExtendedIngredientsItemResponse,
+class IngredientsAdapter(private val onItemClicked: (ExtendedIngredientsItemUiState) -> Unit) :
+    ListAdapter<ExtendedIngredientsItemUiState,
             IngredientsAdapter.ItemViewHolder>(DiffCallback) {
 
 
     companion object DiffCallback :
-        DiffUtil.ItemCallback<ExtendedIngredientsItemResponse>() {
-        override fun areItemsTheSame(oldItem: ExtendedIngredientsItemResponse,
-                                     newItem: ExtendedIngredientsItemResponse,
+        DiffUtil.ItemCallback<ExtendedIngredientsItemUiState>() {
+        override fun areItemsTheSame(oldItem: ExtendedIngredientsItemUiState,
+                                     newItem: ExtendedIngredientsItemUiState,
         ): Boolean {
-            return oldItem.id == newItem.id
+            return oldItem.amount == newItem.amount
         }
 
-        override fun areContentsTheSame(oldItem: ExtendedIngredientsItemResponse, newItem: ExtendedIngredientsItemResponse): Boolean {
+        override fun areContentsTheSame(oldItem: ExtendedIngredientsItemUiState, newItem: ExtendedIngredientsItemUiState): Boolean {
             return oldItem.nameClean == newItem.nameClean
         }
     }
 
     class ItemViewHolder(private var binding: IngredientsItemBinding ) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(ingredient: ExtendedIngredientsItemResponse) {
+        fun bind(ingredient: ExtendedIngredientsItemUiState) {
             binding.data = ingredient
 
         }

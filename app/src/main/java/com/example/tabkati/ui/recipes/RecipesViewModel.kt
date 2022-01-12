@@ -52,12 +52,11 @@ class RecipesViewModel @Inject constructor(private val repository: RecipesReposi
 
     init {
         viewModelScope.launch {
-            repository.refreshRecipes()
+           // repository.refreshRecipes()
         }
         getRandomRecipes()
         getRandomRecipesE()
         getCatories()
-//        Log.e("popo", ": ${recipesListE.value}")
 
     }
 fun getCatories(){
@@ -69,24 +68,19 @@ fun getCatories(){
     // fun to get the recipe details.
     private fun getRecipeByCategory() {
         viewModelScope.launch {
-            _status.value = RecipesApiStatus.LOADING
-
             try {
                 val result = repository.getRecipesByCategory(_categoryId.value!!)
-                val list = result?.map {
+                _recipesList.value  = result?.map {
                     RecipesItemUiState(
                         title = it?.title!!,
                         image = it?.image!!,
                         id = it?.id!!,
                         mintus =  it?.readyInMinutes!!.toString(),
-                        serving = it?.servings.toString()
-
-                    )
+                        serving = it?.servings.toString() )
                 }
-                _recipesList.value = list
-                _status.value = RecipesApiStatus.DONE
+
+                _respicesUIState.update { it.copy(recipesItems = _recipesList.value)}
             } catch (e: Exception) {
-                _status.value = RecipesApiStatus.ERROR
                 Log.e(TAG, "getRecipeByCategory:${e.message} ")
             }
         }
@@ -95,21 +89,24 @@ fun getCatories(){
 
     // fun to get the popular movie.
     fun getRandomRecipes() {
+        _status.value = RecipesApiStatus.LOADING
         viewModelScope.launch {
-            _status.value = RecipesApiStatus.LOADING
             try {
+
                 val result = repository.getRandomRecipes()
-                val list = result?.map {
+                _recipesList.value = result?.map {
                     RecipesItemUiState(
-                        title = it?.title!!,
-                        image = it?.image!!,
-                        id = it?.id!!,
-                        mintus =  it?.readyInMinutes!!.toString(),
+                        title = it?.title,
+                        image = it?.image,
+                        id = it?.id,
+                        mintus =  it?.readyInMinutes.toString(),
                         serving = it?.servings.toString()
 
                     )
                 }
-                _recipesList.value = list
+                _respicesUIState.update {
+                    it.copy(recipesItems =  _recipesList.value )
+                }
                 _status.value = RecipesApiStatus.DONE
             } catch (e: Exception) {
                 _status.value = RecipesApiStatus.ERROR

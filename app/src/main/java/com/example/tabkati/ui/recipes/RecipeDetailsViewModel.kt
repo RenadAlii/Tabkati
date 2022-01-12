@@ -14,6 +14,7 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -34,10 +35,15 @@ class RecipeDetailsViewModel @Inject constructor(private val repository: Recipes
     private var _recipe = MutableLiveData<RecipesItemResponse?>()
     val recipe: LiveData<RecipesItemResponse?> get() =  _recipe
 
+    private val _ingredientList = MutableLiveData<List<ExtendedIngredientsItemUiState?>?>()
+    val ingredientList: LiveData<List<ExtendedIngredientsItemUiState?>?> get() = _ingredientList
+
+    private val _stepList = MutableLiveData<List<StepsItemsUiState?>?>()
+    val stepList: LiveData<List<StepsItemsUiState?>?> get() = _stepList
 
 
-//    private val _uiState: MutableStateFlow<StepsUiState>  = MutableStateFlow(StepsUiState())
-//    val uiState: StateFlow<StepsUiState> = _uiState.asStateFlow()
+    private val _uiState: MutableStateFlow<RecipesDetailsScreenUiState>  = MutableStateFlow(RecipesDetailsScreenUiState())
+    val uiState: StateFlow<RecipesDetailsScreenUiState> = _uiState.asStateFlow()
 
 
     // fun to set the recipe id.
@@ -51,7 +57,23 @@ class RecipeDetailsViewModel @Inject constructor(private val repository: Recipes
             _status.value = RecipesApiStatus.LOADING
 
             try {
-                _recipe.value = repository.getRecipeById(_recipeId.value!!)
+                val recipesDetailsResult = repository.getRecipeById(_recipeId.value!!)
+                _ingredientList.value =recipesDetailsResult?.extendedIngredients?.map {
+                    ExtendedIngredientsItemUiState(
+                        nameClean = it?.nameClean,
+                        amount = it?.amount,
+                        unit = it?.unit
+                    )
+                }
+                _uiState.update { it.copy(
+                        image = recipesDetailsResult?.image,
+                        title = recipesDetailsResult?.title,
+                        readyInMinutes = recipesDetailsResult?.readyInMinutes,
+                        servings = recipesDetailsResult?.servings,
+                    instruction = recipesDetailsResult?.instructions,
+                        aggregateLikes = recipesDetailsResult?.aggregateLikes,
+                       extendedIngredients = _ingredientList.value,)}
+
                 Log.e(Constants.TAG, "......: ${_recipe.value}", )
                 _status.value = RecipesApiStatus.DONE
             } catch (e: Exception) {
@@ -61,7 +83,7 @@ class RecipeDetailsViewModel @Inject constructor(private val repository: Recipes
         }
     }
 
-    private var fetchJob: Job? = null
+    //private var fetchJob: Job? = null
 
 //    fun fetchRecipeDetails(id: String) {
 //        fetchJob?.cancel()

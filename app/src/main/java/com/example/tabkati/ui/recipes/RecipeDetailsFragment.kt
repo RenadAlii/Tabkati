@@ -13,7 +13,9 @@ import com.example.tabkati.adapter.IngredientsAdapter
 import com.example.tabkati.adapter.InstructionsAdapter
 import com.example.tabkati.data.StepsItemResponse
 import com.example.tabkati.databinding.FragmentRecipeDetailsBinding
+import com.example.tabkati.utils.BookMark
 import com.example.tabkati.utils.Constants.RECIPEID
+import com.example.tabkati.utils.isFill
 import com.google.android.material.tabs.TabLayout
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -77,7 +79,6 @@ class RecipeDetailsFragment : Fragment() {
             })
 
             val recipeInstructionsAdapter = InstructionsAdapter({
-
 //action
             })
             recyclerViewOfIngredient.adapter = recipeIngredientAdapter
@@ -100,6 +101,19 @@ class RecipeDetailsFragment : Fragment() {
                     this.type = "text/plain"
                 }
                 startActivity(shred)
+            }
+
+
+            bookMarkEmptyIcon.setOnClickListener {
+               bookMarkEmptyIcon.isFill(bookMarkFillIcon,bookMarkEmptyIcon,BookMark.EMPTY)
+                ///viewModel set the data on fire store
+
+            }
+
+            bookMarkFillIcon.setOnClickListener {
+                bookMarkEmptyIcon.isFill(bookMarkFillIcon,bookMarkEmptyIcon,BookMark.FILL)
+                ///viewModel delete the data from fire store
+
             }
 
             //region tab Listener

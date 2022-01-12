@@ -4,11 +4,11 @@ import com.example.tabkati.R
 
 
 data class RecipesItemUiState(
-    val id: Int = 0,
-    val image: String = "",
-    val title: String = "",
-    val mintus: String = "",
-    val serving: String,
+    val id: Int? = 0,
+    val image: String? = "",
+    val title: String? = "",
+    val mintus: String? = "",
+    val serving: String?,
 ) {
 
 }
@@ -22,8 +22,8 @@ data class CategoryUIState(
 
 data class RecipesScreenUiState(
     val category: List<CategoryUIState> = listOf(),
-    val recipesItems: List<RecipesItemUiState> = listOf(),
-    val userName: String? = "renad ",
+    val recipesItems: List<RecipesItemUiState?>? = listOf(),
+    val userName: String? = "",
 )
 
 
@@ -36,20 +36,22 @@ data class UserProfileScreenUiState(
 
 
 data class ExtendedIngredientsItemUiState(
-    val nameClean: String = "",
-    val amount: Double = 0.0,
-    val unit: String = "",
+    val nameClean: String? = "",
+    val amount: Double? = 0.0,
+    val unit: String? = "",
 )
 
 
 data class RecipesDetailsScreenUiState(
-    val image: String = "",
-    val title: String = "",
-    val readyInMinutes: Int = 0,
-    val servings: Int = 0,
-    val aggregateLikes: Int = 0,
-    val extendedIngredients: List<ExtendedIngredientsItemUiState> = listOf(),
-    val StepsItemsUiState: List<StepsItemsUiState> = listOf(),
+    val image: String? = "",
+    val title: String? = "",
+    val readyInMinutes: Int? = 0,
+    val servings: Int? = 0,
+    val instruction: String? = "",
+    val aggregateLikes: Int? = 0,
+    val extendedIngredients: List<ExtendedIngredientsItemUiState?>? = listOf(),
+    val StepsItemsUiState: List<StepsItemsUiState?>? = listOf(),
+
 )
 
 data class StepsItemsUiState(
@@ -58,6 +60,7 @@ data class StepsItemsUiState(
     val ingredients: List<ingredientsUiState> = listOf(),
 )
 
-class ingredientsUiState {
+data class ingredientsUiState(val image: String = "",
+                              val name: String = "",) {
 
 }

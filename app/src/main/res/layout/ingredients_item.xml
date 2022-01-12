@@ -6,7 +6,7 @@
     <data>
         <variable
             name="data"
-            type="com.example.tabkati.data.ExtendedIngredientsItemResponse" />
+            type="com.example.tabkati.ui.recipes.ExtendedIngredientsItemUiState" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
