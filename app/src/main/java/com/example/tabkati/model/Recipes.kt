@@ -30,7 +30,6 @@ data class ExtendedIngredientsItem(
 )
 
 data class StepIngredients(
-
     val image: String? = null,
     val name: String? = null
 )
