@@ -44,6 +44,7 @@
     <string name="email">Email</string>
     <string name="save">Save</string>
     <string name="setting">Setting</string>
+    <string name="book_marked">Book Marked</string>
     <string-array name="language_array">
         <item>Arabic</item>
         <item>English</item>

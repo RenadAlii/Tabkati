@@ -123,7 +123,6 @@ fun getCatories(){
             _status.value = RecipesApiStatus.LOADING
             try {
                 _recipesListE.value = repository.getAllRecipesE()
-                Log.e(TAG, "getRandomRecipesE: ${_recipesListE.value}")
                 _status.value = RecipesApiStatus.DONE
             } catch (e: Exception) {
                 _status.value = RecipesApiStatus.ERROR

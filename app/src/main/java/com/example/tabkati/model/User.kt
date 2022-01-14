@@ -1,7 +1,3 @@
 package com.example.tabkati.model
 
-data class User(
-    var name: String? =null,
-    var email: String? = null,
-    var theme: Boolean = false
-)
+data class User (val name:String="",val email:String="" ,val favourite: List<RecipesModel> = listOf())

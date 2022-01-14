@@ -1,8 +1,7 @@
 package com.example.tabkati.di
 
-import com.example.tabkati.repository.UserInfoFirestoreRepository
-import com.example.tabkati.utils.Constants.FAVOURITE
-import com.example.tabkati.utils.Constants.SHOPPING_LIST_REF
+import com.example.tabkati.data.FavoriteFirestoreDataSource
+import com.example.tabkati.data.UserInfoFirestoreRemoteDataSource
 import com.example.tabkati.utils.Constants.USERS_REF
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.CollectionReference
@@ -25,25 +24,18 @@ import javax.inject.Named
         @Named(USERS_REF)
         fun provideUsersRef(db: FirebaseFirestore) = db.collection(USERS_REF)
 
-    @Provides
-    @Named(FAVOURITE)
-    fun provideFavouriteRef(db: FirebaseFirestore) = db.collection(FAVOURITE)
-
-    @Provides
-    @Named(SHOPPING_LIST_REF)
-    fun provideShoppingListRef(db: FirebaseFirestore) = db.collection(SHOPPING_LIST_REF)
 
    @Provides
    fun ProvideUserFirestoreRemoteDataSource(
        auth: FirebaseAuth,
        @Named(USERS_REF) usersReference: CollectionReference
-       ) = UserInfoFirestoreRepository(auth, usersReference)
+       ) = UserInfoFirestoreRemoteDataSource(auth, usersReference)
 
-//    @Provides
-//    fun ProvideFavouriteFirestoreRemoteDataSource(
-//        auth: FirebaseAuth,
-//        @Named(FAVOURITE) usersReference: CollectionReference
-//    ) = UserInfoFirestoreRepository(auth, usersReference)
-//
+    @Provides
+    fun ProvideFavouriteFirestoreRemoteDataSource(
+        auth: FirebaseAuth,
+        @Named(USERS_REF) usersReference: CollectionReference
+    ) = FavoriteFirestoreDataSource(auth, usersReference)
+
 
     }

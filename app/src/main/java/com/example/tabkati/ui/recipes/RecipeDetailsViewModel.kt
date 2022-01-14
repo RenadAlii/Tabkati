@@ -29,8 +29,8 @@ class RecipeDetailsViewModel @Inject constructor(private val repository: Recipes
     // The external immutable LiveData for the request status.
     val status: LiveData<RecipesApiStatus> get() =  _status
 
-    private var _recipeId = MutableLiveData<String?>()
-    val recipeId: LiveData<String?> get() =  _recipeId
+    private var _recipeId = MutableLiveData<String>()
+    val recipeId: LiveData<String> get() =  _recipeId
 
     private var _recipe = MutableLiveData<RecipesItemResponse?>()
     val recipe: LiveData<RecipesItemResponse?> get() =  _recipe
@@ -66,15 +66,16 @@ class RecipeDetailsViewModel @Inject constructor(private val repository: Recipes
                     )
                 }
                 _uiState.update { it.copy(
+                    id = recipesDetailsResult?.id,
                         image = recipesDetailsResult?.image,
                         title = recipesDetailsResult?.title,
                         readyInMinutes = recipesDetailsResult?.readyInMinutes,
                         servings = recipesDetailsResult?.servings,
                     instruction = recipesDetailsResult?.instructions,
                         aggregateLikes = recipesDetailsResult?.aggregateLikes,
-                       extendedIngredients = _ingredientList.value,)}
+                       extendedIngredients = _ingredientList.value)}
 
-                Log.e(Constants.TAG, "......: ${_recipe.value}", )
+                Log.e(Constants.TAG, "......: ${_recipe.value}" )
                 _status.value = RecipesApiStatus.DONE
             } catch (e: Exception) {
                 _status.value = RecipesApiStatus.ERROR
@@ -82,30 +83,6 @@ class RecipeDetailsViewModel @Inject constructor(private val repository: Recipes
             }
         }
     }
-
-    //private var fetchJob: Job? = null
-
-//    fun fetchRecipeDetails(id: String) {
-//        fetchJob?.cancel()
-//        fetchJob = viewModelScope.launch {
-//            try {
-//                val recipeItem = repository.getRecipeById(id)
-//                val stepsItem = recipeItem?.analyzedInstructions
-//                _uiState.update {
-////                    it.copy(
-////                        steps = recipeItem.analyzedInstructions
-////
-////                    )
-//               // }
-//            } catch (ioe: IOException) {
-//                // Handle the error and notify the notify the UI when appropriate.
-//                _uiState.update {
-//                    val messages = getMessagesFromThrowable(ioe)
-//                    it.copy(userMessages = messages)
-//                }
-//            }
-     //  }
-    //}
 
 
 

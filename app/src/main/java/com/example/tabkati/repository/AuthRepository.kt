@@ -1,8 +1,10 @@
 package com.example.tabkati.repository
 
 import android.util.Log
+import com.example.tabkati.model.RecipesModel
 import com.example.tabkati.utils.State.*
 import com.example.tabkati.utils.Constants.EMAIL
+import com.example.tabkati.utils.Constants.FAVOURITE
 import com.example.tabkati.utils.Constants.NAME
 import com.example.tabkati.utils.Constants.THEME
 import com.example.tabkati.utils.Constants.USERS_REF
@@ -51,8 +53,8 @@ class AuthRepository @Inject constructor(
                 usersReference.document(uid).set(
                     mapOf(
                         NAME to name,
-                        EMAIL to email
-
+                        EMAIL to email,
+                        FAVOURITE to listOf<RecipesModel>()
                     )
                 ).await().also {
                     emit(Success(it))
@@ -72,7 +74,9 @@ class AuthRepository @Inject constructor(
             val subscription = eventDocument.set(
                 mapOf(
                     NAME to name,
-                    EMAIL to email
+                    EMAIL to email,
+                    FAVOURITE to listOf<RecipesModel>()
+
                 )
             ).addOnCompleteListener {
                 offer(it.isSuccessful)

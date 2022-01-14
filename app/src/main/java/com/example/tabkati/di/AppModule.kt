@@ -2,12 +2,10 @@ package com.example.tabkati.di
 
 import android.app.Application
 import android.content.Intent
-import com.example.tabkati.domain.use_case.EditUserNameUseCase
-import com.example.tabkati.domain.use_case.GetUserUseCase
-import com.example.tabkati.domain.use_case.UserUseCase
-import com.example.tabkati.repository.AuthRepository
-import com.example.tabkati.repository.MainAuthRepository
-import com.example.tabkati.repository.UserInfoFirestoreRepository
+import com.example.tabkati.data.FavoriteFirestoreDataSource
+import com.example.tabkati.data.UserInfoFirestoreRemoteDataSource
+import com.example.tabkati.domain.use_case.*
+import com.example.tabkati.repository.*
 import com.example.tabkati.utils.Constants
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -18,6 +16,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import javax.inject.Named
 
 
@@ -48,6 +47,9 @@ object AppModule {
         return googleSignInClient.signInIntent
     }
 
+
+
+
     @Provides
     fun provideMainAuthRepo(
         googleSignInClient: GoogleSignInClient,
@@ -63,7 +65,13 @@ object AppModule {
     ): AuthRepository = AuthRepository(auth, usersReference)
 
 
+    @ExperimentalCoroutinesApi
     @Provides
-    fun provideUserUseCases(repository: UserInfoFirestoreRepository) = UserUseCase(
+    fun provideUserUseCases(repository: UserInfoFirestoreRemoteDataSource) = UserUseCase(
         getUserInfo = GetUserUseCase(repository), editUserName = EditUserNameUseCase(repository))
+
+    @Provides
+    fun provideBookMarkedUseCases(repository: FavoriteFirestoreDataSource) = BookmarkedUseCase(
+    addBookMarked = AddFavoriteRecipeUseCase(repository), getBookMark = GetFavoriteRecipesUseCase(repository),
+    deleteBookMarked = DeleteFavoriteRecipesUseCase(repository))
 }

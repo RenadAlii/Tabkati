@@ -11,6 +11,8 @@ object Constants {
     const val NAME = "name"
     const val EMAIL = "email"
     const val THEME = "theme"
+    const val TITLE = "title"
+    const val BOOKMARKED = "bookmarked"
 
 
     //args
@@ -21,7 +23,7 @@ object Constants {
 
     // API
      const val BASE_URL = "https://api.spoonacular.com"
-     const val API_KEY = "f8cc66e0181e4f699147d4871c361439"
+     const val API_KEY = "a749dc5c1de24b10a225a2a8334f76b8"
          //"a749dc5c1de24b10a225a2a8334f76b8"
          //"f8cc66e0181e4f699147d4871c361439"
     //e5542afac9674732ac012ed7fa50d970

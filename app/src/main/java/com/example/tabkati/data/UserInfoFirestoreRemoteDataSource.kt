@@ -1,44 +1,38 @@
-package com.example.tabkati.repository
-
+package com.example.tabkati.data
 
 import android.util.Log
 import com.example.tabkati.domain.repository.UserFirestereRepository
-import com.example.tabkati.domain.use_case.GetUserUseCase
 import com.example.tabkati.model.User
 import com.example.tabkati.utils.Constants.USERS_REF
-import com.example.tabkati.utils.State
 
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.CollectionReference
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.awaitCancellation
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
-import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 import javax.inject.Named
 import javax.inject.Singleton
-import kotlin.math.log
 
 @Singleton
 @ExperimentalCoroutinesApi
-class UserInfoFirestoreRepository @Inject constructor(private val auth: FirebaseAuth, @Named(
+class UserInfoFirestoreRemoteDataSource @Inject constructor(private val auth: FirebaseAuth, @Named(
     USERS_REF) private val usersReference: CollectionReference): UserFirestereRepository {
 
     override fun getUserFromFirestore():Flow<User> = callbackFlow {
         auth.currentUser?.apply {
             val snapshotListener = usersReference.document(uid).addSnapshotListener{
                     snapshot, e ->
-               if (snapshot!=null){
+                if (snapshot!=null){
                     val user = snapshot.toObject(User::class.java)
-                   if (user != null) {
-                       trySend(user)
-                   }
+                    if (user != null) {
+                        trySend(user)
+                    }
 
                 }else{
-                   Log.e("error", "getUserFromFirestore: ${e?.message} ", )
+                    Log.e("error", "getUserFromFirestore: ${e?.message} ", )
                 }
 
 
@@ -62,14 +56,14 @@ class UserInfoFirestoreRepository @Inject constructor(private val auth: Firebase
 
         }
 
-        }
-
-
-
-
-
-
-
     }
+
+
+
+
+
+
+
+}
 
 

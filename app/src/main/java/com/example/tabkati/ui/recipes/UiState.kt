@@ -9,9 +9,7 @@ data class RecipesItemUiState(
     val title: String? = "",
     val mintus: String? = "",
     val serving: String?,
-) {
-
-}
+)
 
 data class CategoryUIState(
     val id: String = "",
@@ -25,6 +23,11 @@ data class RecipesScreenUiState(
     val recipesItems: List<RecipesItemUiState?>? = listOf(),
     val userName: String? = "",
 )
+
+data class BookMarkedRecipesScreenUiState(
+    val recipesItems: List<RecipesItemUiState>? = listOf()
+)
+
 
 
 data class UserProfileScreenUiState(
@@ -43,6 +46,7 @@ data class ExtendedIngredientsItemUiState(
 
 
 data class RecipesDetailsScreenUiState(
+    val id: Int? =0,
     val image: String? = "",
     val title: String? = "",
     val readyInMinutes: Int? = 0,
@@ -53,6 +57,8 @@ data class RecipesDetailsScreenUiState(
     val StepsItemsUiState: List<StepsItemsUiState?>? = listOf(),
 
 )
+
+
 
 data class StepsItemsUiState(
     val number: Int = 0,

@@ -7,10 +7,10 @@
         android:icon="@drawable/menu"
         android:title="@string/recipes"/>
     <item
-        android:id="@+id/page_3"
+        android:id="@+id/bookMarkedFragment"
         android:enabled="true"
-        android:icon="@drawable/calander"
-        android:title="@string/meal_plan"/>
+        android:icon="@drawable/bookmark__2_"
+        android:title="@string/book_marked"/>
     <item
         android:id="@+id/homeFragment"
         android:enabled="true"
