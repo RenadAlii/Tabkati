@@ -199,8 +199,11 @@ class RecipeDetailsFragment : Fragment() {
     private fun isBookmarkorNull(bookMarked: RecipesItemUiState?) {
         binding.apply {
             if (bookMarked == null) {
-                bookMarkEmptyIcon.isFill(bookMarkFillIcon, bookMarkEmptyIcon, BookMark.EMPTY)
+                bookMarkEmptyIcon.isFill(bookMarkFillIcon, bookMarkEmptyIcon, BookMark.FILL)
+
             } else {
+                bookMarkEmptyIcon.isFill(bookMarkFillIcon, bookMarkEmptyIcon, BookMark.EMPTY)
+
                 bookMarkEmptyIcon.isFill(bookMarkFillIcon, bookMarkEmptyIcon, BookMark.FILL)
 
             }

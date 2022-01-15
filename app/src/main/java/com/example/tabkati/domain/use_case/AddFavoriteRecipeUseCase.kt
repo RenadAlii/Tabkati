@@ -10,7 +10,6 @@ import kotlinx.coroutines.withContext
 class AddFavoriteRecipeUseCase(
     private val repository: Favorite,
 ) {
-    @InternalCoroutinesApi
     suspend operator fun invoke(listOFFavoriteRecipe: RecipesModel) = withContext(Dispatchers.IO) {
         repository.getFavoriteRecipesFromFirestore().collect {
             val list = it.toMutableList()

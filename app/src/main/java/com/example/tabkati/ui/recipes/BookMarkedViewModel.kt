@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.tabkati.domain.use_case.AddFavoriteRecipeUseCase
 import com.example.tabkati.domain.use_case.BookmarkedUseCase
 import com.example.tabkati.model.ExtendedIngredientsItem
 import com.example.tabkati.model.RecipesModel
@@ -129,6 +130,7 @@ class BookMarkedViewModel @Inject constructor(private val bookmarkedUseCase: Boo
         viewModelScope.launch {
             try {
                 _status.value = RecipesApiStatus.LOADING
+
                 bookmarkedUseCase.addBookMarked(recipe)
                 getBookMarkedRecipe()
                 _status.value = RecipesApiStatus.DONE
