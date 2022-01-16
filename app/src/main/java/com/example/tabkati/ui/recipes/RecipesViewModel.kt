@@ -57,8 +57,8 @@ class RecipesViewModel @Inject constructor(private val repository: RecipesReposi
         }
 
         _status.value = RecipesApiStatus.LOADING
-        getCatories()
         getRandomRecipes()
+        getCatories()
         getRandomRecipesE()
 
         _status.value = RecipesApiStatus.DONE
