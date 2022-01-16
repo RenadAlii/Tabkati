@@ -6,9 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
 
-@Database(entities = [BreakfastRecipesEntity::class, MainCourseRecipesEntity::class, DrinkRecipesEntity::class, DesertRecipesEntity::class,
-    VegetarianRecipesEntity::class, RecipesEntity::class, SaladRecipesEntity::class, SideDishRecipesEntity::class, SnackRecipesEntity::class,
-    SoupRecipesEntity::class], version = 1, exportSchema = false)
+@Database(entities = [RecipesEntity::class], version = 1, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
     abstract val recipesDao: RecipesDao
 }
