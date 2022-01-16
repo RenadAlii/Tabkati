@@ -78,33 +78,27 @@ class HomeFragment : Fragment() {
                 goToSearchFragment()
             }
 
-               progressBar.lottieAnimationStatus(progressBar,progressBarError,recipesViewModel.status.value,recyclerViewOfRandomRecipes )
-
 
         }
-
-
-
-
-
-
 
 
         // get Auth State
         getAuthState()
-        lifecycleScope.launch{
-            repeatOnLifecycle(Lifecycle.State.RESUMED){
-                recipesViewModel.respicesUIState.collect {
-                    linkRecipesAdapter(it.category)}
-
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.RESUMED) {
+                recipesViewModel.respicesUIState.collect { uistatus ->
+                    linkRecipesAdapter(uistatus.category)
+                    binding.apply {
+                        progressBar.lottieAnimationStatus(progressBar,
+                            progressBarError,
+                            uistatus.status,
+                            recyclerViewOfRandomRecipes)
+                    }
+                }
             }
 
         }
     }
-
-
-
-
 
 
     private fun FragmentHomeBinding.linkRandomRecipesAdapter() {
@@ -129,7 +123,7 @@ class HomeFragment : Fragment() {
         this@HomeFragment.findNavController().navigate(action)
     }
 
-    private fun linkRecipesAdapter(recipeCategoriesData:List<CategoryUIState>) {
+    private fun linkRecipesAdapter(recipeCategoriesData: List<CategoryUIState>) {
 
         recyclerViewOfRecipeCategories = binding.recyclerViewOfRecipeCate
         recyclerViewOfRecipeCategories.layoutManager =
@@ -193,7 +187,7 @@ class HomeFragment : Fragment() {
             // if the user signedOut it = true go to Auth Activity to signIn in.
             if (it) {
                 goToAuthActivity()
-            }else{
+            } else {
                 binding.progressBar.visibility = View.GONE
             }
         })

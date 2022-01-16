@@ -56,12 +56,10 @@ class RecipesViewModel @Inject constructor(private val repository: RecipesReposi
            // repository.refreshRecipes()
         }
 
-        _status.value = RecipesApiStatus.LOADING
         getRandomRecipes()
         getCatories()
         getRandomRecipesE()
 
-        _status.value = RecipesApiStatus.DONE
 
     }
 fun getCatories(){
@@ -88,7 +86,6 @@ fun getCatories(){
                 _respicesUIState.update { it.copy(recipesItems = _recipesList.value)}
             } catch (e: Exception) {
                 Log.e(TAG, "getRecipeByCategory:${e.message} ")
-                _status.value = RecipesApiStatus.ERROR
 
             }
 
@@ -100,7 +97,9 @@ fun getCatories(){
     fun getRandomRecipes() {
         viewModelScope.launch {
             try {
-
+                _respicesUIState.update {
+                    it.copy( status = RecipesApiStatus.LOADING )
+                }
                 val result = repository.getRandomRecipes()
                 _recipesList.value = result?.map {
                     RecipesItemUiState(
@@ -113,10 +112,12 @@ fun getCatories(){
                     )
                 }
                 _respicesUIState.update {
-                    it.copy(recipesItems =  _recipesList.value )
+                    it.copy(recipesItems =  _recipesList.value, status = RecipesApiStatus.DONE )
                 }
             } catch (e: Exception) {
-                _status.value = RecipesApiStatus.ERROR
+                _respicesUIState.update {
+                    it.copy( status = RecipesApiStatus.ERROR )
+                }
             }
 
         }

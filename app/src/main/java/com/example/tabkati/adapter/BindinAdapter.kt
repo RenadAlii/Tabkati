@@ -19,10 +19,15 @@ import com.example.tabkati.utils.RecipesApiStatus
 @BindingAdapter("imageUrl")
 fun AppCompatImageView.bindImage( imageUrl: String?) {
     imageUrl?.let {
-        val imgUri = "$imageUrl".toUri().buildUpon().scheme("https").build()
+        val imgUri = "$imageUrl".trim().toUri().buildUpon().scheme("https").build()
         this.load(imgUri){
+            if (imageUrl.isNullOrEmpty()){
+                placeholder(R.drawable.loading_animation)
+                error(R.drawable.loading_animation)
+
+            }
             placeholder(R.drawable.loading_animation)
-            error(R.drawable.loading_animation)
+            error(R.drawable.ic_broken_image)
 
         }
     }

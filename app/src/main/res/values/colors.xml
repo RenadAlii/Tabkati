@@ -13,4 +13,5 @@
     <color name="blackTransparent60">#630C0B0B</color>
     <color name="blackTransparent40">#D00C0B0B</color>
     <color name="transparent">#000C0B0B</color>
+    <color name="logo_color">#ECFCEC </color>
 </resources>

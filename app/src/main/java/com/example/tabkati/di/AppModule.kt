@@ -1,13 +1,20 @@
 package com.example.tabkati.di
 
 import android.app.Application
+import android.content.Context
 import android.content.Intent
+import com.example.tabkati.MainActivity
 import com.example.tabkati.data.AuthFirebaseRemoteDataSource
 import com.example.tabkati.data.FavoriteFirestoreDataSource
 import com.example.tabkati.data.UserInfoFirestoreRemoteDataSource
 import com.example.tabkati.domain.use_case.*
 import com.example.tabkati.repository.*
+import com.example.tabkati.ui.login.AuthMainActivity
+import com.example.tabkati.ui.splash.SplashActivity
 import com.example.tabkati.utils.Constants
+import com.example.tabkati.utils.Constants.AUTH_INTENT
+import com.example.tabkati.utils.Constants.MAIN_INTENT
+import com.example.tabkati.utils.Constants.SPLASH_INTENT
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -66,6 +73,11 @@ object AppModule {
     ): AuthFirebaseRemoteDataSource = AuthFirebaseRemoteDataSource(auth, usersReference)
 
 
+    @Provides
+    fun provideSplashRepo(
+        auth: FirebaseAuth,
+    ): SplashRepository = SplashRepository(auth)
+
     @ExperimentalCoroutinesApi
     @Provides
     fun provideUserUseCases(repository: UserInfoFirestoreRemoteDataSource) = UserUseCase(
@@ -75,4 +87,31 @@ object AppModule {
     fun provideBookMarkedUseCases(repository: FavoriteFirestoreDataSource) = BookmarkedUseCase(
     addBookMarked = AddFavoriteRecipeUseCase(repository), getBookMark = GetFavoriteRecipesUseCase(repository),
     deleteBookMarked = DeleteFavoriteRecipesUseCase(repository))
+
+
+    @Provides
+    fun provideContext(application: Application): Context {
+        return application.applicationContext
+    }
+
+    @Provides
+    @Named(SPLASH_INTENT)
+    fun provideSplashIntent(context: Context): Intent {
+        return Intent(context, SplashActivity::class.java)
+    }
+
+    @Provides
+    @Named(AUTH_INTENT)
+    fun provideAuthIntent(context: Context): Intent {
+        return Intent(context, AuthMainActivity::class.java)
+    }
+
+    @Provides
+    @Named(MAIN_INTENT)
+    fun provideMainIntent(context: Context): Intent {
+        return Intent(context, MainActivity::class.java)
+    }
+
+
+
 }

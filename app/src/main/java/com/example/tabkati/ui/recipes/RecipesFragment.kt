@@ -19,6 +19,7 @@ import com.example.tabkati.databinding.FragmentHomeBinding
 import com.example.tabkati.databinding.FragmentRecipesBinding
 import com.example.tabkati.utils.Constants.CATEGORYID
 import com.example.tabkati.utils.RecipesApiStatus
+import com.example.tabkati.utils.lottieAnimationStatus
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collect
@@ -76,18 +77,23 @@ class RecipesFragment : Fragment() {
                 this@RecipesFragment.findNavController().navigate(action)
             }
             recyclerViewOfRecipes.adapter = recipesAdapter
-//            lifecycleScope.launch{
-//                repeatOnLifecycle(Lifecycle.State.CREATED){
-//                    recipesViewModel.respicesUIState.collect {
-//                        recipesAdapter.submitList(it.recipesItems)}
-//
-//                }
+            lifecycleScope.launch {
+                repeatOnLifecycle(Lifecycle.State.RESUMED) {
+                    recipesViewModel.respicesUIState.collect { uistatus ->
+                        binding.apply {
+                            progressBar.lottieAnimationStatus(progressBar,
+                                progressBarError,
+                                uistatus.status,
+                                recyclerViewOfRandomRecipes)
+                        }
+                    }
+                }
 
-        //}
+            }
 
-        recipesViewModel.status.observe(viewLifecycleOwner,
-            {  recipesState(it)
-            })
+//        recipesViewModel.status.observe(viewLifecycleOwner,
+//            {  recipesState(it)
+//            })
 
 
 

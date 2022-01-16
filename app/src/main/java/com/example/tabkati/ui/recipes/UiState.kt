@@ -1,6 +1,7 @@
 package com.example.tabkati.ui.recipes
 
 import com.example.tabkati.R
+import com.example.tabkati.utils.RecipesApiStatus
 
 
 data class RecipesItemUiState(
@@ -22,6 +23,7 @@ data class RecipesScreenUiState(
     val category: List<CategoryUIState> = listOf(),
     val recipesItems: List<RecipesItemUiState?>? = listOf(),
     val userName: String? = "",
+    val status: RecipesApiStatus=RecipesApiStatus.LOADING
 )
 
 data class BookMarkedRecipesScreenUiState(

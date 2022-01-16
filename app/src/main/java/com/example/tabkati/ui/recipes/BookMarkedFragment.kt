@@ -68,12 +68,24 @@ class BookMarkedFragment : Fragment() {
 
             lifecycleScope.launch {
                 bookMarkedViewModel.getBookMarkedRecipe()
-            bookMarkedViewModel.bookMarkedUIState.collect {
-            recipesAdapter.submitList(it.recipesItems)
+                bookMarkedViewModel.bookMarkedUIState.collect {
+                    // check if the list of bookmarked recipes is empty or not
+                    if (it.recipesItems.isNullOrEmpty()) {
+                        // if empty display the msg.
+                        textOfEmptyList.visibility = View.VISIBLE
+                        recyclerViewOfBookmarkedRecipes.visibility = View.GONE
+                    } else {
+                        // if not empty display the list of recipes.
+                        textOfEmptyList.visibility = View.GONE
+                        recyclerViewOfBookmarkedRecipes.visibility = View.VISIBLE
+                        recipesAdapter.submitList(it.recipesItems)
+                    }
 
-        }}
+                }
+            }
 
-    }}
+        }
+    }
 
 
     override fun onDestroyView() {

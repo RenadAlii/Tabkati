@@ -30,7 +30,7 @@ fun ImageView.isFill(imageViewFill: ImageView, imageViewEmpty: ImageView, bookMa
 
 fun LottieAnimationView.lottieAnimationStatus(
    prograss: LottieAnimationView, error: LottieAnimationView,
-    status: RecipesApiStatus?,recyclerView: RecyclerView
+    status: RecipesApiStatus,recyclerView: RecyclerView
 ) {
     when (status) {
         RecipesApiStatus.LOADING -> {
@@ -49,6 +49,7 @@ fun LottieAnimationView.lottieAnimationStatus(
             recyclerView.visibility = View.VISIBLE
 
         }
+        null ->  recyclerView.visibility = View.VISIBLE
     }
 }
 fun ProgressBar.progressBarStatus(
