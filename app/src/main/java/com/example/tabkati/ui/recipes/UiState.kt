@@ -63,12 +63,12 @@ data class RecipesDetailsScreenUiState(
 
 
 data class StepsItemsUiState(
-    val number: Int = 0,
-    val step: String = "",
-    val ingredients: List<ingredientsUiState> = listOf(),
+    val number: Int? = 0,
+    val step: String? = "",
+    val ingredients: List<IngredientsUiState?>? = listOf(),
 )
 
-data class ingredientsUiState(val image: String = "",
-                              val name: String = "",) {
+data class IngredientsUiState(
+                              val name: String? = "",) {
 
 }

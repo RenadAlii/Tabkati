@@ -7,35 +7,39 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tabkati.data.StepsItemResponse
 import com.example.tabkati.databinding.InstructionsItemBinding
+import com.example.tabkati.ui.recipes.StepsItemsUiState
 
-class InstructionsAdapter (private val onItemClicked: (StepsItemResponse) -> Unit) :
-    ListAdapter<StepsItemResponse,
+class InstructionsAdapter(private val onItemClicked: (StepsItemsUiState) -> Unit) :
+    ListAdapter<StepsItemsUiState,
             InstructionsAdapter.ItemViewHolder>(DiffCallback) {
 
 
+
     companion object DiffCallback :
-        DiffUtil.ItemCallback<StepsItemResponse>() {
-        override fun areItemsTheSame(oldItem: StepsItemResponse,
-                                     newItem: StepsItemResponse,
+        DiffUtil.ItemCallback<StepsItemsUiState>() {
+        override fun areItemsTheSame(
+            oldItem: StepsItemsUiState,
+            newItem: StepsItemsUiState,
         ): Boolean {
             return oldItem.number == newItem.number
         }
 
-        override fun areContentsTheSame(oldItem: StepsItemResponse, newItem: StepsItemResponse): Boolean {
+        override fun areContentsTheSame(
+            oldItem: StepsItemsUiState,
+            newItem: StepsItemsUiState,
+        ): Boolean {
             return oldItem.step == newItem.step
         }
     }
 
-    class ItemViewHolder(private var binding: InstructionsItemBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind( Step: StepsItemResponse) {
-            binding.data =  Step
-            //binding.dataIng =  Step.ingredients
-
-
+    class ItemViewHolder(private var binding: InstructionsItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        fun bind(Step: StepsItemsUiState) {
+            binding.data = Step
         }
 
-        }
 
+    }
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
@@ -54,8 +58,6 @@ class InstructionsAdapter (private val onItemClicked: (StepsItemResponse) -> Uni
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         holder.bind(getItem(position))
     }
-
-
 
 
 }

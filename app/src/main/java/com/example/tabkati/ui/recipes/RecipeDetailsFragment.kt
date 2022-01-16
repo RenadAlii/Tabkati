@@ -35,7 +35,6 @@ class RecipeDetailsFragment : Fragment() {
     private lateinit var recyclerViewOfInstruction: RecyclerView
     var srcUrl: String? = null
     private lateinit var recipeId: String
-    private var dataStep: List<StepsItemResponse?>? = listOf()
     private val recipeDetailsViewModel by viewModels<RecipeDetailsViewModel>()
     @InternalCoroutinesApi
     private val bookMarkedViewModel by viewModels<BookMarkedViewModel>()
@@ -96,23 +95,16 @@ class RecipeDetailsFragment : Fragment() {
 
             recyclerViewOfInstruction.adapter = recipeInstructionsAdapter
 
-            recipeDetailsViewModel?.recipe?.value?.analyzedInstructions?.map {
-                dataStep = it?.steps
-            }
-            recipeInstructionsAdapter.submitList(dataStep)
+
 
 
             lifecycleScope.launch{
                 repeatOnLifecycle(Lifecycle.State.RESUMED){
                     recipeDetailsViewModel.uiState .collect { recipe ->
+                        recipeInstructionsAdapter.submitList(recipe.StepsItemsUiState)
                         shareIcon.setOnClickListener {
-                            val shred = Intent().apply {
-                                this.action = Intent.ACTION_SEND
-                                    srcUrl = recipe.instruction
-                                this.putExtra(Intent.EXTRA_TEXT, srcUrl)
-                                this.type = "text/plain"
-                            }
-                            startActivity(shred)
+                            //fun to share the recipe
+                            shareIntent(recipe)
                         }
                 }
             }
@@ -133,7 +125,6 @@ class RecipeDetailsFragment : Fragment() {
 
                 })
 
-                // Log.e("maha", "onViewCreated:${isBookMarked.isNullOrEmpty()} ", )
 
 
 
@@ -159,13 +150,13 @@ class RecipeDetailsFragment : Fragment() {
                     when (tab?.position) {
                         0 -> {
                             binding.recyclerViewOfRecipeDetailsIngredients.visibility = View.VISIBLE
-                            // binding.recyclerViewOfRecipeDetailsInstructions.visibility = View.GONE
-                            binding.card.visibility = View.GONE
+                            binding.recyclerViewOfRecipeDetailsInstructions.visibility = View.GONE
+                           // binding.card.visibility = View.GONE
                         }
                         else -> {
                             binding.recyclerViewOfRecipeDetailsIngredients.visibility = View.GONE
-                            //  binding.recyclerViewOfRecipeDetailsInstructions.visibility = View.VISIBLE
-                            binding.card.visibility = View.VISIBLE
+                            binding.recyclerViewOfRecipeDetailsInstructions.visibility = View.VISIBLE
+                            //binding.card.visibility = View.VISIBLE
 
                         }
                     }
@@ -175,14 +166,12 @@ class RecipeDetailsFragment : Fragment() {
                     when (tab?.position) {
                         0 -> {
                             binding.recyclerViewOfRecipeDetailsIngredients.visibility = View.GONE
-                            // binding.recyclerViewOfRecipeDetailsInstructions.visibility = View.VISIBLE
-                            binding.card.visibility = View.VISIBLE
+                             binding.recyclerViewOfRecipeDetailsInstructions.visibility = View.VISIBLE
 
                         }
                         else -> {
                             binding.recyclerViewOfRecipeDetailsIngredients.visibility = View.VISIBLE
-                            // binding.recyclerViewOfRecipeDetailsInstructions.visibility = View.GONE
-                            binding.card.visibility = View.GONE
+                            binding.recyclerViewOfRecipeDetailsInstructions.visibility = View.GONE
 
 
                         }
@@ -211,6 +200,16 @@ class RecipeDetailsFragment : Fragment() {
         }
 
 
+    }
+
+    private fun shareIntent(recipe: RecipesDetailsScreenUiState) {
+        val shred = Intent().apply {
+            this.action = Intent.ACTION_SEND
+            srcUrl = recipe.instruction
+            this.putExtra(Intent.EXTRA_TEXT, srcUrl)
+            this.type = "text/plain"
+        }
+        startActivity(shred)
     }
 
     private fun isBookmarkorNull(bookMarked: RecipesItemUiState?) {

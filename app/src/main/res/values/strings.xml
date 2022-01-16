@@ -26,6 +26,8 @@
     <string name="instruct" translatable="false">%1$s .</string>
     <string name="step" translatable="false">%1$s</string>
     <string name="likes" translatable="false">%1$s Likes</string>
+    <string name="step_number" translatable="false">Step %1$s</string>
+
     <string name="search">search</string>
     <string name="instructions">Instructions</string>
     <string name="ingredients">Ingredients</string>

@@ -54,7 +54,6 @@ class BookMarkedFragment : Fragment() {
             // Allows Data Binding to Observe LiveData with the lifecycle of this fragment.
             lifecycleOwner = viewLifecycleOwner
             bookMarkedRecipesRecyclerView = recyclerViewOfBookmarkedRecipes
-            bookMarkedRecipesRecyclerView.layoutManager = LinearLayoutManager(requireContext())
 
 
             val recipesAdapter = RecipesAdapter {

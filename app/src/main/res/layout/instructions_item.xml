@@ -3,14 +3,17 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <data>
-        <variable
-            name="data"
-            type="com.example.tabkati.data.StepsItemResponse" />
-        <variable
-            name="dataIng"
-            type="com.example.tabkati.data.ExtendedIngredientsItemResponse" />
-    </data>
+
+        <data>
+
+            <variable
+                name="data"
+                type="com.example.tabkati.ui.recipes.StepsItemsUiState" />
+            <variable
+                name="ingredients"
+                type="com.example.tabkati.ui.recipes.IngredientsUiState" />
+        </data>
+
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/card"
@@ -18,7 +21,6 @@
         android:layout_height="wrap_content"
         android:background="@color/cardview_light_background"
         app:cardElevation="1dp"
-        android:paddingTop="4dp"
         android:paddingBottom="4dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -28,27 +30,29 @@
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/step"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
+               android:layout_margin="8dp"
+                android:padding="16dp"
                 android:labelFor="@+id/instruct_textview"
-                android:padding="4dp"
-                android:text="1"
+                android:text="@{@string/step_number(data.number)}"
                 android:textColor="@color/teal_700"
-                android:textSize="16sp"
-                app:layout_constraintEnd_toStartOf="@+id/instruct_textview"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/instruct_textview"
+                />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/instruct_textview"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="28dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="8dp"
-                android:padding="8dp"
-                android:text="@{@string/instruct(data.step)}"
+                android:layout_marginBottom="16dp"
+                android:textSize="16sp"
+                android:text="@{data.step}"
                 android:textAlignment="textStart"
                 android:textColor="@color/light_black"
                 android:fontFamily="@font/nunito_semibold_italic"
@@ -56,20 +60,7 @@
                 app:layout_constraintStart_toEndOf="@+id/step"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/ingredients_textview"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="4dp"
-                android:layout_marginBottom="4dp"
-                android:fontFamily="@font/nunito"
-                android:text="@{@string/ingredints_(dataIng.nameClean)}"
-                android:textColor="@color/teal_700"
-                android:textSize="12sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/instruct_textview" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
 </layout>

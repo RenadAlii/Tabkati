@@ -65,6 +65,20 @@ class RecipeDetailsViewModel @Inject constructor(private val repository: Recipes
                         unit = it?.unit
                     )
                 }
+
+                 recipesDetailsResult?.analyzedInstructions?.map { analyzedInstruction ->
+                    _stepList.value = analyzedInstruction?.steps?.map { steps ->
+                       val listOfStepsIngredients = steps?.ingredients?.map {
+                           IngredientsUiState(name = it?.name)
+                       }
+                      StepsItemsUiState(
+                            number = steps?.number,
+                            step = steps?.step,
+                            ingredients = listOfStepsIngredients
+                        )
+                   }
+                }
+
                 _uiState.update { it.copy(
                     id = recipesDetailsResult?.id,
                         image = recipesDetailsResult?.image,
@@ -72,8 +86,9 @@ class RecipeDetailsViewModel @Inject constructor(private val repository: Recipes
                         readyInMinutes = recipesDetailsResult?.readyInMinutes,
                         servings = recipesDetailsResult?.servings,
                     instruction = recipesDetailsResult?.instructions,
-                        aggregateLikes = recipesDetailsResult?.aggregateLikes,
-                       extendedIngredients = _ingredientList.value)}
+                    StepsItemsUiState = stepList.value
+                       , aggregateLikes = recipesDetailsResult?.aggregateLikes,
+                       extendedIngredients = ingredientList.value)}
 
                 Log.e(Constants.TAG, "......: ${_recipe.value}" )
                 _status.value = RecipesApiStatus.DONE

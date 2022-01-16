@@ -47,6 +47,8 @@ fun bindIngredientsRecyclerView(recyclerView: RecyclerView, data: List<ExtendedI
     // this tell the RecyclerView new list is available.
     adapter.submitList(data)
 }
+
+
 @BindingAdapter("recipeApiStatus")
 fun bindStatus(statusImageView: LottieAnimationView,
                status: RecipesApiStatus?) {
@@ -117,12 +119,7 @@ fun bindSearchRecyclerView(recyclerView: RecyclerView, data: List<ResultsItem>?)
 }
 
 
-//@BindingAdapter("app:items")
-//fun setItems(listView: RecyclerView, items: List<Task>?) {
-//    items?.let {
-//        (listView.adapter as TasksAdapter).submitList(items)
-//    }
-//}
+
 
 @BindingAdapter("app:completedTask")
 fun setStyle(textView: TextView, enabled: Boolean) {

@@ -233,30 +233,6 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/tabs" />
 
-                        <com.google.android.material.card.MaterialCardView
-                            android:id="@+id/card"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="4dp"
-                            android:padding="4dp"
-                            android:background="@color/cardview_light_background"
-                            android:visibility="gone"
-                            app:cardElevation="1dp"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/tabs">
-
-                            <com.google.android.material.textview.MaterialTextView
-                                android:id="@+id/instruction_textview"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_margin="4dp"
-                                android:padding="4dp"
-                                android:fontFamily="@font/nunito_extralight"
-                                android:text="@{viewModel.uiState.instruction}"
-                                android:textColor="@color/light_black" />
-                        </com.google.android.material.card.MaterialCardView>
 
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/recycler_view_of_recipe_details_instructions"
