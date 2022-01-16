@@ -6,7 +6,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.tabkati.data.RecipeCategoriesPictureDataSource
-import com.example.tabkati.data.RecipesItemResponse
 import com.example.tabkati.data.database.RecipesEntity
 import com.example.tabkati.repository.RecipesRepository
 import com.example.tabkati.utils.Constants.TAG
@@ -16,7 +15,6 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import okhttp3.internal.wait
 import javax.inject.Inject
 
 
@@ -53,20 +51,26 @@ class RecipesViewModel @Inject constructor(private val repository: RecipesReposi
 
     init {
         viewModelScope.launch {
-           // repository.refreshRecipes()
+            // repository.refreshRecipes()
         }
+        getCatories()
 
         getRandomRecipes()
-        getCatories()
         getRandomRecipesE()
 
 
     }
-fun getCatories(){
-     val recipeCategoriesData = RecipeCategoriesPictureDataSource.recipeCategoriesPictureList.map { CategoryUIState(it.id,it.titleOFCat,it.CategoryImage) }
 
-    _respicesUIState.update { it.copy(category = recipeCategoriesData) }
-}
+    fun getCatories() {
+        val recipeCategoriesData =
+            RecipeCategoriesPictureDataSource.recipeCategoriesPictureList.map {
+                CategoryUIState(it.id,
+                    it.titleOFCat,
+                    it.CategoryImage)
+            }
+
+        _respicesUIState.update { it.copy(category = recipeCategoriesData) }
+    }
 
     // fun to get the recipe details.
     private fun getRecipeByCategory() {
@@ -74,19 +78,20 @@ fun getCatories(){
 
             try {
                 val result = repository.getRecipesByCategory(_categoryId.value!!)
-                _recipesList.value  = result?.map {
+                _recipesList.value = result?.map {
                     RecipesItemUiState(
-                        title = it?.title!!,
-                        image = it?.image!!,
-                        id = it?.id!!,
-                        mintus =  it?.readyInMinutes!!.toString(),
-                        serving = it?.servings.toString() )
+                        title = it?.title,
+                        image = it?.image,
+                        id = it?.id,
+                        mintus = it?.readyInMinutes?.toString(),
+                        serving = it?.servings.toString())
                 }
 
-                _respicesUIState.update { it.copy(recipesItems = _recipesList.value)}
+                _respicesUIState.update { it.copy(recipesItems = _recipesList.value) }
             } catch (e: Exception) {
-                Log.e(TAG, "getRecipeByCategory:${e.message} ")
-
+                _respicesUIState.update {
+                    it.copy(status = RecipesApiStatus.ERROR)
+                }
             }
 
         }
@@ -98,7 +103,7 @@ fun getCatories(){
         viewModelScope.launch {
             try {
                 _respicesUIState.update {
-                    it.copy( status = RecipesApiStatus.LOADING )
+                    it.copy(status = RecipesApiStatus.LOADING)
                 }
                 val result = repository.getRandomRecipes()
                 _recipesList.value = result?.map {
@@ -106,17 +111,17 @@ fun getCatories(){
                         title = it?.title,
                         image = it?.image,
                         id = it?.id,
-                        mintus =  it?.readyInMinutes.toString(),
+                        mintus = it?.readyInMinutes.toString(),
                         serving = it?.servings.toString()
 
                     )
                 }
                 _respicesUIState.update {
-                    it.copy(recipesItems =  _recipesList.value, status = RecipesApiStatus.DONE )
+                    it.copy(recipesItems = _recipesList.value, status = RecipesApiStatus.DONE)
                 }
             } catch (e: Exception) {
                 _respicesUIState.update {
-                    it.copy( status = RecipesApiStatus.ERROR )
+                    it.copy(status = RecipesApiStatus.ERROR)
                 }
             }
 
@@ -124,14 +129,13 @@ fun getCatories(){
     }
 
 
-    // fun to get the popular movie.
+    // fun to get the Random Recipes from Room.
     fun getRandomRecipesE() {
         viewModelScope.launch {
             try {
                 _recipesListE.value = repository.getAllRecipesE()
             } catch (e: Exception) {
                 _status.value = RecipesApiStatus.ERROR
-                // to clear the RecyclerView.
 
             }
 

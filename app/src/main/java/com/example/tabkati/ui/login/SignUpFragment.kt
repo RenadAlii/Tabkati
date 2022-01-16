@@ -29,7 +29,6 @@ class SignUpFragment : Fragment() {
     private var _binding: FragmentSignUpBinding? = null
     private lateinit var binding: FragmentSignUpBinding
 
-    //private val sharedViewModel: AuthViewModel by activityViewModels()
     private val sharedViewModel: AuthViewModel by viewModels {
         ViewModelFactory()
     }
@@ -212,7 +211,6 @@ class SignUpFragment : Fragment() {
 
 
     private fun goToMainActivity() {
-        // findNavController().navigate(R.id.action_signUpFragment_to_mainActivity)
         val intent = Intent(requireContext(), MainActivity::class.java)
         startActivity(intent)
     }

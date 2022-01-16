@@ -51,7 +51,7 @@ class LoginFragment : Fragment() {
                         editTextTextEmailAddressLogin.editText?.text.toString()
                     )
                 ) {
-                   // makeToast()
+                    makeToast()
                     goToMainActivity()
                 }else{
                 sharedViewModel.setToastMsg(getString(R.string.enter_all_info))
@@ -121,14 +121,13 @@ class LoginFragment : Fragment() {
     }
 
     private fun goToMainActivity() {
-     //   findNavController().navigate(R.id.action_loginFragment_to_mainActivity)
         val intent = Intent(requireContext(), MainActivity::class.java)
         startActivity(intent)
     }
 
 
-    override fun onDestroy() {
-        super.onDestroy()
+    override fun onDestroyView() {
+        super.onDestroyView()
         _binding = null
     }
 }
