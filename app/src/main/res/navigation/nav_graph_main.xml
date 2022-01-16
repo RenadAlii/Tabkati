@@ -53,12 +53,12 @@
     <fragment
         android:id="@+id/groceriesFragment"
         android:name="com.example.tabkati.ui.recipes.GroceriesFragment"
-        android:label="fragment_groceries"
+        android:label="Groceries"
         tools:layout="@layout/fragment_groceries" />
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.example.tabkati.ui.recipes.ProfileFragment"
-        android:label="ProfileFragment" />
+        android:label="Profile" />
     <dialog
         android:id="@+id/modalBottomSheet"
         android:name="com.example.tabkati.ui.recipes.ModalBottomSheet"
@@ -70,7 +70,7 @@
     <fragment
         android:id="@+id/bookMarkedFragment"
         android:name="com.example.tabkati.ui.recipes.BookMarkedFragment"
-        android:label="BookMarkedFragment" >
+        android:label="BookMarked" >
         <action
             android:id="@+id/action_bookMarkedFragment_to_recipeDetailsFragment"
             app:destination="@id/recipeDetailsFragment" />

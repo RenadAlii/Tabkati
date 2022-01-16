@@ -1,4 +1,4 @@
-package com.example.tabkati.repository
+package com.example.tabkati.data
 
 import android.util.Log
 import com.example.tabkati.model.RecipesModel
@@ -6,12 +6,10 @@ import com.example.tabkati.utils.State.*
 import com.example.tabkati.utils.Constants.EMAIL
 import com.example.tabkati.utils.Constants.FAVOURITE
 import com.example.tabkati.utils.Constants.NAME
-import com.example.tabkati.utils.Constants.THEME
 import com.example.tabkati.utils.Constants.USERS_REF
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.firestore.CollectionReference
-import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
@@ -23,7 +21,7 @@ import javax.inject.Singleton
 
 //Singleton to create one instanse of this class.
 @Singleton
-class AuthRepository @Inject constructor(
+class AuthFirebaseRemoteDataSource @Inject constructor(
     private val auth: FirebaseAuth,
     @Named(USERS_REF) private val usersReference: CollectionReference,
 ) {
@@ -48,7 +46,6 @@ class AuthRepository @Inject constructor(
     ) = flow {
         try {
             emit(Loading)
-            Log.d("ddd", "createUserInFireStore: ")
             auth.currentUser?.apply {
                 usersReference.document(uid).set(
                     mapOf(

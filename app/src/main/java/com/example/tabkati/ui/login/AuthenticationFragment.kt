@@ -59,10 +59,7 @@ class AuthenticationFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        FirebaseAuth.getInstance().signOut()
-        // Initialize Firebase Auth
-//        auth = Firebase.auth
-//        auth.signOut()
+
         binding.apply {
             lifecycleOwner = viewLifecycleOwner
             viewModel = authviewModel
@@ -70,7 +67,9 @@ class AuthenticationFragment : Fragment() {
             // not the class AuthenticationFragment.
             authenticationFragment = this@AuthenticationFragment
             googlePlusIcon.setOnClickListener {
+                progressBar.visibility = View.VISIBLE
                resultLauncher.launch(provideSignInIntent(GoogleSignIn.getClient(requireContext(), provideGoogleSignInOptions())))
+                progressBar.visibility = View.GONE
 
             }
 

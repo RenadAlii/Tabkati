@@ -20,6 +20,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 
+@InternalCoroutinesApi
 @HiltViewModel
 class BookMarkedViewModel @Inject constructor(private val bookmarkedUseCase: BookmarkedUseCase) :
     ViewModel() {
@@ -41,7 +42,9 @@ class BookMarkedViewModel @Inject constructor(private val bookmarkedUseCase: Boo
     val taskList: List<RecipesModel> get() = _taskList
 
 
-
+init {
+    getBookMarkedRecipe()
+}
 
 
     @InternalCoroutinesApi

@@ -51,8 +51,6 @@ class SignUpFragment : Fragment() {
             lifecycleOwner = viewLifecycleOwner
 
             signup.setOnClickListener {
-
-
                 disableErrorTextField()
                 if (!sharedViewModel.isUserInfoForSignUpNotEmpty(
                         editTextTextPasswordSignUp.editText?.text.toString(),
@@ -64,7 +62,7 @@ class SignUpFragment : Fragment() {
                     enableErrorTextField()
                     makeToast()
                 } else {
-
+                    makeToast()
                 }
             }
 
@@ -74,9 +72,7 @@ class SignUpFragment : Fragment() {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 sharedViewModel.error.collect {
                     // Update UI elements
-                    Log.d("ddd", "onViewCreated: ${it.toString()}")
                     if (it) {
-
                         makeToast()
                         goToMainActivity()
                     }
@@ -213,22 +209,7 @@ class SignUpFragment : Fragment() {
     fun goToLoginFragment() {
         findNavController().navigate(R.id.action_signUpFragment_to_loginFragment)
     }
-//    private fun createUser(name: String) {
-//        sharedViewModel.createUser(name).observe(viewLifecycleOwner, { response ->
-//            when (response) {
-//                is Response.Loading -> binding.progressBar.visibility = View.VISIBLE
-//                is Response.Success -> {
-//                   goToMainActivity()
-//                    binding.progressBar.visibility = View.GONE
-//                }
-//                is Response.Failure -> {
-//                    Toast.makeText(requireContext(), response.errorMessage, Toast.LENGTH_SHORT)
-//                        .show()
-//                    binding.progressBar.visibility = View.GONE
-//                }
-//            }
-//        })
-//    }
+
 
     private fun goToMainActivity() {
         // findNavController().navigate(R.id.action_signUpFragment_to_mainActivity)
@@ -236,9 +217,8 @@ class SignUpFragment : Fragment() {
         startActivity(intent)
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
+    override fun onDestroyView() {
+        super.onDestroyView()
         _binding = null
-
     }
 }

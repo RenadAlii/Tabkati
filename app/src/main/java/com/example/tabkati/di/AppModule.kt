@@ -2,6 +2,7 @@ package com.example.tabkati.di
 
 import android.app.Application
 import android.content.Intent
+import com.example.tabkati.data.AuthFirebaseRemoteDataSource
 import com.example.tabkati.data.FavoriteFirestoreDataSource
 import com.example.tabkati.data.UserInfoFirestoreRemoteDataSource
 import com.example.tabkati.domain.use_case.*
@@ -62,7 +63,7 @@ object AppModule {
     fun provideAuthRepo(
         auth: FirebaseAuth,
         @Named(Constants.USERS_REF) usersReference: CollectionReference,
-    ): AuthRepository = AuthRepository(auth, usersReference)
+    ): AuthFirebaseRemoteDataSource = AuthFirebaseRemoteDataSource(auth, usersReference)
 
 
     @ExperimentalCoroutinesApi

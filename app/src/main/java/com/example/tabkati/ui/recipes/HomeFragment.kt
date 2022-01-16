@@ -20,6 +20,8 @@ import com.example.tabkati.adapter.RecipesAdapter
 import com.example.tabkati.databinding.FragmentHomeBinding
 import com.example.tabkati.ui.login.AuthMainActivity
 import com.example.tabkati.utils.State
+import com.example.tabkati.utils.lottieAnimationStatus
+import com.example.tabkati.utils.progressBarStatus
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collect
@@ -75,7 +77,19 @@ class HomeFragment : Fragment() {
             searchBar.setOnClickListener {
                 goToSearchFragment()
             }
+
+               progressBar.lottieAnimationStatus(progressBar,progressBarError,recipesViewModel.status.value,recyclerViewOfRandomRecipes )
+
+
         }
+
+
+
+
+
+
+
+
         // get Auth State
         getAuthState()
         lifecycleScope.launch{
@@ -87,6 +101,10 @@ class HomeFragment : Fragment() {
 
         }
     }
+
+
+
+
 
 
     private fun FragmentHomeBinding.linkRandomRecipesAdapter() {

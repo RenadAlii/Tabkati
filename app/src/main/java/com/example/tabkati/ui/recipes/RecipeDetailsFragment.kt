@@ -7,7 +7,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tabkati.adapter.IngredientsAdapter
@@ -35,6 +37,7 @@ class RecipeDetailsFragment : Fragment() {
     private lateinit var recipeId: String
     private var dataStep: List<StepsItemResponse?>? = listOf()
     private val recipeDetailsViewModel by viewModels<RecipeDetailsViewModel>()
+    @InternalCoroutinesApi
     private val bookMarkedViewModel by viewModels<BookMarkedViewModel>()
 
 
@@ -99,26 +102,40 @@ class RecipeDetailsFragment : Fragment() {
             recipeInstructionsAdapter.submitList(dataStep)
 
 
-            shareIcon.setOnClickListener {
-                val shred = Intent().apply {
-                    this.action = Intent.ACTION_SEND
-                    recipeDetailsViewModel.recipe.observe(viewLifecycleOwner, { recipe ->
-                        srcUrl = recipe?.sourceUrl.toString()
-                    })
-                    this.putExtra(Intent.EXTRA_TEXT, srcUrl)
-                    this.type = "text/plain"
+            lifecycleScope.launch{
+                repeatOnLifecycle(Lifecycle.State.RESUMED){
+                    recipeDetailsViewModel.uiState .collect { recipe ->
+                        shareIcon.setOnClickListener {
+                            val shred = Intent().apply {
+                                this.action = Intent.ACTION_SEND
+                                    srcUrl = recipe.instruction
+                                this.putExtra(Intent.EXTRA_TEXT, srcUrl)
+                                this.type = "text/plain"
+                            }
+                            startActivity(shred)
+                        }
                 }
-                startActivity(shred)
             }
 
-            lifecycleScope.launch {
-                bookMarkedViewModel.bookMarkedUIState.collect {
-                    val isBookMarked = it.recipesItems?.find {
-                        recipeId.toInt() == it.id
-                    }
-                    isBookmarkorNull(isBookMarked)
+
+
+
+
                 }
-            }
+
+                val isBookMarked = bookMarkedViewModel.recipesList.observe(viewLifecycleOwner, { recipe ->
+                   val recipeOrNull = recipe?.find {
+                      it.id == recipeId.toInt()
+
+                }
+                     isBookmarkorNull(recipeOrNull)
+
+
+                })
+
+                // Log.e("maha", "onViewCreated:${isBookMarked.isNullOrEmpty()} ", )
+
+
 
             bookMarkEmptyIcon.setOnClickListener {
                 bookMarkEmptyIcon.isFill(bookMarkFillIcon, bookMarkEmptyIcon, BookMark.EMPTY)
@@ -198,13 +215,16 @@ class RecipeDetailsFragment : Fragment() {
 
     private fun isBookmarkorNull(bookMarked: RecipesItemUiState?) {
         binding.apply {
-            if (bookMarked == null) {
-                bookMarkEmptyIcon.isFill(bookMarkFillIcon, bookMarkEmptyIcon, BookMark.FILL)
+            if (bookMarked==null) {
+
+                bookMarkEmptyIcon.visibility = View.VISIBLE
+                bookMarkFillIcon.visibility = View.GONE
+
 
             } else {
-                bookMarkEmptyIcon.isFill(bookMarkFillIcon, bookMarkEmptyIcon, BookMark.EMPTY)
+                bookMarkEmptyIcon.visibility = View.GONE
+                bookMarkFillIcon.visibility = View.VISIBLE
 
-                bookMarkEmptyIcon.isFill(bookMarkFillIcon, bookMarkEmptyIcon, BookMark.FILL)
 
             }
         }

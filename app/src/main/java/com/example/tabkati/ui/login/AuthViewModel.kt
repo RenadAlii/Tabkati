@@ -3,8 +3,8 @@ package com.example.tabkati.ui.login
 
 import android.util.Log
 import androidx.lifecycle.*
+import com.example.tabkati.data.AuthFirebaseRemoteDataSource
 import com.example.tabkati.di.FirebaseModule
-import com.example.tabkati.repository.AuthRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
@@ -15,7 +15,7 @@ import javax.inject.Inject
 // here we emit the data that is collected from the repository class.
 @HiltViewModel
 class AuthViewModel @Inject constructor(
-    private val repository: AuthRepository,
+    private val repository: AuthFirebaseRemoteDataSource,
 ) : ViewModel() {
 
     private var _error: MutableStateFlow<Boolean> = MutableStateFlow(false)
@@ -150,19 +150,15 @@ class AuthViewModel @Inject constructor(
             .createUserWithEmailAndPassword(email.trim(), userPassword.trim())
             .addOnCanceledListener {
                 setToastMsg("canceled")
-                Log.d("ddd", "signUpUser: cancel")
             }
             .addOnFailureListener {
                 setToastMsg(it.message.toString())
-                Log.d("ddd", "signUpUser: ${it.message.toString()} ")
             }
             .addOnSuccessListener {
                 setToastMsg("success ${it.user?.email}")
-                Log.d("ddd", "signUpUser:${it.user?.email} ")
 
              viewModelScope.launch {
                  createUser(name).collect { it ->
-
                      _error.value = it
                  }
              }

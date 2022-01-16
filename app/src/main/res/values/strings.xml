@@ -39,12 +39,13 @@
     <string name="arabic">Arabic</string>
     <string name="language">Language</string>
     <string name="welcome">Hello %1$s</string>
-    <string name="your_name">Your Name</string>
-    <string name="name">Name</string>
-    <string name="email">Email</string>
-    <string name="save">Save</string>
-    <string name="setting">Setting</string>
-    <string name="book_marked">Book Marked</string>
+    <string name="your_name" translatable="false">Your Name</string>
+    <string name="name" translatable="false">Name</string>
+    <string name="email" translatable="false">Email</string>
+    <string name="save" translatable="false">Save</string>
+    <string name="setting" translatable="false">Setting</string>
+    <string name="book_marked" translatable="false">Book Marked</string>
+    <string name="bookmark" translatable="false">BookMark</string>
     <string-array name="language_array">
         <item>Arabic</item>
         <item>English</item>

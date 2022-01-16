@@ -10,7 +10,7 @@
         android:id="@+id/bookMarkedFragment"
         android:enabled="true"
         android:icon="@drawable/bookmark__2_"
-        android:title="@string/book_marked"/>
+        android:title="@string/bookmark"/>
     <item
         android:id="@+id/homeFragment"
         android:enabled="true"

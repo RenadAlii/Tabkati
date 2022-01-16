@@ -24,4 +24,5 @@
     <string name="save">Save</string>
     <string name="setting">Setting</string>
     <string name="book_marked">Book Marked</string>
+    <string name="bookmark">BookMark</string>
 </resources>

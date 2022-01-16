@@ -16,6 +16,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import okhttp3.internal.wait
 import javax.inject.Inject
 
 
@@ -54,9 +55,13 @@ class RecipesViewModel @Inject constructor(private val repository: RecipesReposi
         viewModelScope.launch {
            // repository.refreshRecipes()
         }
+
+        _status.value = RecipesApiStatus.LOADING
+        getCatories()
         getRandomRecipes()
         getRandomRecipesE()
-        getCatories()
+
+        _status.value = RecipesApiStatus.DONE
 
     }
 fun getCatories(){
@@ -68,6 +73,7 @@ fun getCatories(){
     // fun to get the recipe details.
     private fun getRecipeByCategory() {
         viewModelScope.launch {
+
             try {
                 val result = repository.getRecipesByCategory(_categoryId.value!!)
                 _recipesList.value  = result?.map {
@@ -82,14 +88,16 @@ fun getCatories(){
                 _respicesUIState.update { it.copy(recipesItems = _recipesList.value)}
             } catch (e: Exception) {
                 Log.e(TAG, "getRecipeByCategory:${e.message} ")
+                _status.value = RecipesApiStatus.ERROR
+
             }
+
         }
     }
 
 
     // fun to get the popular movie.
     fun getRandomRecipes() {
-        _status.value = RecipesApiStatus.LOADING
         viewModelScope.launch {
             try {
 
@@ -107,12 +115,10 @@ fun getCatories(){
                 _respicesUIState.update {
                     it.copy(recipesItems =  _recipesList.value )
                 }
-                _status.value = RecipesApiStatus.DONE
             } catch (e: Exception) {
                 _status.value = RecipesApiStatus.ERROR
-                // to clear the RecyclerView.
-
             }
+
         }
     }
 
@@ -120,15 +126,14 @@ fun getCatories(){
     // fun to get the popular movie.
     fun getRandomRecipesE() {
         viewModelScope.launch {
-            _status.value = RecipesApiStatus.LOADING
             try {
                 _recipesListE.value = repository.getAllRecipesE()
-                _status.value = RecipesApiStatus.DONE
             } catch (e: Exception) {
                 _status.value = RecipesApiStatus.ERROR
                 // to clear the RecyclerView.
 
             }
+
         }
     }
 

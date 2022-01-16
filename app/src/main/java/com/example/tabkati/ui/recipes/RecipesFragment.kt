@@ -6,6 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -15,8 +18,11 @@ import com.example.tabkati.adapter.RecipesAdapter
 import com.example.tabkati.databinding.FragmentHomeBinding
 import com.example.tabkati.databinding.FragmentRecipesBinding
 import com.example.tabkati.utils.Constants.CATEGORYID
+import com.example.tabkati.utils.RecipesApiStatus
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 @ExperimentalCoroutinesApi
 @AndroidEntryPoint
@@ -44,7 +50,7 @@ class RecipesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        setHasOptionsMenu(true)
 
         arguments?.let {
             // set the chosen category.
@@ -63,7 +69,6 @@ class RecipesFragment : Fragment() {
             recyclerViewOfRecipes.layoutManager = LinearLayoutManager(requireContext())
 
 
-
             val recipesAdapter = RecipesAdapter {
                 val action = RecipesFragmentDirections.actionRecipesFragmentToRecipeDetailsFragment(
                     recipeId = it.id.toString()
@@ -71,15 +76,39 @@ class RecipesFragment : Fragment() {
                 this@RecipesFragment.findNavController().navigate(action)
             }
             recyclerViewOfRecipes.adapter = recipesAdapter
+//            lifecycleScope.launch{
+//                repeatOnLifecycle(Lifecycle.State.CREATED){
+//                    recipesViewModel.respicesUIState.collect {
+//                        recipesAdapter.submitList(it.recipesItems)}
+//
+//                }
+
+        //}
+
+        recipesViewModel.status.observe(viewLifecycleOwner,
+            {  recipesState(it)
+            })
+
+
+
+    }}
+
+    private fun recipesState(value: RecipesApiStatus?) {
+
+        when (value){
+            RecipesApiStatus.LOADING ->{
+                binding.progressBar.visibility = View.VISIBLE
+            }
+            RecipesApiStatus.DONE->{
+                binding.progressBar.visibility = View.GONE
+                binding.recyclerViewOfRandomRecipes.visibility = View.VISIBLE
+            }
 
 
 
         }
 
-
-
-        }
-
+    }
 
 
     override fun onDestroyView() {

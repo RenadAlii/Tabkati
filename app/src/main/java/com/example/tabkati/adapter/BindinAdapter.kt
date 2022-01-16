@@ -22,8 +22,8 @@ fun AppCompatImageView.bindImage( imageUrl: String?) {
         val imgUri = "$imageUrl".toUri().buildUpon().scheme("https").build()
         this.load(imgUri){
             placeholder(R.drawable.loading_animation)
-            error(R.drawable.loading_animation
-            )
+            error(R.drawable.loading_animation)
+
         }
     }
 }
