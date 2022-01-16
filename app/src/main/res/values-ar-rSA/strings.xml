@@ -27,4 +27,10 @@
     <string name="groceries">قائمة المشتريات</string>
     <string name="profile">الملف الشخصي</string>
     <string name="welcome">مرحبا %1$s</string>
+    <string name="your_name">أسمك</string>
+    <string name="name" translatable="false">الأسم</string>
+    <string name="email">الأميل</string>
+    <string name="save">حفظ</string>
+    <string name="setting">الاعدادات</string>
+    <string name="save_recipes_you_love_so_that_you_can_cook_them_again_and_again_and_again" translatable="false">أحفظ الوصفات التي تعجبك لتستطيع إعدادها في كل مره.</string>
 </resources>
