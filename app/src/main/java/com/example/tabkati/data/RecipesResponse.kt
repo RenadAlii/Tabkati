@@ -171,36 +171,7 @@ data class IngredientsItemResponse(
     val id: Int? = null
 )
 
-///**
-// * Convert Network results to database objects
-// */
-//fun SpoonacularRemoteDatasource.asDomainModel(): List<RecipesItemResponse>? {
-//    return recipes?.map {
-//        RecipesItemResponse(
-//            id = it?.id,
-//            title = it?.title,
-//            image = it?.image,
-//            servings = it?.servings,
-//            aggregateLikes = it?.aggregateLikes,
-//            readyInMinutes = it?.readyInMinutes,
-//            sourceUrl = it?.sourceUrl,
-//            dairyFree = it?.dairyFree,
-//            vegetarian = it?.vegetarian,
-//            veryHealthy = it?.veryHealthy,
-//            glutenFree = it?.glutenFree,
-//            instructions = it?.instructions,
-////			extendedIngredients = it.extendedIngredients.map {
-////				ExtendedIngredientsItemResponse(
-////					id= it.id,
-////					nameClean = it.nameClean,
-////					amount = it.amount,
-////					unit = it.unit,
-////
-////				)
-//            //}
-//        )
-//    }
-//}
+
 
 //converts from data transfer objects to database objects.
 fun SpoonacularRemoteDatasource.asDatabaseModel(): Array<RecipesEntity>? {
