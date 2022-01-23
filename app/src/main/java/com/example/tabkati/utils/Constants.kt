@@ -25,6 +25,7 @@ object Constants {
     const val MAIN_INTENT = "mainIntent"
 
 
+
     // firebase notification.
     // channel name.
     const val channelName = "com.example.tabkati"
@@ -33,7 +34,7 @@ object Constants {
 
     // API
      const val BASE_URL = "https://api.spoonacular.com"
-     const val API_KEY = "0082aa2f93d449c2b77b8115f5ab2f4e"
+     const val API_KEY = "e5542afac9674732ac012ed7fa50d970"
          //"a749dc5c1de24b10a225a2a8334f76b8"
          //"f8cc66e0181e4f699147d4871c361439"
     //e5542afac9674732ac012ed7fa50d970

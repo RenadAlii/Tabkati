@@ -51,7 +51,7 @@ class RecipesViewModel @Inject constructor(private val repository: RecipesReposi
 
     init {
         viewModelScope.launch {
-            // repository.refreshRecipes()
+           // repository.refreshRecipes()
         }
         getCatories()
 
