@@ -33,4 +33,5 @@
     <string name="save">حفظ</string>
     <string name="setting">الاعدادات</string>
     <string name="save_recipes_you_love_so_that_you_can_cook_them_again_and_again_and_again" translatable="false">أحفظ الوصفات التي تعجبك لتستطيع إعدادها في كل مره.</string>
+    <string name="notification">"لدينا وصفات جديدة رائعه سوف تعجبك لاتنسى أن تتفقدها. "</string>
 </resources>

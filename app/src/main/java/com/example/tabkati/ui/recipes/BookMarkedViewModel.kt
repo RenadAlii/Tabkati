@@ -4,8 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.tabkati.domain.use_case.AddFavoriteRecipeUseCase
-import com.example.tabkati.domain.use_case.BookmarkedUseCase
+import com.example.tabkati.domain.useCase.BookmarkedUseCase
 import com.example.tabkati.model.ExtendedIngredientsItem
 import com.example.tabkati.model.RecipesModel
 import com.example.tabkati.model.StepsItems

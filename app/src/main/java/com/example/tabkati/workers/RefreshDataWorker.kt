@@ -1,18 +1,15 @@
 package com.example.tabkati.workers
 
 import android.content.Context
-import android.content.Intent
-import android.util.Log
 import androidx.hilt.work.HiltWorker
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
-import com.example.tabkati.data.RecipesRemoteDataSource
-import com.example.tabkati.data.database.getDatabase
+import com.example.tabkati.R
 import com.example.tabkati.repository.RecipesRepository
+import com.example.tabkati.utils.makeStatusNotification
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedInject
 import retrofit2.HttpException
-import javax.inject.Inject
 
 // RefreshDataWorker to refresh the Recipes in the DB.
 // CoroutineWorker to use Coroutines in worker.
@@ -30,6 +27,11 @@ class RefreshDataWorker  @AssistedInject constructor(
 
 
     override suspend fun doWork(): Result {
+
+
+        // Makes a notification when the work starts.
+        makeStatusNotification(R.string.notification.toString() , applicationContext)
+
         return try {
             repository.refreshRecipes()
             Result.success()

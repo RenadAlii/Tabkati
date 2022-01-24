@@ -7,7 +7,7 @@ import com.example.tabkati.MainActivity
 import com.example.tabkati.data.AuthFirebaseRemoteDataSource
 import com.example.tabkati.data.FavoriteFirestoreDataSource
 import com.example.tabkati.data.UserInfoFirestoreRemoteDataSource
-import com.example.tabkati.domain.use_case.*
+import com.example.tabkati.domain.useCase.*
 import com.example.tabkati.repository.*
 import com.example.tabkati.ui.login.AuthMainActivity
 import com.example.tabkati.ui.splash.SplashActivity

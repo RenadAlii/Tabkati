@@ -2,11 +2,9 @@ package com.example.tabkati.ui.recipes
 
 import android.util.Log
 import androidx.lifecycle.*
-import com.example.tabkati.domain.use_case.GetUserUseCase
-import com.example.tabkati.domain.use_case.UserUseCase
+import com.example.tabkati.domain.useCase.UserUseCase
 import com.example.tabkati.model.User
 import com.example.tabkati.utils.RecipesApiStatus
-import com.example.tabkati.utils.State
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow

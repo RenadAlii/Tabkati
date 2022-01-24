@@ -1,9 +1,8 @@
-package com.example.tabkati.domain.use_case
+package com.example.tabkati.domain.useCase
 
 import com.example.tabkati.domain.repository.Favorite
 import com.example.tabkati.model.RecipesModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.InternalCoroutinesApi
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.withContext
 

@@ -1,4 +1,4 @@
-package com.example.tabkati.domain.use_case
+package com.example.tabkati.domain.useCase
 
 data class BookmarkedUseCase(
     val addBookMarked: AddFavoriteRecipeUseCase,
