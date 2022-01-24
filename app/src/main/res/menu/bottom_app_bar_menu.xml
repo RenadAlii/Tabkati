@@ -9,7 +9,7 @@
         android:title="@string/home"/>
 
     <item
-        android:id="@+id/recipesFragment"
+        android:id="@+id/randomRecipesFragment"
         android:enabled="true"
         android:icon="@drawable/menu"
         android:title="@string/recipes"/>

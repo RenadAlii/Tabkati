@@ -12,13 +12,8 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.tabkati.R
-import com.example.tabkati.adapter.RecipeCategoriesAdapter
 import com.example.tabkati.adapter.RecipesAdapter
-import com.example.tabkati.databinding.FragmentHomeBinding
-import com.example.tabkati.databinding.FragmentRecipesBinding
-import com.example.tabkati.utils.Constants.CATEGORYID
-import com.example.tabkati.utils.RecipesApiStatus
+import com.example.tabkati.databinding.FragmentRandomRecipesBinding
 import com.example.tabkati.utils.lottieAnimationStatus
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -27,56 +22,50 @@ import kotlinx.coroutines.launch
 
 @ExperimentalCoroutinesApi
 @AndroidEntryPoint
-class RecipesFragment : Fragment() {
-    private var _binding: FragmentRecipesBinding? = null
-    private lateinit var binding: FragmentRecipesBinding
+class RandomRecipesFragment : Fragment() {
+
+    private var _binding: FragmentRandomRecipesBinding? = null
+    private lateinit var binding: FragmentRandomRecipesBinding
     private lateinit var recyclerViewOfRecipes: RecyclerView
+    private val recipesViewModel by viewModels<RandomRecipesViewModel>()
 
-
-    private val recipesViewModel by viewModels<RecipesViewModel>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setHasOptionsMenu(true)
-
+       setHasOptionsMenu(true)
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
-        _binding = FragmentRecipesBinding.inflate(inflater)
+        // Inflate the layout for this fragment
+        _binding = FragmentRandomRecipesBinding.inflate(inflater)
         binding = _binding!!
         return binding.root
     }
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setHasOptionsMenu(true)
-
-        arguments?.let {
-            // set the chosen category.
-            recipesViewModel.setCategoryId(it.getString(CATEGORYID).toString())
-        }
-
+        recipesViewModel.getRandomRecipes()
 
         binding.apply {
             // Allows Data Binding to Observe LiveData with the lifecycle of this fragment.
             lifecycleOwner = viewLifecycleOwner
-            // @ because inside binding.apply this revers to the binding instance.
-            // not the class RecipesFragment.
-            recipesFragment = this@RecipesFragment
             viewModel = recipesViewModel
             recyclerViewOfRecipes = recyclerViewOfRandomRecipes
             recyclerViewOfRecipes.layoutManager = LinearLayoutManager(requireContext())
 
 
             val recipesAdapter = RecipesAdapter {
-                val action = RecipesFragmentDirections.actionRecipesFragmentToRecipeDetailsFragment(
+                // navigate and send the id of the recipe to RecipeDetailsFragment.
+                val action = RandomRecipesFragmentDirections.actionRandomRecipesFragmentToRecipeDetailsFragment(
                     recipeId = it.id.toString()
                 )
-                this@RecipesFragment.findNavController().navigate(action)
+                this@RandomRecipesFragment.findNavController().navigate(action)
             }
             recyclerViewOfRecipes.adapter = recipesAdapter
+
             lifecycleScope.launch {
                 repeatOnLifecycle(Lifecycle.State.RESUMED) {
                     recipesViewModel.respicesUIState.collect { uistatus ->
@@ -91,35 +80,13 @@ class RecipesFragment : Fragment() {
 
             }
 
-//        recipesViewModel.status.observe(viewLifecycleOwner,
-//            {  recipesState(it)
-//            })
-
-
-
-    }}
-
-    private fun recipesState(value: RecipesApiStatus?) {
-
-        when (value){
-            RecipesApiStatus.LOADING ->{
-                binding.progressBar.visibility = View.VISIBLE
-            }
-            RecipesApiStatus.DONE->{
-                binding.progressBar.visibility = View.GONE
-                binding.recyclerViewOfRandomRecipes.visibility = View.VISIBLE
-            }
-
 
 
         }
-
     }
-
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
-
 }

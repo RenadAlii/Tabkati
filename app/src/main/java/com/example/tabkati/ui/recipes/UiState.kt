@@ -26,6 +26,11 @@ data class RecipesScreenUiState(
     val status: RecipesApiStatus=RecipesApiStatus.LOADING
 )
 
+data class RecipesByCatScreenUiState(
+    val recipesItems: List<RecipesItemUiState?>? = listOf(),
+    val status: RecipesApiStatus=RecipesApiStatus.LOADING
+)
+
 data class BookMarkedRecipesScreenUiState(
     val recipesItems: List<RecipesItemUiState>? = listOf()
 )

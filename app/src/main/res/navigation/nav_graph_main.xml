@@ -11,7 +11,7 @@
         android:label="Home">
         <action
             android:id="@+id/action_homeFragment_to_recipesFragment"
-            app:destination="@id/recipesFragment" />
+            app:destination="@id/recipesByCatFragment" />
         <action
             android:id="@+id/action_homeFragment_to_recipeDetailsFragment"
             app:destination="@id/recipeDetailsFragment" />
@@ -24,9 +24,9 @@
 
     </fragment>
     <fragment
-        android:id="@+id/recipesFragment"
-        android:name="com.example.tabkati.ui.recipes.RecipesFragment"
-        android:label="Recipes">
+        android:id="@+id/recipesByCatFragment"
+        android:name="com.example.tabkati.ui.recipes.RecipesByCatFragment"
+        android:label="@string/recipes">
         <argument
             android:name="idOfCat"
             app:argType="string" />
@@ -73,6 +73,15 @@
         android:label="BookMarked" >
         <action
             android:id="@+id/action_bookMarkedFragment_to_recipeDetailsFragment"
+            app:destination="@id/recipeDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/randomRecipesFragment"
+        android:name="com.example.tabkati.ui.recipes.RandomRecipesFragment"
+        android:label="@string/recipes"
+        tools:layout="@layout/fragment_random_recipes">
+        <action
+            android:id="@+id/action_randomRecipesFragment_to_recipeDetailsFragment"
             app:destination="@id/recipeDetailsFragment" />
     </fragment>
 

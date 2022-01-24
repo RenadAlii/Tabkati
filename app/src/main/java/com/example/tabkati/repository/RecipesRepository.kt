@@ -36,7 +36,6 @@ class RecipesRepository @Inject constructor(
     suspend fun refreshRecipes() {
         withContext(Dispatchers.IO) {
             val randomRecipes = recipesRemoteDataSource.getRandomRecipes("10")
-            Log.e("Abdrhman", "refreshRecipes:${randomRecipes} ", )
             randomRecipes.asDatabaseModel()?.let { recipesDao.insertRecipes(*it) }
         }
 

@@ -22,7 +22,6 @@ class MainActivity : AppCompatActivity() {
     private var _binding: ActivityMainBinding? = null
     private lateinit var binding: ActivityMainBinding
     private lateinit var bottomNavigationView: BottomNavigationView
-    private lateinit var appBarConfiguration: AppBarConfiguration
 
     //create the navController using the navHostFragment.
     private lateinit var navController: NavController
@@ -37,9 +36,8 @@ class MainActivity : AppCompatActivity() {
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController = navHostFragment.navController
 
-        appBarConfiguration = AppBarConfiguration(setOf(
-            R.id.homeFragment, R.id.recipesFragment, R.id.groceriesFragment))
-        setupActionBarWithNavController(navController, appBarConfiguration)
+
+        setupActionBarWithNavController(navController)
         bottomNavigationView.setupWithNavController(navController)
 
 
@@ -49,5 +47,10 @@ class MainActivity : AppCompatActivity() {
     // for the up Button
     override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp() || super.onSupportNavigateUp()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 }

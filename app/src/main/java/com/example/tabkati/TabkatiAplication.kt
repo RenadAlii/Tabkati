@@ -3,6 +3,7 @@ package com.example.tabkati
 import android.app.Application
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import androidx.hilt.work.HiltWorkerFactory
 import androidx.work.*
 import com.example.tabkati.workers.RefreshDataWorker
@@ -55,7 +56,6 @@ class TabkatiAplication: Application(), Configuration.Provider {
     }
 
     private fun setupRecurringWork() {
-
         /*  constraints to prevent the work from occurring
          when there is no network or the device is low on battery.
          */
@@ -65,7 +65,7 @@ class TabkatiAplication: Application(), Configuration.Provider {
             .build()
 
         // schedule the work.
-        val repeatingRequest = PeriodicWorkRequestBuilder<RefreshDataWorker>(1,TimeUnit.SECONDS)
+        val repeatingRequest = PeriodicWorkRequestBuilder<RefreshDataWorker>(1,TimeUnit.DAYS)
             .setConstraints(constraints)
             .build()
 

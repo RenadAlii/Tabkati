@@ -21,7 +21,6 @@ import com.example.tabkati.databinding.FragmentHomeBinding
 import com.example.tabkati.ui.login.AuthMainActivity
 import com.example.tabkati.utils.State
 import com.example.tabkati.utils.lottieAnimationStatus
-import com.example.tabkati.utils.progressBarStatus
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collect
@@ -34,9 +33,11 @@ class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
     private lateinit var binding: FragmentHomeBinding
-    private val homeViwModel by viewModels<HomeViewModel>()
-    private val recipesViewModel by viewModels<RecipesViewModel>()
+
+    private val homeViwModel by viewModels<SignOutViewModel>()
+    private val recipesViewModel by viewModels<RecipesByCatViewModel>()
     private val userInfoViewModel by viewModels<UserInfoViewModel>()
+    private val randomRecipesViewModel by viewModels<RandomRecipesViewModel>()
 
 
     private lateinit var recyclerViewOfRecipeCategories: RecyclerView
@@ -53,6 +54,7 @@ class HomeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
+        // Inflate the layout for this fragment
         _binding = FragmentHomeBinding.inflate(inflater)
         binding = _binding!!
         return binding.root
@@ -61,15 +63,17 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        randomRecipesViewModel.getRandomRecipes()
+
         binding.apply {
             // Allows Data Binding to Observe LiveData with the lifecycle of this fragment.
             lifecycleOwner = viewLifecycleOwner
             // @ because inside binding.apply this revers to the binding instance.
             // not the class HomeFragment.
             homeFragment = this@HomeFragment
-            recipesViewModel.getRandomRecipes()
             viewModel = recipesViewModel
             userViewmodel = userInfoViewModel
+            randomRecipesViewmodel = randomRecipesViewModel
 
             // recyclerView & adapter of random recipes.
             linkRandomRecipesAdapter()
@@ -82,11 +86,9 @@ class HomeFragment : Fragment() {
         }
 
 
-        // get Auth State
-        getAuthState()
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.RESUMED) {
-                recipesViewModel.respicesUIState.collect { uistatus ->
+                randomRecipesViewModel.respicesUIState.collect { uistatus ->
                     linkRecipesAdapter(uistatus.category)
                     binding.apply {
                         progressBar.lottieAnimationStatus(progressBar,
@@ -116,6 +118,7 @@ class HomeFragment : Fragment() {
         navigateToRecipesCategory(recipe)
     }
 
+    // fun to navigate and send the id of the recipe to RecipeDetailsFragment.
     private fun navigateToRecipesCategory(recipe: RecipesItemUiState) {
         val action = HomeFragmentDirections.actionHomeFragmentToRecipeDetailsFragment(
             recipeId = recipe.id.toString()
@@ -144,12 +147,15 @@ class HomeFragment : Fragment() {
     }
 
 
+    // Initialize the contents of the Fragment host's standard options menu.
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.top_app_bar_menu, menu)
         super.onCreateOptionsMenu(menu, inflater)
 
     }
 
+
+    //fun called whenever an item in options menu is selected.
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.authenticationFragment -> signOut()
@@ -167,11 +173,16 @@ class HomeFragment : Fragment() {
 
     }
 
+    // fun to observe signOut state in the firebase.
     private fun signOut() {
-        homeViwModel.sigOut().observe(viewLifecycleOwner, {
+        homeViwModel.signOut().observe(viewLifecycleOwner, {
             when (it) {
                 is State.Loading -> binding.progressBar.visibility = View.VISIBLE
-                is State.Success -> binding.progressBar.visibility = View.GONE
+                is State.Success -> {
+                    binding.progressBar.visibility = View.GONE
+                    // get Auth State
+                    getAuthState()
+                }
                 is State.Failure,
                 -> {
                     binding.progressBar.visibility = View.GONE

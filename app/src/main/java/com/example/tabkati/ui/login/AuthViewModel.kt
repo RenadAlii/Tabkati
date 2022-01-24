@@ -1,7 +1,6 @@
 package com.example.tabkati.ui.login
 
 
-import android.util.Log
 import androidx.lifecycle.*
 import com.example.tabkati.data.AuthFirebaseRemoteDataSource
 import com.example.tabkati.di.FirebaseModule

@@ -6,6 +6,8 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.example.tabkati.R
+import com.example.tabkati.databinding.ActivityMainBinding
+import com.example.tabkati.databinding.ActivitySplashBinding
 import com.example.tabkati.utils.Constants.AUTH_INTENT
 import com.example.tabkati.utils.Constants.MAIN_INTENT
 import dagger.hilt.android.AndroidEntryPoint
@@ -27,9 +29,13 @@ class SplashActivity : AppCompatActivity() {
 
     private val viewModel by viewModels<SplashViewModel>()
 
+    private var _binding: ActivitySplashBinding? = null
+    private lateinit var binding: ActivitySplashBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_splash)
+        _binding = ActivitySplashBinding.inflate(layoutInflater)
+        binding = _binding!!
+        setContentView(binding.root)
         lifecycleScope.launch {
             delay(3000)
         checkIfUserIsAuthenticated()
@@ -54,4 +60,11 @@ class SplashActivity : AppCompatActivity() {
         startActivity(authIntent)
         finish()
     }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
+    }
+
+
 }

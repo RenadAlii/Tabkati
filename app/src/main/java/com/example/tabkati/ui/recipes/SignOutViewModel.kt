@@ -9,12 +9,12 @@ import kotlinx.coroutines.flow.collect
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeViewModel @Inject constructor(
+class SignOutViewModel @Inject constructor(
     private val repository: MainAuthRepository
 ): ViewModel() {
 
-    // fun to sigOut from firebase auth.
-    fun sigOut() = liveData(Dispatchers.IO) {
+    // fun to signOut from firebase auth.
+    fun signOut() = liveData(Dispatchers.IO) {
         repository.signOut().collect{
             emit(it)
         }
@@ -26,4 +26,7 @@ class HomeViewModel @Inject constructor(
             emit(it)
         }
     }
+
+
+
 }
