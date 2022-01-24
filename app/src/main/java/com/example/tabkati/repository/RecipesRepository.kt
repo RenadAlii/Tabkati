@@ -11,6 +11,7 @@ import com.example.tabkati.data.database.RecipesDao
 import com.example.tabkati.data.database.RecipesEntity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import retrofit2.HttpException
 import javax.inject.Inject
 
 class RecipesRepository @Inject constructor(
@@ -35,8 +36,12 @@ class RecipesRepository @Inject constructor(
      */
     suspend fun refreshRecipes() {
         withContext(Dispatchers.IO) {
+            try{
             val randomRecipes = recipesRemoteDataSource.getRandomRecipes("10")
-            randomRecipes.asDatabaseModel()?.let { recipesDao.insertRecipes(*it) }
+            randomRecipes.asDatabaseModel()?.let { recipesDao.insertRecipes(*it) }}
+            catch (e: Exception){
+
+            }
         }
 
     }
