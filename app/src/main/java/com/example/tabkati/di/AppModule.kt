@@ -57,21 +57,19 @@ object AppModule {
 
 
 
-
     @Provides
-    fun provideMainAuthRepo(
-        googleSignInClient: GoogleSignInClient,
+    fun provideAuthFirebaseRemoteDataSource(
         auth: FirebaseAuth,
-    ): MainAuthRepository =
-        MainAuthRepository(googleSignInClient, auth)
+        @Named(Constants.USERS_REF) usersReference: CollectionReference,
+        googleSignInClient: GoogleSignInClient
+    ): AuthFirebaseRemoteDataSource = AuthFirebaseRemoteDataSource(auth, usersReference, googleSignInClient)
 
 
     @Provides
     fun provideAuthRepo(
-        auth: FirebaseAuth,
-        @Named(Constants.USERS_REF) usersReference: CollectionReference,
-    ): AuthFirebaseRemoteDataSource = AuthFirebaseRemoteDataSource(auth, usersReference)
-
+        dataSource: AuthFirebaseRemoteDataSource,
+    ): AuthRepository =
+        AuthRepository(dataSource)
 
     @Provides
     fun provideSplashRepo(

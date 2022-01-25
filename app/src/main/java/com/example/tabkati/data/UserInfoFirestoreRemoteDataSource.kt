@@ -1,10 +1,8 @@
 package com.example.tabkati.data
 
-import android.util.Log
 import com.example.tabkati.domain.repository.UserFirestereRepository
 import com.example.tabkati.model.User
 import com.example.tabkati.utils.Constants.USERS_REF
-
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.CollectionReference
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -31,10 +29,7 @@ class UserInfoFirestoreRemoteDataSource @Inject constructor(private val auth: Fi
                         trySend(user)
                     }
 
-                }else{
-                    Log.e("error", "getUserFromFirestore: ${e?.message} ", )
                 }
-
 
             }
             awaitClose {
@@ -47,9 +42,7 @@ class UserInfoFirestoreRemoteDataSource @Inject constructor(private val auth: Fi
     override suspend fun editUserNameInFirestore(name: String?): Flow<Unit> = callbackFlow {
         try {
             auth.currentUser?.apply {
-                usersReference.document(uid).update(mapOf("name" to name)).await().also {
-
-                }
+                usersReference.document(uid).update(mapOf("name" to name)).await()
 
             }
         } catch (exception: Exception) {

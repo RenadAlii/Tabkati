@@ -17,7 +17,10 @@ data class CategoryUIState(
     val title: String = "",
     val image: Int = R.drawable.bancake,
 )
-
+data class AuthScreenUiState(
+    val status: RecipesApiStatus=RecipesApiStatus.DONE,
+    val msg: String = ""
+)
 
 data class RecipesScreenUiState(
     val category: List<CategoryUIState> = listOf(),
@@ -73,7 +76,6 @@ data class StepsItemsUiState(
     val ingredients: List<IngredientsUiState?>? = listOf(),
 )
 
-data class IngredientsUiState(
-                              val name: String? = "",) {
+data class IngredientsUiState(val name: String? = "")
 
-}
+

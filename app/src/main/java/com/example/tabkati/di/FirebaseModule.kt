@@ -10,6 +10,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import javax.inject.Named
 
 @Module
@@ -25,6 +26,7 @@ import javax.inject.Named
         fun provideUsersRef(db: FirebaseFirestore) = db.collection(USERS_REF)
 
 
+   @ExperimentalCoroutinesApi
    @Provides
    fun ProvideUserFirestoreRemoteDataSource(
        auth: FirebaseAuth,

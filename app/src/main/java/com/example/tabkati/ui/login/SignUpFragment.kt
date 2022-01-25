@@ -2,15 +2,11 @@ package com.example.tabkati.ui.login
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import com.example.tabkati.utils.State.Failure
-import com.example.tabkati.utils.State.Loading
-import com.example.tabkati.utils.State.Success
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -18,25 +14,28 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.example.tabkati.MainActivity
 import com.example.tabkati.R
-import com.example.tabkati.ViewModelFactory
 import com.example.tabkati.databinding.FragmentSignUpBinding
+import com.example.tabkati.utils.RecipesApiStatus
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.InternalCoroutinesApi
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
-
+@ExperimentalCoroutinesApi
+@InternalCoroutinesApi
+@AndroidEntryPoint
 class SignUpFragment : Fragment() {
 
     private var _binding: FragmentSignUpBinding? = null
     private lateinit var binding: FragmentSignUpBinding
+    private val sharedViewModel by viewModels<AuthViewModel>()
 
-    private val sharedViewModel: AuthViewModel by viewModels {
-        ViewModelFactory()
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         _binding = FragmentSignUpBinding.inflate(inflater)
         binding = _binding!!
@@ -57,29 +56,61 @@ class SignUpFragment : Fragment() {
                         editTextTextEmailAddressSignup.editText?.text.toString()
                     )
                 ) {
-                    sharedViewModel.setToastMsg(getString(R.string.enter_all_info))
+                    makeToast(getString(R.string.enter_all_info))
                     enableErrorTextField()
-                    makeToast()
+
                 } else {
-                    makeToast()
+                    authUiState()
                 }
             }
 
 
         }
+
+        }
+
+
+
+
+    // fun that collects the auth UIState Screen.
+    private fun authUiState() {
         lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
-                sharedViewModel.error.collect {
-                    // Update UI elements
-                    if (it) {
-                        makeToast()
-                        goToMainActivity()
+            repeatOnLifecycle(Lifecycle.State.RESUMED) {
+                sharedViewModel.authUIState.collect { uistatus ->
+                    when (uistatus.status) {
+                        // in case of loading.
+                        RecipesApiStatus.LOADING -> {
+                            binding.progressBar.visibility = View.VISIBLE
+                        }
+                        // in case of error.
+                        RecipesApiStatus.ERROR -> {
+                            binding.progressBar.visibility = View.GONE
+                            makeToast(uistatus.msg)
+
+                        }
+                        // in case of done.
+                        RecipesApiStatus.DONE -> {
+                            binding.progressBar.visibility = View.GONE
+                            goToMainActivity()
+
+
+                        }
                     }
                 }
             }
+
+
         }
     }
 
+    // fun to make toast.
+    private fun makeToast(msg: String) {
+        Toast.makeText(requireContext(), msg, Toast.LENGTH_SHORT).show()
+    }
+
+
+
+    // fun to disable error text filed.
     private fun disableErrorTextField() {
         binding.apply {
             // disable error filed for password field.
@@ -94,6 +125,9 @@ class SignUpFragment : Fragment() {
         }
     }
 
+
+
+    // fun to enable error text filed.
     private fun enableErrorTextField() {
         binding.apply {
             setErrorTextFieldForPassword()
@@ -192,17 +226,7 @@ class SignUpFragment : Fragment() {
         })
     }
 
-    // fun to make Toast
-    private fun makeToast() {
-        sharedViewModel.toastMessage.observe(viewLifecycleOwner, {
-            it?.let {
-                if (it != "") {
-                    Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
-                }
-            }
 
-        })
-    }
 
     // fun to go to Login.
     fun goToLoginFragment() {

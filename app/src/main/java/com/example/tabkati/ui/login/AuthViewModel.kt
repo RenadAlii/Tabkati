@@ -4,21 +4,26 @@ package com.example.tabkati.ui.login
 import androidx.lifecycle.*
 import com.example.tabkati.data.AuthFirebaseRemoteDataSource
 import com.example.tabkati.di.FirebaseModule
+import com.example.tabkati.repository.AuthRepository
+import com.example.tabkati.ui.recipes.AuthScreenUiState
+import com.example.tabkati.ui.recipes.UserProfileScreenUiState
+import com.example.tabkati.utils.RecipesApiStatus
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.InternalCoroutinesApi
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 
 // here we emit the data that is collected from the repository class.
+@InternalCoroutinesApi
 @HiltViewModel
 class AuthViewModel @Inject constructor(
-    private val repository: AuthFirebaseRemoteDataSource,
+    private val repository: AuthRepository,
 ) : ViewModel() {
 
-    private var _error: MutableStateFlow<Boolean> = MutableStateFlow(false)
-    val error:StateFlow<Boolean> = _error.asStateFlow()
+
 
     private var _toastMessage = MutableLiveData<String>()
     val toastMessage: LiveData<String> get() = _toastMessage
@@ -26,33 +31,26 @@ class AuthViewModel @Inject constructor(
     private var _errorEnableMsg = MutableLiveData("")
     val errorEnableMsg: LiveData<String> get() = _errorEnableMsg
 
-    private var _userEmail = MutableLiveData<String?>()
-    val userEmail: LiveData<String?> = _userEmail
+    private var _authUIState = MutableStateFlow(AuthScreenUiState())
+    val authUIState = _authUIState.asStateFlow()
 
-    fun setToastMsg(Msg: String) {
-        clearToastMsg()
-        _toastMessage.value = Msg
-    }
 
-    private fun clearToastMsg() {
-        _toastMessage.value = ""
-    }
 
     fun signInWithGoogle(idToken: String) = liveData(Dispatchers.IO) {
-        repository.firebaseSignInWithGoogle(idToken).collect { response ->
+        repository.signInWithGoogle(idToken).collect { response ->
             emit(response)
         }
     }
 
 
     fun createUser() = liveData(Dispatchers.IO) {
-        repository.createUserInFireStore().collect { response ->
+        repository.createUser().collect { response ->
             emit(response)
         }
     }
 
     suspend fun createUser(name: String): Flow<Boolean> =
-        repository.createUserInFireStoreh(name)
+        repository.createUser(name)
 
 
     // fun to check if the user email is empty if true errorEnableMsg = email.
@@ -129,42 +127,71 @@ class AuthViewModel @Inject constructor(
 
     // fun to Login using firebase by user email & password.
     private fun loginUpUser(userPassword: String, email: String) {
+        _authUIState.update {
+            it.copy(status = RecipesApiStatus.LOADING)
+        }
         FirebaseModule.provideFirebaseAuthInstance()
             .signInWithEmailAndPassword(email.trim(), userPassword.trim())
             .addOnCanceledListener {
-                setToastMsg("canceled")
+                _authUIState.update {
+                    it.copy(status = RecipesApiStatus.ERROR,
+                        msg = "canceled")
+                }
             }
-            .addOnFailureListener {
-                setToastMsg(it.message.toString())
+            .addOnFailureListener { e ->
+                //setToastMsg(it.message.toString())
+                _authUIState.update {
+                    it.copy(status = RecipesApiStatus.ERROR,
+                        msg = e.message.toString())
+                }
             }
-            .addOnSuccessListener {
-                setToastMsg("success ${it.user?.email}")
+            .addOnSuccessListener { user ->
+                _authUIState.update {
+                    it.copy(status = RecipesApiStatus.DONE,
+                        msg = "success ${user.user?.email}")
+                }
+
 
             }
     }
 
     // fun to sign up using firebase by user name, password and email.
     private fun signUpUser(userPassword: String, email: String, name: String) {
+        _authUIState.update {
+            it.copy(status = RecipesApiStatus.LOADING)
+        }
         FirebaseModule.provideFirebaseAuthInstance()
             .createUserWithEmailAndPassword(email.trim(), userPassword.trim())
             .addOnCanceledListener {
-                setToastMsg("canceled")
+                _authUIState.update {
+                    it.copy(status = RecipesApiStatus.ERROR,
+                        msg = "canceled")
+                }
             }
-            .addOnFailureListener {
-                setToastMsg(it.message.toString())
+            .addOnFailureListener { e ->
+                _authUIState.update {
+                    it.copy(status = RecipesApiStatus.ERROR,
+                        msg = e.message.toString())
+                }
             }
-            .addOnSuccessListener {
-                setToastMsg("success ${it.user?.email}")
+            .addOnSuccessListener { user ->
 
-             viewModelScope.launch {
-                 createUser(name).collect { it ->
-                     _error.value = it
-                 }
-             }
+                viewModelScope.launch {
+                    createUser(name).collect {
+                        if (it) {
+                            _authUIState.update { uistate ->
+                                uistate.copy(status = RecipesApiStatus.DONE,
+                                    msg = "success ${user.user?.email}")
+                            }
+                        }
+                    }
+                }
             }
     }
-
 }
+
+
+
 
 
 

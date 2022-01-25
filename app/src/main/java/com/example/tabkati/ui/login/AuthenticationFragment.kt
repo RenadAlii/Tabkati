@@ -10,7 +10,6 @@ import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.tabkati.MainActivity
@@ -23,24 +22,21 @@ import com.example.tabkati.di.AppModule.provideGoogleSignInOptions
 import com.example.tabkati.di.AppModule.provideSignInIntent
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.common.api.ApiException
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.InternalCoroutinesApi
 
 
+@ExperimentalCoroutinesApi
+@InternalCoroutinesApi
 @AndroidEntryPoint
 class AuthenticationFragment : Fragment() {
 
 
-    @Inject lateinit var signInIntent: Intent
-    private lateinit var auth: FirebaseAuth
     private var _binding: FragmentAuthenticationBinding? = null
     private lateinit var binding: FragmentAuthenticationBinding
 
     private lateinit var resultLauncher: ActivityResultLauncher<Intent>
-    //private val viewModel: AuthViewModel by activityViewModels()
     private val authviewModel by viewModels<AuthViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -77,6 +73,50 @@ class AuthenticationFragment : Fragment() {
     }
 
 
+
+
+
+    // fun to observe the response of signInWithGoogle.
+    private fun signInWithGoogle(idToken: String) {
+        authviewModel.signInWithGoogle(idToken).observe(this, { response ->
+            when(response) {
+                is Loading -> binding.progressBar.visibility = View.VISIBLE
+                is Success -> {
+                    val isNewUser = response.data
+                    // if the user in new create register the user in fireStore else go to main Activity.
+                    if (isNewUser) {
+                        createUser()
+                    } else {
+                      goToMainActivity()
+                        binding.progressBar.visibility = View.GONE
+                    }
+                }
+                is Failure -> {
+                    Toast.makeText(requireContext(), response.errorMessage, Toast.LENGTH_SHORT).show()
+                    binding.progressBar.visibility = View.GONE
+                }
+            }
+        })
+    }
+
+    // fun to observe the response of creating new user when log in with google.
+    private fun createUser() {
+        authviewModel.createUser().observe(viewLifecycleOwner, { response ->
+            when (response) {
+                is Loading -> binding.progressBar.visibility = View.VISIBLE
+                is Success -> {
+                    goToMainActivity()
+                    binding.progressBar.visibility = View.GONE
+                }
+                is Failure -> {
+                    Toast.makeText(requireContext(), response.errorMessage, Toast.LENGTH_SHORT).show()
+                    binding.progressBar.visibility = View.GONE
+                }
+            }
+        })
+    }
+
+
     private fun initResultLauncher() {
         resultLauncher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
@@ -96,54 +136,12 @@ class AuthenticationFragment : Fragment() {
             }
     }
 
-
-    private fun signInWithGoogle(idToken: String) {
-        authviewModel.signInWithGoogle(idToken).observe(this, { response ->
-            when(response) {
-                is Loading -> binding.progressBar.visibility = View.VISIBLE
-                is Success -> {
-                    val isNewUser = response.data
-                    if (isNewUser) {
-                        createUser()
-                    } else {
-                      goToMainActivity()
-                        binding.progressBar.visibility = View.GONE
-                    }
-                }
-                is Failure -> {
-                    print(response.errorMessage)
-                    binding.progressBar.visibility = View.GONE
-                }
-            }
-        })
-    }
-    private fun createUser() {
-        authviewModel.createUser().observe(viewLifecycleOwner, { response ->
-            when (response) {
-                is Loading -> binding.progressBar.visibility = View.VISIBLE
-                is Success -> {
-                    goToMainActivity()
-                    binding.progressBar.visibility = View.GONE
-                }
-                is Failure -> {
-                    Toast.makeText(requireContext(), response.errorMessage, Toast.LENGTH_SHORT)
-                        .show()
-                    binding.progressBar.visibility = View.GONE
-                }
-            }
-        })
-    }
+    // fun to go to main activity.
     private fun goToMainActivity() {
-        //findNavController().navigate(R.id.action_authenticationFragment_to_mainActivity)
         val intent = Intent(requireContext(), MainActivity::class.java)
         startActivity(intent)
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        _binding = null
-
-    }
 
 
     // fun to go to Login.
@@ -157,8 +155,10 @@ class AuthenticationFragment : Fragment() {
     }
 
 
-    companion object {
-        private const val TAG = "GoogleActivity"
-        private const val RC_SIGN_IN = 9001
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
+
 }

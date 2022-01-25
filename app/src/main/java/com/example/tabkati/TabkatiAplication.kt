@@ -2,8 +2,6 @@ package com.example.tabkati
 
 import android.app.Application
 import android.content.Context
-import android.content.Intent
-import android.util.Log
 import androidx.hilt.work.HiltWorkerFactory
 import androidx.work.*
 import com.example.tabkati.workers.RefreshDataWorker
@@ -12,7 +10,6 @@ import dagger.hilt.android.HiltAndroidApp
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import java.util.*
 import timber.log.Timber
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject

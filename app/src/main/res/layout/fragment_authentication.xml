@@ -139,20 +139,6 @@
                         app:layout_constraintStart_toEndOf="@+id/or_divider_textview"
                         app:layout_constraintTop_toBottomOf="@+id/loginButton" />
 
-                    <ImageView
-                        android:id="@+id/facebookIcon"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:layout_marginStart="123dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginEnd="16dp"
-                        android:layout_marginBottom="30dp"
-                        android:visibility="invisible"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/googlePlusIcon"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/dividerOnStart"
-                        app:srcCompat="@drawable/facebook" />
 
                     <ImageView
                         android:id="@+id/googlePlusIcon"
@@ -162,24 +148,11 @@
                         android:layout_marginEnd="16dp"
                         android:layout_marginBottom="30dp"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/twitterIcon"
-                        app:layout_constraintStart_toEndOf="@+id/facebookIcon"
+                       app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/dividerOnStart"
                         app:srcCompat="@drawable/google_plus" />
 
-                    <ImageView
-                        android:id="@+id/twitterIcon"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginEnd="123dp"
-                        android:layout_marginBottom="30dp"
-                        android:visibility="invisible"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/googlePlusIcon"
-                        app:layout_constraintTop_toBottomOf="@+id/dividerOnStart"
-                        app:srcCompat="@drawable/twitter" />
 
                     <com.airbnb.lottie.LottieAnimationView
                         android:id="@+id/progressBar"

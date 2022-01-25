@@ -2,11 +2,6 @@ package com.example.tabkati.data
 
 import com.squareup.moshi.Json
 
-//data class StepsResponse(
-//
-//	@Json(name="StepsResponse")
-//	val stepsResponse: List<StepsResponseItem?>? = null
-//)
 
 data class StepsItem(
 
