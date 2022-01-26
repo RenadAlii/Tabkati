@@ -189,19 +189,6 @@ fun SpoonacularRemoteDatasource.asDatabaseModel(): Array<RecipesEntity>? {
             veryHealthy = it?.veryHealthy,
             glutenFree = it?.glutenFree,
             instructions = it?.instructions,
-//			ingredients = it.extendedIngredients.map {
-//				ExtendedIngredientsItemResponse(
-//					id= it.id,
-//					nameClean = it.nameClean,
-//					amount = it.amount,
-//					unit = it.unit,
-//
-//					)
-            //}
-
-
-
-
         )
     }?.toTypedArray()
 }

@@ -12,21 +12,23 @@ import com.example.tabkati.data.ResultsItem
 import com.example.tabkati.ui.recipes.ExtendedIngredientsItemUiState
 import com.example.tabkati.ui.recipes.RecipesItemUiState
 
+
+
 @BindingAdapter("imageUrl")
 fun AppCompatImageView.bindImage( imageUrl: String?) {
+    if (imageUrl.isNullOrEmpty()){
+        this.load(R.drawable.loading_animation)
+    }
     imageUrl?.let {
-        val imgUri = "$imageUrl".trim().toUri().buildUpon().scheme("https").build()
-        this.load(imgUri){
-            if (imageUrl.isNullOrEmpty()){
+        val imgUri = "$imageUrl".toUri().buildUpon().scheme("https").build()
+            this.load(imgUri) {
                 placeholder(R.drawable.loading_animation)
+                error(R.drawable.ic_broken_image)
 
             }
-            placeholder(R.drawable.loading_animation)
-            error(R.drawable.ic_broken_image)
-
         }
     }
-}
+
 
 
 @BindingAdapter("listData")

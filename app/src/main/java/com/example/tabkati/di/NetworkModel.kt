@@ -1,8 +1,10 @@
 package com.example.tabkati.di
 
+import com.example.tabkati.data.RecipeCategoriesPictureDataSource
 import com.example.tabkati.data.RecipesRemoteDataSource
 import com.example.tabkati.data.database.RecipesDao
 import com.example.tabkati.network.RecipeApiService
+import com.example.tabkati.repository.RecipeCategoriesRepository
 import com.example.tabkati.repository.RecipesRepository
 import com.example.tabkati.utils.Constants.BASE_URL
 import com.squareup.moshi.Moshi
@@ -74,5 +76,9 @@ object NetworkModel {
         recipesDao: RecipesDao,
     ): RecipesRepository =
         RecipesRepository(provideRecipesRemoteDataSource(recipeApiService), recipesDao)
+
+
+
+
 
 }

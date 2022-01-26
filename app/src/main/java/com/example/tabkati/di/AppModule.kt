@@ -6,6 +6,7 @@ import android.content.Intent
 import com.example.tabkati.MainActivity
 import com.example.tabkati.data.AuthFirebaseRemoteDataSource
 import com.example.tabkati.data.FavoriteFirestoreDataSource
+import com.example.tabkati.data.RecipeCategoriesPictureDataSource
 import com.example.tabkati.data.UserInfoFirestoreRemoteDataSource
 import com.example.tabkati.domain.useCase.*
 import com.example.tabkati.repository.*
@@ -26,6 +27,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import javax.inject.Named
+import javax.inject.Singleton
 
 
 @Module
@@ -110,6 +112,19 @@ object AppModule {
         return Intent(context, MainActivity::class.java)
     }
 
+
+    @Provides
+    @Singleton
+    fun provideRecipeCategoriesPictureDataSource(
+    ): RecipeCategoriesPictureDataSource =
+        RecipeCategoriesPictureDataSource
+
+    @Provides
+    @Singleton
+    fun provideRecipeCategoriesRepository(
+        dataSource: RecipeCategoriesPictureDataSource
+    ): RecipeCategoriesRepository =
+        RecipeCategoriesRepository(dataSource)
 
 
 }

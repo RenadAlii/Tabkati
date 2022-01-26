@@ -27,13 +27,10 @@ class RefreshDataWorker  @AssistedInject constructor(
 
 
     override suspend fun doWork(): Result {
-
-
-        // Makes a notification when the work starts.
-        makeStatusNotification(R.string.notification.toString() , applicationContext)
-
         return try {
             repository.refreshRecipes()
+            // Makes a notification when the work end.
+            makeStatusNotification(applicationContext.getString(R.string.notification) , applicationContext)
             Result.success()
         } catch (e: HttpException) {
             Result.retry()

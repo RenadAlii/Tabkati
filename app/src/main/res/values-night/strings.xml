@@ -23,7 +23,7 @@
     <string name="email">Email</string>
     <string name="save">Save</string>
     <string name="setting">Setting</string>
-    <string name="book_marked">Book Marked</string>
+    <string name="book_marked" translatable="false">Book Marked</string>
     <string name="bookmark">BookMark</string>
     <string name="save_recipes_you_love_so_that_you_can_cook_them_again_and_again_and_again">Save recipes you love so that you can cook them again ,and again and again...</string>
 </resources>

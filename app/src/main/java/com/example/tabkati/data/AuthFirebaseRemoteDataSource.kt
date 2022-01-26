@@ -30,7 +30,7 @@ class AuthFirebaseRemoteDataSource @Inject constructor(
 ) {
 
 
-
+  // fun to signOut from firebase auth.
    suspend fun signOut() = flow {
         try {
             emit(Loading)
@@ -43,6 +43,7 @@ class AuthFirebaseRemoteDataSource @Inject constructor(
         }
     }
 
+    // fun to get the auth state of the user if it sign in or not .
     @ExperimentalCoroutinesApi
     suspend fun getFirebaseAuthState(): Flow<Boolean> = callbackFlow  {
         val authStateListener = FirebaseAuth.AuthStateListener { auth ->
@@ -55,6 +56,7 @@ class AuthFirebaseRemoteDataSource @Inject constructor(
     }
 
 
+        // fun to sign the user using google.
     suspend fun firebaseSignInWithGoogle(idToken: String) = flow {
         try {
             emit(Loading)
@@ -69,15 +71,14 @@ class AuthFirebaseRemoteDataSource @Inject constructor(
     }
 
 
-    suspend fun createUserInFireStore(
-        name: String = auth.currentUser?.displayName!!,
-    ) = flow {
+    // fun to create new user in fireStore using the name in google.
+    suspend fun createUserInFireStore() = flow {
         try {
             emit(Loading)
             auth.currentUser?.apply {
                 usersReference.document(uid).set(
                     mapOf(
-                        NAME to name,
+                        NAME to displayName,
                         EMAIL to email,
                         FAVOURITE to listOf<RecipesModel>()
                     )
@@ -91,6 +92,7 @@ class AuthFirebaseRemoteDataSource @Inject constructor(
         }
     }
 
+    @ExperimentalCoroutinesApi
     suspend fun createUserInFireStoreh(name: String): Flow<Boolean> = callbackFlow {
         auth.currentUser?.apply {
             val eventDocument = usersReference.document(uid)
@@ -103,7 +105,7 @@ class AuthFirebaseRemoteDataSource @Inject constructor(
 
                 )
             ).addOnCompleteListener {
-                offer(it.isSuccessful)
+                trySend(it.isSuccessful)
             }
 
             awaitClose { subscription.result }

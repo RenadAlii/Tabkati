@@ -50,6 +50,7 @@
     <string name="book_marked" translatable="false">Book Marked</string>
     <string name="bookmark" translatable="false">BookMark</string>
     <string name="save_recipes_you_love_so_that_you_can_cook_them_again_and_again_and_again" translatable="false">Save recipes you love so that you can cook them again ,and again and again...</string>
+    <string name="notification_title">New Recipes !!</string>
     <string-array name="language_array">
         <item>Arabic</item>
         <item>English</item>

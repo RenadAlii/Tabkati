@@ -1,7 +1,6 @@
 package com.example.tabkati.adapter
 
-import android.annotation.SuppressLint
-import com.example.tabkati.data.RecipeCategoriesPictureLocalDataSource
+
 import com.example.tabkati.databinding.GridViewRecipeCateItemBinding
 import android.view.LayoutInflater
 import android.view.ViewGroup

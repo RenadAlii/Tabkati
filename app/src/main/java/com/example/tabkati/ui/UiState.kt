@@ -57,7 +57,7 @@ data class ExtendedIngredientsItemUiState(
 
 data class RecipesDetailsScreenUiState(
     val id: Int? =0,
-    val image: String? = "",
+    val image: String? =null,
     val title: String? = "",
     val readyInMinutes: Int? = 0,
     val servings: Int? = 0,

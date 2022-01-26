@@ -138,6 +138,7 @@ class AuthenticationFragment : Fragment() {
 
     // fun to go to main activity.
     private fun goToMainActivity() {
+
         val intent = Intent(requireContext(), MainActivity::class.java)
         startActivity(intent)
     }

@@ -1,6 +1,7 @@
 package com.example.tabkati.utils
 
-
+import android.provider.Settings.Global.getString
+import com.example.tabkati.R
 
 
 // Notification Channel constants
@@ -10,7 +11,7 @@ package com.example.tabkati.utils
     "Verbose WorkManager Notifications"
 const val VERBOSE_NOTIFICATION_CHANNEL_DESCRIPTION =
     "Shows notifications whenever work starts"
-@JvmField val NOTIFICATION_TITLE: CharSequence = "WorkRequest Starting"
+
 const val CHANNEL_ID = "VERBOSE_NOTIFICATION"
 const val NOTIFICATION_ID = 1
 

@@ -59,12 +59,15 @@ class TabkatiAplication: Application(), Configuration.Provider {
         val constraints = Constraints.Builder()
             .setRequiredNetworkType(NetworkType.UNMETERED)
             .setRequiresBatteryNotLow(true)
+            .setRequiresDeviceIdle(true)
             .build()
 
+
         // schedule the work.
-        val repeatingRequest = PeriodicWorkRequestBuilder<RefreshDataWorker>(1,TimeUnit.DAYS)
-            .setConstraints(constraints)
+        val repeatingRequest = PeriodicWorkRequestBuilder<RefreshDataWorker>(1, TimeUnit.DAYS)
+        .setConstraints(constraints)
             .build()
+
 
         WorkManager.getInstance(context).enqueueUniquePeriodicWork(
             WORK_NAME,

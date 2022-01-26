@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.tabkati.data.RecipeCategoriesPictureDataSource
+import com.example.tabkati.repository.RecipeCategoriesRepository
 import com.example.tabkati.repository.RecipesRepository
 import com.example.tabkati.utils.RecipesApiStatus
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -15,7 +16,9 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class RandomRecipesViewModel @Inject constructor(private val repository: RecipesRepository) :
+class RandomRecipesViewModel @Inject constructor(private val recipesRepository: RecipesRepository,
+private val categoryRepository: RecipeCategoriesRepository
+) :
     ViewModel() {
 
 
@@ -37,9 +40,9 @@ class RandomRecipesViewModel @Inject constructor(private val repository: Recipes
 
     init {
         viewModelScope.launch {
-            repository.refreshRecipes()
+            recipesRepository.refreshRecipes()
         }
-        getCatories()
+        getCategories()
     }
 
 
@@ -51,14 +54,14 @@ class RandomRecipesViewModel @Inject constructor(private val repository: Recipes
                 _respicesUIState.update {
                     it.copy(status = RecipesApiStatus.LOADING)
                 }
-                val result = repository.getAllRecipesE()
-                _recipesList.value = result?.map {
+                val result = recipesRepository.getAllRecipesE()
+                _recipesList.value = result.map {
                     RecipesItemUiState(
                         title = it.title,
                         image = it.image,
-                        id = it?.id,
-                        mintus = it?.readyInMinutes.toString(),
-                        serving = it?.servings.toString()
+                        id = it.id,
+                        mintus = it.readyInMinutes.toString(),
+                        serving = it.servings.toString()
 
 
                     )
@@ -76,9 +79,9 @@ class RandomRecipesViewModel @Inject constructor(private val repository: Recipes
     }
 
 
-    fun getCatories() {
+    private fun getCategories() {
         val recipeCategoriesData =
-            RecipeCategoriesPictureDataSource.recipeCategoriesPictureList.map {
+            categoryRepository.getCategoriesList().map {
                 CategoryUIState(it.id,
                     it.titleOFCat,
                     it.CategoryImage)

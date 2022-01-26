@@ -33,7 +33,7 @@ fun makeStatusNotification(message: String, context: Context) {
     // Create the notification
     val builder = NotificationCompat.Builder(context, CHANNEL_ID)
         .setSmallIcon(R.drawable.ic_launcher_foreground)
-        .setContentTitle(NOTIFICATION_TITLE)
+        .setContentTitle(context.resources.getString(R.string.notification_title))
         .setContentText(message)
         .setPriority(NotificationCompat.PRIORITY_HIGH)
         .setVibrate(LongArray(0))
