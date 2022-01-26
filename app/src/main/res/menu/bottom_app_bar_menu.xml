@@ -19,16 +19,16 @@
         android:icon="@drawable/bookmark__2_"
         android:title="@string/bookmark"/>
 
-
+        <item
+          android:id="@+id/groceriesFragment"
+       android:enabled="true"
+           android:icon="@drawable/ic_baseline_shopping_basket_24"
+           android:title="@string/groceries"/>
 <!--    <item-->
 <!--        android:id="@+id/page_4"-->
 <!--        android:enabled="true"-->
 <!--        android:icon="@drawable/add"-->
 <!--        android:title="@string/your_recipes"/>-->
-<!--    <item-->
-<!--        android:id="@+id/groceriesFragment"-->
-<!--        android:enabled="true"-->
-<!--        android:icon="@drawable/ic_baseline_shopping_basket_24"-->
-<!--        android:title="@string/groceries"/>-->
+
 
 </menu>
