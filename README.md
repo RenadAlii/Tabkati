@@ -1,5 +1,5 @@
 # Tabkati | طبختي
-*Tapkati* is an open-source project help you explore and save 5000+ of recipes.
+*Tapkati* is an open-source project help you explore and save 5000+ of recipes using [spoonacular](https://spoonacular.com/food-api/docs).
 
 This application is written entirely in Kotlin using  clean Android Architecture alongside MVVM pattern.
 
@@ -25,4 +25,7 @@ This application is written entirely in Kotlin using  clean Android Architecture
 ## Firebase Products:
 1. [Firebase Authentication](https://github.com/coil-kt/coil) using Google Provider & Email.
 2. [Cloud Storage for Firebase](https://firebase.google.com/docs/storage).
+
+## Api doc:
+[spoonacular](https://spoonacular.com/food-api/docs).
 
