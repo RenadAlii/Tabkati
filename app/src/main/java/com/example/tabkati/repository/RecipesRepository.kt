@@ -1,8 +1,5 @@
 package com.example.tabkati.repository
 
-import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.Transformations
 import com.example.tabkati.data.RecipesItemResponse
 import com.example.tabkati.data.RecipesRemoteDataSource
 import com.example.tabkati.data.ResultsItem
@@ -11,7 +8,6 @@ import com.example.tabkati.data.database.RecipesDao
 import com.example.tabkati.data.database.RecipesEntity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import retrofit2.HttpException
 import javax.inject.Inject
 
 class RecipesRepository @Inject constructor(

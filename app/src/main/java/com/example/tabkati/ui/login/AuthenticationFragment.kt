@@ -78,8 +78,8 @@ class AuthenticationFragment : Fragment() {
 
     // fun to observe the response of signInWithGoogle.
     private fun signInWithGoogle(idToken: String) {
-        authviewModel.signInWithGoogle(idToken).observe(this, { response ->
-            when(response) {
+        authviewModel.signInWithGoogle(idToken).observe(this) { response ->
+            when (response) {
                 is Loading -> binding.progressBar.visibility = View.VISIBLE
                 is Success -> {
                     val isNewUser = response.data
@@ -87,21 +87,22 @@ class AuthenticationFragment : Fragment() {
                     if (isNewUser) {
                         createUser()
                     } else {
-                      goToMainActivity()
+                        goToMainActivity()
                         binding.progressBar.visibility = View.GONE
                     }
                 }
                 is Failure -> {
-                    Toast.makeText(requireContext(), response.errorMessage, Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), response.errorMessage, Toast.LENGTH_SHORT)
+                        .show()
                     binding.progressBar.visibility = View.GONE
                 }
             }
-        })
+        }
     }
 
     // fun to observe the response of creating new user when log in with google.
     private fun createUser() {
-        authviewModel.createUser().observe(viewLifecycleOwner, { response ->
+        authviewModel.createUser().observe(viewLifecycleOwner) { response ->
             when (response) {
                 is Loading -> binding.progressBar.visibility = View.VISIBLE
                 is Success -> {
@@ -109,11 +110,12 @@ class AuthenticationFragment : Fragment() {
                     binding.progressBar.visibility = View.GONE
                 }
                 is Failure -> {
-                    Toast.makeText(requireContext(), response.errorMessage, Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), response.errorMessage, Toast.LENGTH_SHORT)
+                        .show()
                     binding.progressBar.visibility = View.GONE
                 }
             }
-        })
+        }
     }
 
 

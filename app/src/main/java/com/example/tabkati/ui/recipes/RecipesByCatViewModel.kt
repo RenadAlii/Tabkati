@@ -1,14 +1,10 @@
 package com.example.tabkati.ui.recipes
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.tabkati.data.RecipeCategoriesPictureDataSource
-import com.example.tabkati.data.database.RecipesEntity
 import com.example.tabkati.repository.RecipesRepository
-import com.example.tabkati.utils.Constants.TAG
 import com.example.tabkati.utils.RecipesApiStatus
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow

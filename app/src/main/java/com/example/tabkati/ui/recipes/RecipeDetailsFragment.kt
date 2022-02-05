@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tabkati.adapter.IngredientsAdapter
 import com.example.tabkati.adapter.InstructionsAdapter
-import com.example.tabkati.data.StepsItemResponse
 import com.example.tabkati.databinding.FragmentRecipeDetailsBinding
 import com.example.tabkati.utils.BookMark
 import com.example.tabkati.utils.Constants.RECIPEID

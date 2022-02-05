@@ -175,7 +175,7 @@ class HomeFragment : Fragment() {
 
     // fun to observe signOut state in the firebase.
     private fun signOut() {
-        homeViwModel.signOut().observe(viewLifecycleOwner, {
+        homeViwModel.signOut().observe(viewLifecycleOwner) {
             when (it) {
                 is State.Loading -> binding.progressBar.visibility = View.VISIBLE
                 is State.Success -> {
@@ -189,19 +189,19 @@ class HomeFragment : Fragment() {
                 }
 
             }
-        })
+        }
     }
 
     // fun to get the user authentication state so no user not authenticated will stay in home fragment.
     private fun getAuthState() {
-        homeViwModel.getAuthState().observe(viewLifecycleOwner, {
+        homeViwModel.getAuthState().observe(viewLifecycleOwner) {
             // if the user signedOut it = true go to Auth Activity to signIn in.
             if (it) {
                 goToAuthActivity()
             } else {
                 binding.progressBar.visibility = View.GONE
             }
-        })
+        }
     }
 
     private fun goToAuthActivity() {

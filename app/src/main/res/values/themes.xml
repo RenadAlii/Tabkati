@@ -31,5 +31,8 @@
         <item name="android:background">@drawable/rounded_sheet</item>
     </style>
 
+    <style name="card_view_style">
+        <item name="cardBackgroundColor">@color/background_card_light</item>
+    </style>
 
 </resources>

@@ -69,11 +69,11 @@
                     android:id="@+id/bookMark_empty_icon"
                     android:layout_width="30dp"
                     android:layout_height="35dp"
-                    android:visibility="gone"
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="4dp"
                     android:orientation="vertical"
                     android:src="@drawable/bookmark__1_"
+                    android:visibility="gone"
                     app:layout_constraintEnd_toStartOf="@+id/share_icon"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -84,8 +84,8 @@
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="4dp"
                     android:orientation="vertical"
-                    android:visibility="gone"
                     android:src="@drawable/bookmark"
+                    android:visibility="gone"
                     app:layout_constraintEnd_toStartOf="@+id/share_icon"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -102,14 +102,14 @@
 
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/card_for_recipe"
+                    style="card_view_style"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="180dp"
                     android:scrollbars="vertical"
-                    app:cardBackgroundColor="#F9FFF8"
                     app:cardCornerRadius="30dp"
-                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 

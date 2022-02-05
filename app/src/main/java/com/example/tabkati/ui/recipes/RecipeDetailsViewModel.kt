@@ -1,16 +1,13 @@
 package com.example.tabkati.ui.recipes
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.tabkati.data.RecipesItemResponse
 import com.example.tabkati.repository.RecipesRepository
-import com.example.tabkati.utils.Constants
 import com.example.tabkati.utils.RecipesApiStatus
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -52,6 +49,8 @@ class RecipeDetailsViewModel @Inject constructor(private val repository: Recipes
         getRecipeDetails()
     }
 
+
+    // fun to get the Recipes Details.
     private fun getRecipeDetails() {
         viewModelScope.launch {
             _status.value = RecipesApiStatus.LOADING
@@ -90,11 +89,9 @@ class RecipeDetailsViewModel @Inject constructor(private val repository: Recipes
                        , aggregateLikes = recipesDetailsResult?.aggregateLikes,
                        extendedIngredients = ingredientList.value)}
 
-                Log.e(Constants.TAG, "......: ${_recipe.value}" )
                 _status.value = RecipesApiStatus.DONE
             } catch (e: Exception) {
                 _status.value = RecipesApiStatus.ERROR
-                Log.e(Constants.TAG, "getRecipeById:${e.message}${_recipeId.value!!} ", )
             }
         }
     }

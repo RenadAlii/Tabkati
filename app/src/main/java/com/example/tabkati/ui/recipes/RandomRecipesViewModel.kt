@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.tabkati.data.RecipeCategoriesPictureDataSource
 import com.example.tabkati.repository.RecipeCategoriesRepository
 import com.example.tabkati.repository.RecipesRepository
 import com.example.tabkati.utils.RecipesApiStatus

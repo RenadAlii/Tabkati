@@ -1,6 +1,5 @@
 package com.example.tabkati.data
 
-import android.util.Log
 import com.example.tabkati.model.RecipesModel
 import com.example.tabkati.utils.State.*
 import com.example.tabkati.utils.Constants.EMAIL

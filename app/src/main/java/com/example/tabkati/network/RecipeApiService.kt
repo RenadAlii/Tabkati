@@ -32,14 +32,12 @@ interface RecipeApiService {
         ,@Query("apiKey") apiKey: String=API_KEY
     ):SpoonacularRemoteDatasource
     //search for Recipes.
-    //https://api.spoonacular.com/recipes/complexSearch?titlematch=cake&apiKey=a749dc5c1de24b10a225a2a8334f76b8
     @GET("/recipes/complexSearch?")
     suspend fun searchForRecipes(@Query("query") query: String
                                  ,@Query("apiKey") apiKey: String=API_KEY
     ): SearchResultResponse
 
 
-//https://api.spoonacular.com/recipes/149425/analyzedInstructions?stepBreakdown=true&apiKey=f8cc66e0181e4f699147d4871c361439
     //Get Recipe steps by id.
     @GET("/recipes/{id}/analyzedInstructions?stepBreakdown=true&apiKey=${API_KEY}")
     suspend fun getRecipeSteps(@Path("id") RecipeId: String): RecipesItemResponse

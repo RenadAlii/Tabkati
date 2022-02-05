@@ -1,12 +1,11 @@
 package com.example.tabkati.ui.splash
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
-import com.example.tabkati.R
-import com.example.tabkati.databinding.ActivityMainBinding
 import com.example.tabkati.databinding.ActivitySplashBinding
 import com.example.tabkati.utils.Constants.AUTH_INTENT
 import com.example.tabkati.utils.Constants.MAIN_INTENT
@@ -17,6 +16,7 @@ import javax.inject.Inject
 import javax.inject.Named
 
 
+@SuppressLint("CustomSplashScreen")
 @AndroidEntryPoint
 class SplashActivity : AppCompatActivity() {
     @Named(AUTH_INTENT)

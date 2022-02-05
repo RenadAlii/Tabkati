@@ -5,7 +5,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.tabkati.data.ExtendedIngredientsItemResponse
 import com.example.tabkati.databinding.IngredientsItemBinding
 import com.example.tabkati.ui.recipes.ExtendedIngredientsItemUiState
 

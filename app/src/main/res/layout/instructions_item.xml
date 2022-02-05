@@ -20,8 +20,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/cardview_light_background"
-        app:cardElevation="1dp"
-        android:paddingBottom="4dp">
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp"
+        app:cardElevation="4dp"
+        >
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -32,12 +34,11 @@
                 android:id="@+id/step"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-               android:layout_margin="8dp"
                 android:padding="16dp"
                 android:labelFor="@+id/instruct_textview"
                 android:text="@{@string/step_number(data.number)}"
                 android:textColor="@color/teal_700"
-                android:textSize="20sp"
+                android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toTopOf="@+id/instruct_textview"
@@ -51,7 +52,7 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="16dp"
-                android:textSize="16sp"
+                android:textSize="12sp"
                 android:text="@{data.step}"
                 android:textAlignment="textStart"
                 android:textColor="@color/light_black"

@@ -3,7 +3,7 @@
     <string name="app_name">طبختي</string>
     <string name="loginText">تسجيل الدخول</string>
     <string name="full_name">الأسم الكامل</string>
-    <string name="email_address">البريد الإلكتروني؟</string>
+    <string name="email_address">البريد الإلكتروني</string>
     <string name="sign_up">إنشاء حساب</string>
     <string name="register">إنشاء حساب</string>
     <string name="enter_all_info">أدخل كل المعلومات المطلوبه!</string>
@@ -35,4 +35,5 @@
     <string name="save_recipes_you_love_so_that_you_can_cook_them_again_and_again_and_again" translatable="false">أحفظ الوصفات التي تعجبك لتستطيع إعدادها في كل مره.</string>
     <string name="notification">"لدينا وصفات جديدة رائعه سوف تعجبك لاتنسى أن تتفقدها. "</string>
     <string name="notification_title">وصفات جديدة</string>
+    <string name="bookmark">المفضلة</string>
 </resources>

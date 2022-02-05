@@ -14,5 +14,10 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <style name="card_view_style">
+        <item name="cardBackgroundColor">@color/background_card_dark</item>
+    </style>
+
+
     <style name="CustomBottomSheetStyle"></style>
 </resources>

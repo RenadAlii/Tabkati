@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="_2_serving" translatable="false">%1$s Serving</string>
-    <string name="ingredient" translatable="false">Avocado</string>
     <string name="ingredints_" translatable="false">%1$s</string>
     <string name="instruct" translatable="false">%1$s .</string>
     <string name="step" translatable="false">%1$s</string>

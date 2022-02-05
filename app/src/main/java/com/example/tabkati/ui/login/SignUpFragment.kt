@@ -141,7 +141,7 @@ class SignUpFragment : Fragment() {
     }
 
     private fun FragmentSignUpBinding.setErrorTextFieldForUserNameAndEmail() {
-        sharedViewModel.errorEnableMsg.observe(viewLifecycleOwner, {
+        sharedViewModel.errorEnableMsg.observe(viewLifecycleOwner) {
             if (it == "nameemail") {
                 // enable error filed for personal name field.
                 personNameText.isErrorEnabled = true
@@ -151,11 +151,11 @@ class SignUpFragment : Fragment() {
                 editTextTextEmailAddressSignup.error = getString(R.string.email_is_required)
             }
 
-        })
+        }
     }
 
     private fun FragmentSignUpBinding.setErrorTextFieldForUserNameAndEmailAndPassword() {
-        sharedViewModel.errorEnableMsg.observe(viewLifecycleOwner, {
+        sharedViewModel.errorEnableMsg.observe(viewLifecycleOwner) {
 
             if (it == "passwordnameemail") {
                 // enable error filed for password field.
@@ -169,11 +169,11 @@ class SignUpFragment : Fragment() {
                 editTextTextEmailAddressSignup.error = getString(R.string.email_is_required)
             }
 
-        })
+        }
     }
 
     private fun FragmentSignUpBinding.setErrorTextFieldForPasswordAndEmail() {
-        sharedViewModel.errorEnableMsg.observe(viewLifecycleOwner, {
+        sharedViewModel.errorEnableMsg.observe(viewLifecycleOwner) {
             if (it == "passwordemail") {
                 // enable error filed for password field.
                 editTextTextPasswordSignUp.isErrorEnabled = true
@@ -182,11 +182,11 @@ class SignUpFragment : Fragment() {
                 editTextTextEmailAddressSignup.isErrorEnabled = true
                 editTextTextEmailAddressSignup.error = getString(R.string.email_is_required)
             }
-        })
+        }
     }
 
     private fun FragmentSignUpBinding.setErrorTextFieldForPasswordAndUserName() {
-        sharedViewModel.errorEnableMsg.observe(viewLifecycleOwner, {
+        sharedViewModel.errorEnableMsg.observe(viewLifecycleOwner) {
             if (it == "passwordname") {
                 // enable error filed for password field.
                 editTextTextPasswordSignUp.isErrorEnabled = true
@@ -195,35 +195,35 @@ class SignUpFragment : Fragment() {
                 personNameText.isErrorEnabled = true
                 personNameText.error = getString(R.string.user_name_is_required)
             }
-        })
+        }
     }
 
 
     private fun FragmentSignUpBinding.setErrorTextFieldForEmail() {
-        sharedViewModel.errorEnableMsg.observe(viewLifecycleOwner, {
+        sharedViewModel.errorEnableMsg.observe(viewLifecycleOwner) {
             if (it == "email") {
                 editTextTextEmailAddressSignup.isErrorEnabled = true
                 editTextTextEmailAddressSignup.error = getString(R.string.email_is_required)
             }
-        })
+        }
     }
 
     private fun FragmentSignUpBinding.setErrorTextFieldForUserName() {
-        sharedViewModel.errorEnableMsg.observe(viewLifecycleOwner, {
+        sharedViewModel.errorEnableMsg.observe(viewLifecycleOwner) {
             if (it == "name") {
                 personNameText.isErrorEnabled = true
                 personNameText.error = getString(R.string.user_name_is_required)
             }
-        })
+        }
     }
 
     private fun FragmentSignUpBinding.setErrorTextFieldForPassword() {
-        sharedViewModel.errorEnableMsg.observe(viewLifecycleOwner, {
+        sharedViewModel.errorEnableMsg.observe(viewLifecycleOwner) {
             if (it == "password") {
                 editTextTextPasswordSignUp.isErrorEnabled = true
                 editTextTextPasswordSignUp.error = getString(R.string.password_is_required)
             }
-        })
+        }
     }
 
 

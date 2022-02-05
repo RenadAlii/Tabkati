@@ -2,11 +2,9 @@ package com.example.tabkati.ui.login
 
 
 import androidx.lifecycle.*
-import com.example.tabkati.data.AuthFirebaseRemoteDataSource
 import com.example.tabkati.di.FirebaseModule
 import com.example.tabkati.repository.AuthRepository
 import com.example.tabkati.ui.recipes.AuthScreenUiState
-import com.example.tabkati.ui.recipes.UserProfileScreenUiState
 import com.example.tabkati.utils.RecipesApiStatus
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -23,10 +21,6 @@ class AuthViewModel @Inject constructor(
     private val repository: AuthRepository,
 ) : ViewModel() {
 
-
-
-    private var _toastMessage = MutableLiveData<String>()
-    val toastMessage: LiveData<String> get() = _toastMessage
 
     private var _errorEnableMsg = MutableLiveData("")
     val errorEnableMsg: LiveData<String> get() = _errorEnableMsg

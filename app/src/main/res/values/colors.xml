@@ -14,4 +14,7 @@
     <color name="blackTransparent40">#D00C0B0B</color>
     <color name="transparent">#000C0B0B</color>
     <color name="logo_color">#ECFCEC </color>
+    <color name="background_card_light">#F9FFF8</color>
+    <color name="background_card_dark">#A59F9F</color>
+
 </resources>

@@ -1,6 +1,5 @@
 package com.example.tabkati.ui.recipes
 
-import android.util.Log
 import androidx.lifecycle.*
 import com.example.tabkati.domain.useCase.UserUseCase
 import com.example.tabkati.model.User
@@ -40,7 +39,6 @@ class UserInfoViewModel @Inject constructor(private val userUseCase: UserUseCase
 
     init {
         getUser()
-        Log.e("init", "getUser:${_UserInfoState.value?.name} ", )
     }
 
     @ExperimentalCoroutinesApi
@@ -59,7 +57,6 @@ class UserInfoViewModel @Inject constructor(private val userUseCase: UserUseCase
 
                     }
                     _status.value = RecipesApiStatus.DONE
-                    Log.e("PP", "getUser:${user.name} ", )
                 } }catch (e: Exception) {
             _status.value = RecipesApiStatus.ERROR
 
@@ -85,7 +82,6 @@ class UserInfoViewModel @Inject constructor(private val userUseCase: UserUseCase
                                getUser()
                }}
            catch (e: Exception){
-               Log.e("roa", "editUserName: ${e.message}", )
            }
         }
     }

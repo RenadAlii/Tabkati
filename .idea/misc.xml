@@ -24,7 +24,7 @@
         <entry key="..\:/Users/Renaa/AndroidStudioProjects/Tabkati/app/src/main/res/layout/activity_splash.xml" value="0.1984375" />
         <entry key="..\:/Users/Renaa/AndroidStudioProjects/Tabkati/app/src/main/res/layout/activity_welcome.xml" value="0.2" />
         <entry key="..\:/Users/Renaa/AndroidStudioProjects/Tabkati/app/src/main/res/layout/dropdown_item.xml" value="0.1984375" />
-        <entry key="..\:/Users/Renaa/AndroidStudioProjects/Tabkati/app/src/main/res/layout/fragment_authentication.xml" value="0.16666666666666666" />
+        <entry key="..\:/Users/Renaa/AndroidStudioProjects/Tabkati/app/src/main/res/layout/fragment_authentication.xml" value="0.3333333333333333" />
         <entry key="..\:/Users/Renaa/AndroidStudioProjects/Tabkati/app/src/main/res/layout/fragment_blank.xml" value="0.1984375" />
         <entry key="..\:/Users/Renaa/AndroidStudioProjects/Tabkati/app/src/main/res/layout/fragment_book_marked.xml" value="0.1984375" />
         <entry key="..\:/Users/Renaa/AndroidStudioProjects/Tabkati/app/src/main/res/layout/fragment_groceries.xml" value="0.18333333333333332" />
@@ -42,11 +42,11 @@
         <entry key="..\:/Users/Renaa/AndroidStudioProjects/Tabkati/app/src/main/res/layout/fragment_splash_screen.xml" value="0.18333333333333332" />
         <entry key="..\:/Users/Renaa/AndroidStudioProjects/Tabkati/app/src/main/res/layout/grid_view_recipe_cate_item.xml" value="0.7333333333333334" />
         <entry key="..\:/Users/Renaa/AndroidStudioProjects/Tabkati/app/src/main/res/layout/grocerie_item.xml" value="0.1" />
-        <entry key="..\:/Users/Renaa/AndroidStudioProjects/Tabkati/app/src/main/res/layout/ingredients_item.xml" value="0.1" />
+        <entry key="..\:/Users/Renaa/AndroidStudioProjects/Tabkati/app/src/main/res/layout/ingredients_item.xml" value="0.4315352697095436" />
         <entry key="..\:/Users/Renaa/AndroidStudioProjects/Tabkati/app/src/main/res/layout/ingredients_of_step_item.xml" value="0.13645833333333332" />
         <entry key="..\:/Users/Renaa/AndroidStudioProjects/Tabkati/app/src/main/res/layout/instructions_item.xml" value="0.1950207468879668" />
         <entry key="..\:/Users/Renaa/AndroidStudioProjects/Tabkati/app/src/main/res/layout/notification.xml" value="0.1984375" />
-        <entry key="..\:/Users/Renaa/AndroidStudioProjects/Tabkati/app/src/main/res/layout/recipe_item.xml" value="0.14432989690721648" />
+        <entry key="..\:/Users/Renaa/AndroidStudioProjects/Tabkati/app/src/main/res/layout/recipe_item.xml" value="0.33440514469453375" />
         <entry key="..\:/Users/Renaa/AndroidStudioProjects/Tabkati/app/src/main/res/layout/recipe_search_item.xml" value="0.1984375" />
         <entry key="..\:/Users/Renaa/AndroidStudioProjects/Tabkati/app/src/main/res/menu/bottom_app_bar_menu.xml" value="0.1" />
         <entry key="..\:/Users/Renaa/AndroidStudioProjects/Tabkati/app/src/main/res/menu/setting_menu.xml" value="0.3521739130434783" />

@@ -133,7 +133,7 @@ class LoginFragment : Fragment() {
     }
 
     private fun FragmentLoginBinding.setErrorTextFieldForPasswordAndEmail() {
-        sharedViewModel.errorEnableMsg.observe(viewLifecycleOwner, {
+        sharedViewModel.errorEnableMsg.observe(viewLifecycleOwner) {
             if (it == "passwordemail") {
                 // enable error filed for password field.
                 editTextTextPasswordLogin.isErrorEnabled = true
@@ -142,27 +142,27 @@ class LoginFragment : Fragment() {
                 editTextTextEmailAddressLogin.isErrorEnabled = true
                 editTextTextEmailAddressLogin.error = getString(R.string.email_is_required)
             }
-        })
+        }
     }
 
     private fun FragmentLoginBinding.setErrorTextFieldForEmail() {
-        sharedViewModel.errorEnableMsg.observe(viewLifecycleOwner, {
+        sharedViewModel.errorEnableMsg.observe(viewLifecycleOwner) {
             if (it == "email") {
                 // enable error filed for email field.
                 editTextTextEmailAddressLogin.isErrorEnabled = true
                 editTextTextEmailAddressLogin.error = getString(R.string.email_is_required)
             }
-        })
+        }
     }
 
     private fun FragmentLoginBinding.setErrorTextFieldForPassword() {
-        sharedViewModel.errorEnableMsg.observe(viewLifecycleOwner, {
+        sharedViewModel.errorEnableMsg.observe(viewLifecycleOwner) {
             if (it == "password") {
                 // enable error filed for password field.
                 editTextTextPasswordLogin.isErrorEnabled = true
                 editTextTextPasswordLogin.error = getString(R.string.password_is_required)
             }
-        })
+        }
     }
 
 
