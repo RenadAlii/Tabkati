@@ -18,13 +18,19 @@ This application is written entirely in Kotlin using  clean Android Architecture
 
 7- Data Binding.
 
+8- WorManger 
+
 
 ## Used libraries:
-1- [Github](https://square.github.io/retrofit/)- Retrofit.
+1- [Retrofit](https://square.github.io/retrofit/).
 
-2- [Github](https://pip.pypa.io/en/stable/)- Moshi.
+2- [Moshi](https://pip.pypa.io/en/stable/).
 
-3- [Github](https://github.com/coil-kt/coil)- Coil.
+3- [Coil](https://github.com/coil-kt/coil).
 
 4- 
+
+## Firebase Products:
+1- Firebase Authentication(https://github.com/coil-kt/coil) using Google Provider & Email.
+2- Cloud Storage for Firebase.
 
