@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/profile"
+        android:enabled="true"
+        android:icon="@drawable/user"
+        android:title="@string/profile"/>
+    <item
+        android:id="@+id/language_item"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_language_24"
+        android:title="@string/language">
+    <menu>
+        <item android:id="@+id/create_new"
+            android:title="@string/english"
+            android:checkable="true"/>
+        <item android:id="@+id/open"
+            android:title="@string/arabic"
+            android:checkable="true"/>
+    </menu>
+    </item>
+
+</menu>

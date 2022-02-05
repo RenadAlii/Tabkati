@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">طبختي</string>
+    <string name="loginText">تسجيل الدخول</string>
+    <string name="full_name">الأسم الكامل</string>
+    <string name="email_address">البريد الإلكتروني</string>
+    <string name="sign_up">إنشاء حساب</string>
+    <string name="register">إنشاء حساب</string>
+    <string name="enter_all_info">أدخل كل المعلومات المطلوبه!</string>
+    <string name="PasswordHelperText">يجب ان يتكون الرقم السري من 6احرف او ارقام على الاقل.</string>
+    <string name="email_is_required">البريد الألكتروني مطلوب.</string>
+    <string name="password_is_required">الرقم السري مطلوب.</string>
+    <string name="user_name_is_required">الأسم مطلوب.</string>
+    <string name="home">الصفحة الرئيسية</string>
+    <string name="ingredients">المكونات</string>
+    <string name="search">البحث</string>
+    <string name="instructions">التعليمات</string>
+    <string name="what_you_like_to_cook_today">مذا ترغب ان تطهو اليوم؟</string>
+    <string name="already_signup_login">تملك حساب؟ سجل الدخول.</string>
+    <string name="don_t_have_an_account_sign_up">لايوجد لديك حساب؟ انشىء حساب.</string>
+    <string name="password">الرقم السري.</string>
+    <string name="recipes">الوصفات</string>
+    <string name="your_recipes">وصفاتك</string>
+    <string name="english">الانقليزيه</string>
+    <string name="arabic">العربيه</string>
+    <string name="language">اللغات</string>
+    <string name="groceries">قائمة المشتريات</string>
+    <string name="profile">الملف الشخصي</string>
+    <string name="welcome">مرحبا %1$s</string>
+    <string name="your_name">أسمك</string>
+    <string name="name" translatable="false">الأسم</string>
+    <string name="email">الأميل</string>
+    <string name="save">حفظ</string>
+    <string name="setting">الاعدادات</string>
+    <string name="save_recipes_you_love_so_that_you_can_cook_them_again_and_again_and_again" translatable="false">أحفظ الوصفات التي تعجبك لتستطيع إعدادها في كل مره.</string>
+    <string name="notification">"لدينا وصفات جديدة رائعه سوف تعجبك لاتنسى أن تتفقدها. "</string>
+    <string name="notification_title">وصفات جديدة</string>
+    <string name="bookmark">المفضلة</string>
+</resources>

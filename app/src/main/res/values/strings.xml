@@ -1,3 +1,58 @@
 <resources>
     <string name="app_name">Tabkati</string>
+    <string name="cooking_a_delicious_food_easily" translatable="false">Cooking a \n Delicious Food \n Easily</string>
+    <string name="loginText">LogIn</string>
+    <string name="full_name">Full name</string>
+    <string name="email_address">email address</string>
+    <string name="password">Password</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="already_signup_login">Already SignUp? LogIn.</string>
+    <string name="register">Register</string>
+    <string name="enter_all_info">Please Enter All The Required Information.</string>
+    <string name="PasswordHelperText">Your password must be at least  6 characters long.</string>
+    <string name="email_is_required">Email is required.</string>
+    <string name="password_is_required">Password is required.</string>
+    <string name="user_name_is_required">Name is required.</string>
+
+    <string name="notification" >We have some delicious new recipes for you to enjoy.</string>
+
+    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
+    <string name="don_t_have_an_account_sign_up">Don\'t have an account? Sign up</string>
+    <string name="what_you_like_to_cook_today">What you like to cook today?</string>
+    <string name="timer_with_unicode" translatable="false">\u00B1 %1$s min</string>
+    <string name="_2_serving" translatable="false">%1$s Serving</string>
+    <string name="ingredient" translatable="false">\u2022 %1$s .</string>
+    <string name="amount_unit" translatable="false">%1$s %2$s .</string>
+    <string name="ingredints_" translatable="false">%1$s</string>
+    <string name="instruct" translatable="false">%1$s .</string>
+    <string name="step" translatable="false">%1$s</string>
+    <string name="likes" translatable="false">%1$s Likes</string>
+    <string name="step_number" translatable="false">Step %1$s</string>
+
+    <string name="search">search</string>
+    <string name="instructions">Instructions</string>
+    <string name="ingredients">Ingredients</string>
+    <string name="home">Home</string>
+    <string name="recipes">Recipes</string>
+    <string name="meal_plan" translatable="false">Meal Plan</string>
+    <string name="your_recipes">Your Recipes</string>
+    <string name="groceries">Groceries</string>
+    <string name="profile">Profile</string>
+    <string name="english">English</string>
+    <string name="arabic">Arabic</string>
+    <string name="language">Language</string>
+    <string name="welcome">Hello %1$s</string>
+    <string name="your_name" translatable="false">Your Name</string>
+    <string name="name" translatable="false">Name</string>
+    <string name="email" translatable="false">Email</string>
+    <string name="save" translatable="false">Save</string>
+    <string name="setting" translatable="false">Setting</string>
+    <string name="book_marked" translatable="false">Book Marked</string>
+    <string name="bookmark" translatable="false">BookMark</string>
+    <string name="save_recipes_you_love_so_that_you_can_cook_them_again_and_again_and_again" translatable="false">Save recipes you love so that you can cook them again ,and again and again...</string>
+    <string name="notification_title">New Recipes !!</string>
+    <string-array name="language_array">
+        <item>Arabic</item>
+        <item>English</item>
+    </string-array>
 </resources>
