@@ -25,6 +25,7 @@ This application is written entirely in Kotlin using  clean Android Architecture
 ## Firebase Products:
 1. [Firebase Authentication](https://github.com/coil-kt/coil) using Google Provider & Email.
 2. [Cloud Storage for Firebase](https://firebase.google.com/docs/storage).
+3. [Firebase Cloud Messaging](https://firebase.google.com/docs/cloud-messaging/).
 
 ## Api doc:
 [spoonacular](https://spoonacular.com/food-api/docs).
