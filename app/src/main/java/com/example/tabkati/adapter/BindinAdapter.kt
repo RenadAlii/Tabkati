@@ -1,7 +1,6 @@
 package com.example.tabkati.adapter
 
-import android.graphics.Paint
-import android.widget.TextView
+
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter

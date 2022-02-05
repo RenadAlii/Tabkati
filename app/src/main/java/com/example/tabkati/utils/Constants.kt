@@ -25,9 +25,7 @@ object Constants {
     //Fields
     const val NAME = "name"
     const val EMAIL = "email"
-    const val THEME = "theme"
-    const val TITLE = "title"
-    const val BOOKMARKED = "bookmarked"
+
 
 
     //args
