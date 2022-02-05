@@ -1,19 +1,17 @@
 # Tabkati | طبختي
 *Tapkati* is an open-source project help you explore and save 5000+ of recipes using [spoonacular](https://spoonacular.com/food-api/docs).
 
-This application is written entirely in Kotlin using  clean Android Architecture alongside MVVM pattern.
+This application is written entirely in Kotlin using clean Android Architecture alongside MVVM pattern.
 
 ## Technologies & Methodologies used:
 1. Kotlin  Coroutines + Flow for asynchronous.
-2. Clean Architecture.
+2. [Clean Architecture](https://developer.android.com/jetpack/guide?authuser=2).
 3. MVVM Pattern.
 4. LiveData.
 5. Hilt for dependency injection.
-6. Asynchronous Flow.
-7. Data Binding.
-8. Room for the data persistence.
-9. Work Manager for background job. 
-
+6. Data Binding.
+7. Room for the data persistence.
+8. Work Manager for background job. 
 
 ## Used libraries:
 1. [Retrofit](https://square.github.io/retrofit/).
@@ -29,4 +27,7 @@ This application is written entirely in Kotlin using  clean Android Architecture
 
 ## Api doc:
 [spoonacular](https://spoonacular.com/food-api/docs).
+
+## Demo:
+
 
