@@ -31,3 +31,27 @@ This application is written entirely in Kotlin using clean Android Architecture 
 ## Demo:
 
 
+
+https://user-images.githubusercontent.com/92260353/153712336-2ad3e3d4-218b-4627-9a55-570f1eaba79d.mp4
+
+
+
+https://user-images.githubusercontent.com/92260353/153712550-7fabb1b7-4eaa-4c18-a1e5-b57f7e0a8b00.mp4
+
+
+
+https://user-images.githubusercontent.com/92260353/153712538-58381dc9-b628-48a5-adf1-ffe2f03fe58d.mp4
+
+
+
+
+
+https://user-images.githubusercontent.com/92260353/153712672-d8e26fde-dd99-4dad-8296-61af4b418dd8.mp4
+
+
+
+
+https://user-images.githubusercontent.com/92260353/153712562-b242d7e5-a20a-4642-8150-1e98bcd51f40.mp4
+
+
+
